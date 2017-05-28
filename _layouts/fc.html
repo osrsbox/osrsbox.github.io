@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ page.title }}</title>
+        <!-- link to main stylesheet -->
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/css/fc.css">
+        <script type="text/javascript" src="fc.js"></script>
+    </head>
+    <body>
+    
+        {% include header.html %}
+        
+        <div class="container">
+        
+        {{ content }}
+        
+        </div><!-- /.container -->
+        
+        {% include footer.html %} 
+        
+    </body>
+</html>
