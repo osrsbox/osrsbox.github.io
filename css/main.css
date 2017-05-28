@@ -188,17 +188,3 @@ h2 {
 h3 {
    padding: 5px 15px 5px 15px; 
 }
-table {
-    display: block;
-    margin: 0 auto;
-    border-collapse: collapse;
-    width: 80%;
-}
-th, td {
-    text-align: left;
-    padding: 8px;
-}
-th {
-    background-color: #4CAF50;
-    color: white;
-}
