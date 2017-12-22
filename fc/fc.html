@@ -2,48 +2,55 @@
 layout: fc
 title: OSRS Fight Caves Spawn Predictor and Mapper by PH01L
 ---
+
 <div id="intro" class="intro">
-    <img class="intro" src="images/intro.png" alt="" style="width:420px;height:230px;">
-    <p>This tool determines where monsters in the fight caves minigame will spawn and then puts them on the map below. Once the spawns are discovered, the map will display the first wave. Use the Previous Wave and Next Wave buttons to go up or down through the waves. Also, under each wave button, there will be an prayer icon to help you choose what overhead prayer to use (e.g. Protect for Missles).</p>
-    <p>All you need to do is start the fight caves minigame, and enter the first few spawns that you observe by clicking the location markers on the map. For example, if the first level 22 Tz-Kih spawns in the north west, hit the NW button. If the next two spawn in the center and south, hit the C and S buttons.</p>
-    
-    <div class="clear_intro" onclick="clear_intro();">
-        CLICK HERE TO HIDE THE PANEL ABOVE
-    </div><!-- /.clear_intro -->
-</div><!-- /.intro -->
+  <h3 id="title">Fight Caves Spawn Predictor</h3>
+  <!-- <img class="intro" src="images/intro.png" alt="" style="width:420px;height:230px;"> -->
+  <p>This tool determines where monsters in the fight caves minigame will spawn and then puts them on the map below. Once the spawns are discovered, the map will display the first wave. Use the Previous Wave and Next Wave buttons to go up or down through the waves. Also, under each wave button, there will be an prayer icon to help you choose what overhead prayer to use (e.g. Protect from Missles).</p>
+  <p>All you need to do is start the fight caves minigame, and enter the first few spawns that you observe by clicking the location markers on the map. For example, if the first level 22 Tz-Kih spawns in the north west, hit the NW button. If the next two spawn in the center and south, hit the C and S buttons.</p>
 
-<div id="content" class="content">
-    <div id="gui-holder" class="gui-holder">
-    
-        <img class="map-image" src="images/map.png" alt="HTML5 Icon" style="width:450px;height:465px;">
+  <div class="clear_intro" onclick="clear_intro();">
+    CLICK HERE TO HIDE THE PANEL ABOVE
+  </div>
+  <!-- /.clear_intro -->
+</div>
+<!-- /.intro -->
 
-        <!-- Buttons to control which wave to view -->
-        <button type="button" id="previous-button" class="button previous-button" onclick="javascript:display_wave(63)" disabled>Previous Wave</button>
-        <button type="button" id="current-button" class="button current-button" onclick="" disabled>Current Wave</button>
-        <button type="button" id="next-button" class="button next-button" onclick="javascript:display_wave(2)" disabled>Next Wave</button>
+<div class="application">
+  <div id="gui-holder" class="gui-holder">
 
-        <!-- Image placeholders to indicate what overhead prayer to use -->
-        <img id="prayer-previous" class="prayer-previous" src="images/prayer-empty.png" alt="" style="width:50px;height:50px;">
-        <img id="prayer-current" class="prayer-current" src="images/prayer-empty.png" alt="" style="width:50px;height:50px;">
-        <img id="prayer-next" class="prayer-next" src="images/prayer-empty.png" alt="" style="width:50px;height:50px;">
+    <img class="map-image" src="images/map.png" alt="HTML5 Icon" style="width:450px;height:465px;">
 
-        <!-- User help text -->
-        <p id="text-line" class="text-line"><b>WAVE 1:</b>
-        <br> Where did the first level 22 spawn?</p>
-        
-        <!-- Current wave number banner -->
-        <p id="wave-text-line" class="wave-text-line"></p>
+    <!-- Buttons to control which wave to view -->
+    <button type="button" id="previous-button" class="button previous-button" onclick="javascript:display_wave(63)" disabled>Previous Wave</button>
+    <button type="button" id="current-button" class="button current-button" onclick="" disabled>Current Wave</button>
+    <button type="button" id="next-button" class="button next-button" onclick="javascript:display_wave(2)" disabled>Next Wave</button>
 
-        <!-- Spawn locations -->
-        <img id="spawn-nw" class="spawn-nw" src="images/nw.png" alt="" style="width:100px;height:92px;" onclick="javascript:wave1('nw')">
-        <img id="spawn-c" class="spawn-c" src="images/c.png" alt="" style="width:100px;height:92px;" onclick="javascript:wave1('c')">
-        <img id="spawn-sw" class="spawn-sw" src="images/sw.png" alt="" style="width:100px;height:92px;" onclick="javascript:wave1('sw')">
-        <img id="spawn-s" class="spawn-s" src="images/s.png" alt="" style="width:100px;height:92px;" onclick="javascript:wave1('s')">
-        <img id="spawn-se" class="spawn-se" src="images/se.png" alt="" style="width:100px;height:92px;" onclick="javascript:wave1('se')">
-    
-    </div><!-- /.gui-holder -->
-    
-    <div class="refresh-page" onclick="javascript:refresh_page()">
-        Reload Interface
-    </div><!-- /.refresh-page -->
-</div><!-- /.intro -->
+    <!-- Image placeholders to indicate what overhead prayer to use -->
+    <img id="prayer-previous" class="prayer-previous" src="images/prayer-empty.png" alt="" style="width:50px;height:50px;">
+    <img id="prayer-current" class="prayer-current" src="images/prayer-empty.png" alt="" style="width:50px;height:50px;">
+    <img id="prayer-next" class="prayer-next" src="images/prayer-empty.png" alt="" style="width:50px;height:50px;">
+
+    <!-- User help text -->
+    <p id="text-line" class="text-line"><b>WAVE 1:</b>
+      <br> Where did the first level 22 spawn?</p>
+
+    <!-- Current wave number banner -->
+    <p id="wave-text-line" class="wave-text-line"></p>
+
+    <!-- Spawn locations -->
+    <img id="spawn-nw" class="spawn-nw" src="images/nw.png" alt="" style="width:100px;height:92px;" onclick="javascript:wave1('nw')">
+    <img id="spawn-c" class="spawn-c" src="images/c.png" alt="" style="width:100px;height:92px;" onclick="javascript:wave1('c')">
+    <img id="spawn-sw" class="spawn-sw" src="images/sw.png" alt="" style="width:100px;height:92px;" onclick="javascript:wave1('sw')">
+    <img id="spawn-s" class="spawn-s" src="images/s.png" alt="" style="width:100px;height:92px;" onclick="javascript:wave1('s')">
+    <img id="spawn-se" class="spawn-se" src="images/se.png" alt="" style="width:100px;height:92px;" onclick="javascript:wave1('se')">
+
+  </div>
+  <!-- /.gui-holder -->
+
+  <div class="refresh-page" onclick="javascript:refresh_page()">
+    Reload Interface
+  </div>
+  <!-- /.refresh-page -->
+</div>
+<!-- /.refresh-page -->

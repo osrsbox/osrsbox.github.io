@@ -1,166 +1,46 @@
 body {
 	position: relative;
-	width: 70%;
-	min-width: 480px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0 auto;
 	font-family: 'Helvetica';    
 }
 
-/* NAVIGATION HEADER CONFIGURATION */
-.nav {
-	position: relative;
-	background-color: #333;
-	height: 48px;
-	border-bottom: 2px solid #4CAF50;
-}
-.nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
-.nav li {
-    float: left;
-    height: 48px;
-    max-height: 48px; 
-}
-.nav li a, dropbtn {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    height: 20px;
-    max-height: 20px;    
-}
-.nav li a:hover, .dropdown:hover .dropbtn {
-    background-color: #4CAF50;
-}
-li.dropdown {
-    display: inline-block;
-}
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #333;
-    min-width: 100px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    border-top: 2px solid #4CAF50;
-}
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-    border-left: 2px solid #4CAF50;
-    border-right: 2px solid #4CAF50;
-}
-.dropdown-content a:hover {
-	background-color: #111;
-}
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-.nav .active {
-    background-color: #4CAF50;
-}
-
 /* CONTAINER CONFIGURATION */
-.container {
-	position: relative;
-	background-color: #333;
-	padding: 15px 0px 15px 0px;
-	color: white;
+.content {
+	display: block;
+    position: relative;
+	margin: 0 auto;
+    width: 70%;
+	padding: 15px 15px 15px 15px;
+	color: black;
 	font-size: 85%;
-    min-height: 500px;
 }
-a:link {
-    color: #4CAF50;
-}
-a:visited {
-    color: white;
-}
-a:hover {
-    color: white;
-}
+/* a:link { */
+    /* color: #4CAF50; */
+/* } */
+/* a:visited { */
+    /* color: white; */
+/* } */
+/* a:hover { */
+    /* color: white; */
+/* } */
 
 /* FOOTER CONFIGURATION */
 .footer {
 	position: relative;
+    width: 70%;
+	margin: 0 auto;
 	min-height: 20px;
-	background-color: #333;
 	padding: 15px 15px 15px 15px;
-  	border-top: 2px solid #4CAF50;
 }
 .footer p {
 	margin: 0;
 	padding: 0;
     text-align: right;
-    color: white;
+    color: black;
     font-size: 75%;
 }
 
-/*  FORK ME ON GITHUB RIBBON */
-#forkongithub a {
-    background: #000;
-    color: #fff;
-    text-decoration: none;
-    font-family: arial,sans-serif;
-    text-align: center;
-    font-weight: bold;
-    padding: 5px 40px;
-    font-size: 1rem;
-    line-height: 2rem;
-    position: relative;
-    transition: 0.5s;
-}
-#forkongithub a:hover {
-    background: #4CAF50;
-    color: #fff;
-}
-#forkongithub a::before,#forkongithub a::after {
-    content: "";
-    width: 100%;
-    display: block;
-    position: absolute;
-    top: 1px;
-    left: 0;
-    height: 1px;
-    background: #fff;
-}
-#forkongithub a::after {
-    bottom: 1px;
-    top: auto;
-}
-@media screen and (min-width: 800px) {
-    #forkongithub {
-    position: fixed;
-    display: block;
-    top: 0;
-    right: 0;
-    width: 200px;
-    overflow: hidden;
-    height: 200px;
-    z-index: 9999;
-}
-#forkongithub a {
-    width: 200px;
-    position: absolute;
-    top: 60px;
-    right: -60px;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    box-shadow: 4px 4px 10px rgba(0,0,0,0.8);
-}
-
-/* CODE-BOX CONFIGURATION */ 
+/* CODE-BOX CONFIGURATION  */
 pre {
     white-space: pre-wrap;
 }

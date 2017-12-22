@@ -3,4 +3,3 @@ markdown: kramdown
 
 incremental: true
 baseurl: /
-theme: jekyll-theme-modernist
