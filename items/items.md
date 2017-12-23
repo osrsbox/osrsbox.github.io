@@ -3,7 +3,7 @@ layout: default
 title: OSRSBox | HOME | Old School Runescape Tools by PH01L
 ---
 
-### Barrows Item Tracker
+### OSRS Item Database Lookup
 
 Coming soon
 

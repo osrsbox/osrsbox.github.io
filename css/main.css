@@ -1,43 +1,51 @@
 body {
-	position: relative;
-	margin: 0 auto;
-	font-family: 'Helvetica';    
+    position: relative;
+    margin: 0 auto;
+    font-family: 'Helvetica';    
 }
 
 /* CONTAINER CONFIGURATION */
 .content {
-	display: block;
+    display: block;
     position: relative;
-	margin: 0 auto;
+    margin: 0 auto;
     width: 70%;
-	padding: 15px 15px 15px 15px;
-	color: black;
-	font-size: 85%;
+    padding: 15px 15px 15px 15px;
+    color: black;
+    font-size: 100%;
 }
-/* a:link { */
-    /* color: #4CAF50; */
-/* } */
-/* a:visited { */
-    /* color: white; */
-/* } */
-/* a:hover { */
-    /* color: white; */
-/* } */
 
 /* FOOTER CONFIGURATION */
 .footer {
-	position: relative;
+    position: relative;
     width: 70%;
-	margin: 0 auto;
-	min-height: 20px;
-	padding: 15px 15px 15px 15px;
+    margin: 0 auto;
+    min-height: 20px;
+    padding: 15px 15px 15px 15px;
 }
 .footer p {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
     text-align: right;
     color: black;
     font-size: 75%;
+}
+
+/* HEADER CONFIGURATION */
+h1 {
+    padding: 5px 15px 5px 15px;
+    text-decoration: underline;
+}
+p {
+    padding: 15px 15px 15px 15px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+h2 {
+    padding: 5px 15px 5px 15px;
+}
+h3 {
+   padding: 5px 15px 5px 15px; 
 }
 
 /* CODE-BOX CONFIGURATION  */
@@ -50,41 +58,37 @@ code {
     font-size: 1.2em;
 }
 .code-box {
-    background-color: #696969;
-	padding: 5px 15px 5px 15px; 
+    display: block;
+    margin: 0 auto;    
+    background-color: #AAAAAA;
+    width: 95%; 
 }
-h1 {
-    padding: 5px 15px 5px 15px;
-    text-decoration: underline;
-}
-p {
-    padding: 5px 15px 5px 15px;
-    text-align: justify;
-    text-justify: inter-word;
-}
-h2 {
-    padding: 5px 15px 5px 15px;
-}
-h3 {
-   padding: 5px 15px 5px 15px; 
+.code-box .highlight {
+    background-color: #AAAAAA;
+    border: none;
 }
 
 /* TABLE STYLING */
-table {
+table.content {
+	display: table;
+	overflow: auto;
+	table-layout: auto;
     border-collapse: collapse;
-    width: 80%;
+    width: 95%;
     margin-left:auto; 
-    margin-right:auto;    
+    margin-right:auto;
+    font-size: 110%;
 }
 
-th, td {
+table.content th, table.content td {
     text-align: left;
-    padding: 8px;
+    padding: 4px;
 }
 
-tr:nth-child(even){background-color: #464141}
+tr:nth-child(even){background-color: #929982}
+tr:nth-child(odd){background-color: #edcbb1}
 
 th {
-    background-color: #4CAF50;
+    background-color: #002500;
     color: white;
 }
