@@ -6,6 +6,7 @@ While making some parts of this website and some other tools I have authored I n
 
 The OSRS Cache structure is pretty much the same as the very well know #317 Runescape 2 cache format. All cache files are stored in the home directory of the user. In Microsoft Windows (Vista onwards), the cache files are stored in the following directory:
 
+{: .code-box}
 ```
 C:\Users\<username>\jagexcache\oldschool\LIVE
 OR
@@ -14,6 +15,7 @@ C:\Users\ph01l\jagexcache\oldschool\LIVE
 
 Similarly, on Linux-based systems the cache files are stored in the following directory:
 
+{: .code-box}
 ```
 /home/<username>/jagexcache/oldschool/LIVE
 OR
@@ -22,37 +24,41 @@ OR
 
 Inside the cache directory there are a number of files, but there are only two primary file types/formats. These file types are easily identified by their corresponding file extension, namely:
 
-1. dat files, with a .dat extension
-2. idx files, with a .idx extension
+1. Data files, with a .dat extension
+2. Index files, with a .idx extension
 
 The following sections discuss each of these file type/formats in further detail.
 
 ### Data Files (dat)
 
-The primary data file is named `main_file_cache.dat2`. This file contains the entire cache including information about items, npcs, images, sounds, models and animations. However, the file is in a somewhat unknown structure and you cannot just open the `main_file_cache.dat2` file and view images or extract music. To complicate the matter, the file is made up of various _blocks_ of data, some are compressed, some are not, and the information is not trivial to extract. This is because JaGeX ...
+The primary data file is named `main_file_cache.dat2`. This file contains the entire OSRS cache including information about items, npcs, images, sounds, models and animations. However, the file is stored in a complex structure and you cannot just open the `main_file_cache.dat2` file and view images or extract music. The file is made up of various _blocks_ of data, some are compressed, some are not, and the information is not trivial to extract. To extract anything from the `main_file_cache.dat2` file you must know the location of the data blocks. This information is provided by index files. 
 
 ### Index Files (idx)
 
-As the name suggests, index file are an index 
+As the name suggests, index file are an index for the `main_file_cache.dat2` file. In OSRS there are currently 17 index files named consecutively from `main_file_cache.idx0` to `main_file_cache.idx16`, as well as one index file named `main_file_cache.idx255`. The table below documents each index file, and the data that the index file points to.
 
-    0 - Skeleton
-    1 - Skin
-    2 - Config - See Below
-    3 - Interface
-    4 - Sound Effects_1
-    5 - landscape/maps
-    6 - Music_1
-    7 - Models
-    8 - Sprites
-    9 - Texture
-    10 - Huffman
-    11- Music_2
-    12 - Client Scripts
-    13 - Fonts Parent
-    14 - Sound Effects_2
-    15 - Sound Effects_3
-    
-The config file, or `main_file_cache.idx2` is full of highly useful information.
+| Index file name        | Content            |
+|------------------------|--------------------|
+| main_file_cache.idx0   | Skeleton           |
+| main_file_cache.idx1   | Skin               |
+| main_file_cache.idx2   | Config (See below) |
+| main_file_cache.idx3   | Interface          |
+| main_file_cache.idx4   | Sound Effects 1    |
+| main_file_cache.idx5   | Landscape/Maps     |
+| main_file_cache.idx6   | Music 1            |
+| main_file_cache.idx7   | Models             |
+| main_file_cache.idx8   | Sprites            |
+| main_file_cache.idx9   | Texture            |
+| main_file_cache.idx10  | Huffman            |
+| main_file_cache.idx11  | Music 2            |
+| main_file_cache.idx12  | Client scripts     |
+| main_file_cache.idx13  | Fonts	          |
+| main_file_cache.idx14  | Sound Effects 2    |
+| main_file_cache.idx15  | Sound Effects 3    |
+| main_file_cache.idx16  | Unknown            |
+| main_file_cache.idx255 | Unknown            |
+
+The config file, or `main_file_cache.idx2` contains highly useful information.
 
     0 -
     1 - Underlay Defintion
@@ -72,19 +78,26 @@ The config file, or `main_file_cache.idx2` is full of highly useful information.
     15 - Empty
     16 - Varp Definition
 
-## Extracting OSRS Cache using Runelite
+### How Index Files Point to Data Blocks
 
-RuneLite is basically a suite of open source tools for RuneScape. The project provides a free, open-source and super fast client for Old School RuneScape. In addition, the creators also provide an OSRS client deobfuscator and an OSRS cache extraction tool. This documentation foucsses on the cache tool for extracting information from the OSRS cache, and dabbles a little later with the deobfuscator for extracting cache version information. The [RuneLite homepage](https://runelite.net/) provide a summary of the project and precompiled downloads for the client. The [RuneLite GitHub project page](https://github.com/runelite/runelite) is the official repository to get the source code for the project.
+Discussion of how index files point to specific data blocks
 
-### Compiling RuneLite Cache Tool
+## RuneLite Tools
 
-Firsly, the following instructions were performed on Microsoft Windows 10 64-bit. However, the instructions should be suitable for other Microsoft Windows operating systems and also adaptable to other operating systems such as Linux. The following software is required: 1) Git; 2) Netbeans; 3) Java.
+RuneLite is a suite of open source tools for RuneScape. The project provides a free, open-source and super fast client for Old School RuneScape. In addition, the creators also provide a client deobfuscator and a cache extraction tool. This documentation foucsses on the cache tool for extracting information from the OSRS cache, and dabbles a little later with the deobfuscator for extracting cache version information. The [RuneLite homepage](https://runelite.net/) provide a summary of the project and precompiled downloads for the client. The [RuneLite GitHub project page](https://github.com/runelite/runelite) is the official repository to get the source code for the project.
+
+### Compiling RuneLite Tools
+
+The RuneLite client comes as a precompiled download (a `.jar` file). However, the other tools available do not come precompiled. Therefore, this section documents how to compile the tools. Although this is a pretty staight-forward process, it may be difficult for people without much programming experience.
+
+The following instructions were performed on Microsoft Windows 10 64-bit. However, the instructions should be suitable for other Microsoft Windows operating systems and also adaptable to other operating systems such as Linux. The following software is required: 1) Git; 2) Netbeans; 3) Java.
 
 1. Git SCM. Download from [here](https://git-scm.com/downloads). Select Windows to download the installer for Windows-based systems, and install using default options. Version 2.15.1 was used in this tutorial. Note: You can use any git client.
 2. Netbeans and Java. The easiest option is to download the Netbeans IDE that is bundled with Java EE. Download from [here](https://netbeans.org/downloads/). Install using default options. Version 8.2 was used in this tutorial.
 
 Now, clone the RuneLite repository using Git Bash. For those new to git, you need to open Git Bash using the Windows Explorer context menu. In Windows Explorer, browse to a folder where you want to down the RuneLite repository, right-click a white-space area in Windows Explorer, and select _Git Bash_. Then enter the following command to download the source code from the repository:
 
+{: .code-box}
 ```
 git clone https://github.com/runelite/runelite.git
 ```
@@ -109,22 +122,35 @@ Now, open the RuneLite repository in Netbeans:
     + Expand the Runelite icon
     + Expand the Modules folder
     + Right click Cache, and select Open Project
-+ A new project will appear is the navigation pane
+	+ A new project will appear is the navigation pane
+	+ Right click Deobfuscator, and select Open Project
+	+ A new project will appear is the navigation pane
 
-Before we can build the actual cache tool, we need to modify the source code a little. Since RuneLite is a suite of tools, we need to configure the Maven project to only build the cache tool. Using the navigation menu, open the following file:
+Before we can build the actual cache tool, we need to modify the source code a little. Since RuneLite is a suite of tools, we need to configure the Maven project to only build the cache tool. The same process can also be done for the deobfuscator. Using the navigation menu, open the following file:
 
 + Cache > Project Files > pom.xml
 
 You need to add a line in the `pom.xml` file to specify a main class. With a main class, the tool cannot be run correctly. You need to add the following entry:
 
+{: .code-box}
 ```
 <manifest>
 	<mainClass>net.runelite.cache.Cache</mainClass>
 </manifest>
 ```
 
+For the deobfuscator, the following entry needs to be added:
+
+{: .code-box}
+```
+<manifest>
+	<mainClass>net.runelite.deobfuscator.Deobfuscator</mainClass>
+</manifest>
+```
+
 The entry needs to be in the `<plugin>` section, specifically in the `maven-assembly-plugin` entry. The following snippet displays a section of the `pom.xml` file, and what it should look like after the entry is added.
 
+{: .code-box}
 ```
 <plugin>
     <artifactId>maven-assembly-plugin</artifactId>
@@ -145,6 +171,7 @@ Great! Now you can build the cache tool. Perform the following tasks:
 
 This will compile the cache tool and produce a `.jar` file that can be executed. The `.jar` file for the cache tool is available in the following directory:
 
+{: .code-box}
 ```
 runelite\cache\target
 ```
@@ -155,6 +182,8 @@ Two different versions will be compiled:
 + `cache-1.2.9-SNAPSHOT.jar`
 
 As illustrated by the naming conventions, one has a `.jar` build with all project dependencies. The other is a standalone `.jar` file without dependencies. It is recommended to the use the `cache-1.2.9-SNAPSHOT-jar-with-dependencies.jar` file to avoid any dependency issues.
+
+## Extracting OSRS Cache Information using Runelite
 
 The cache tool has support for extracting the following types of data from the OSRS cache:
 
@@ -172,6 +201,7 @@ You can run the newly build cache tool by using the Windows Command environment.
 
 The cache tool has the following general syntax:
 
+{: .code-box}
 ```
 java -jar cache-1.2.9-SNAPSHOT-jar-with-dependencies.jar -c <cache-location> <cache-extraction-option> <output-directory>
 ```
@@ -184,26 +214,31 @@ Where each of the inputs are explained below:
 
 Examples are helpful for this type of tool, where the command can be complex. The following five snippets provide examples of how to run the RuneLite cache tool.
 
+{: .code-box}
 ```
 # EXTRACT ITEM INFORMATION IN JSON FORMAT
 java -jar .\cache-1.2.9-SNAPSHOT-jar-with-dependencies.jar -c C:\Users\ph01l\jagexcache\oldschool\LIVE\ -items C:\Users\ph01l\Desktop\items
 ```
 
+{: .code-box}
 ```
 # EXTRACT NPC INFORMATION IN JSON FORMAT
 java -jar .\cache-1.2.9-SNAPSHOT-jar-with-dependencies.jar -c C:\Users\ph01l\jagexcache\oldschool\LIVE\ -npcs C:\Users\ph01l\Desktop\npcs
 ```
 
+{: .code-box}
 ```
 # EXTRACT OBJECT INFORMATION IN JSON FORMAT
 java -jar .\cache-1.2.9-SNAPSHOT-jar-with-dependencies.jar -c C:\Users\ph01l\jagexcache\oldschool\LIVE\ -objects C:\Users\ph01l\Desktop\objects
 ```
 
+{: .code-box}
 ```
 # EXTRACT IMAGES
 java -jar .\cache-1.2.9-SNAPSHOT-jar-with-dependencies.jar -c C:\Users\ph01l\jagexcache\oldschool\LIVE\ -sprites C:\Users\ph01l\Desktop\sprites
 ```
 
+{: .code-box}
 ```
 # EXTRACT THE ENTIRE CACHE IN DAT FORMAT
 java -jar .\cache-1.2.9-SNAPSHOT-jar-with-dependencies.jar -u -c C:\Users\ph01l\jagexcache\oldschool\LIVE\ -t tree
@@ -211,22 +246,79 @@ java -jar .\cache-1.2.9-SNAPSHOT-jar-with-dependencies.jar -u -c C:\Users\ph01l\
 
 You can also run the cache tool directly in Netbeans. However, to achieve this you must provide command line arguments. To achieve this, in the bottom-right pane (the output/debugging pane) there is a little icon that looks like a fast forward button - colored (yellow). There are two icons which look the same, it is the bottom one! When hovered over, it will read: Re-run with different paramters. This button allows us to enter command line arguments when running the program. The first line needs to have the arguments added to it. In original format, th configuration has the following line:
 
+{: .code-box}
 ```
 exec.args=-classpath %classpath net.runelite.cache.Cache
 ```
 
 If you want to _Run_ the cache tool directly in Netbeans you need to add additional arguments. For example, to dump items you can use the following arguments:
 
+{: .code-box}
 ```
 exec.args=-classpath %classpath net.runelite.cache.Cache -c C:\Users\ph01l\jagexcache\oldschool\LIVE -items C:\Users\ph01l\Desktop\items
 ```
 
 ## Extracting OSRS Cache Version using Runelite
 
-Intro
+The previous section discussed extracting information from the OSRS cache. Sometimes it is also highly useful to determine the OSRS cache version that you are working with. This section outlines methods to extract the cache version on both Windows and Linux operating systems. Both tools are based on the [RuneLite cache updater](https://github.com/runelite/updater/blob/master/src/main/bash/update.sh), and adapted to only extract the cache version number.
 
-### Compiling RuneLite Deobfuscation Tool
+To provide some context and further information, both Windows and Linux scripts work in the same way. The script will download the latest OSRS cache version, the same way that any OSRS client would. The RuneLite deobfuscator tool will then be executed against the downloaded `.jar` client and the version number extracted. 
 
-HERE
+The script has two dependencies: 1) The RuneLite Deobfuscator tool; and 2) Java. You can compile your own version of the deobfuscator (by using the documentation above), or download a precompile version of the deobfuscator tool from [here](http://osrsbox.com/osrsbox-cache/cache-1.2.9-SNAPSHOT-jar-with-dependencies.jar). Make sure the PowerShell script (`osrs_cache_version.ps1`) and the deobfuscator tool (`deob-1.2.9-SNAPSHOT-jar-with-dependencies.jar`) are in the same directory. Also, make sure you navigate to the correct directory in your terminal.
 
-### Extract the Current OSRS Cache Version
+The following two sections outline how to determine the OSRS cache version using the two scripts available.
+
+### Extract the Current OSRS Cache Version (Windows Powershell)
+
+A simple [PowerShell script](http://osrsbox.com/osrsbox-cache/osrs_cache_version/osrs_cache_version.ps1) is provided to download the lastest OSRS cache and determine the current version number. To run this script, you must allow scripts to be run in PowerShell. This is disabled by default for security reasons. To enable scripts to be run for a temporary session, execute the following command:
+
+{: .code-box}
+```
+powershell –ExecutionPolicy Bypass 
+```
+
+Invoke the script using the following command:
+
+{: .code-box}
+```
+./osrs_cache_version.ps1
+```
+
+The output from the script will be similar to that displayed below. The second to last line of the script output will display the current OSRS cache version.
+
+{: .code-box}
+```
+PS C:\Users\phoil\Desktop> .\osrs_version.ps1
+>>> Starting...
+  > Downloading: jav_config.ws
+  > Base URL used: http://oldschool90.runescape.com/
+  > Initial JAR file for download: gamepack_3732011.jar
+  > Downloading: http://oldschool90.runescape.com/gamepack_3732011.jar
+  > Download successful
+  > OSRS cache version: 160
+>>> Finished.
+```
+
+### Extract the Current OSRS Cache Version (Linx BASH)
+
+A simple [BASH script](http://osrsbox.com/osrsbox-cache/osrs_cache_version/osrs_cache_version.sh) is provided to download the lastest OSRS cache and determine the current version number. Invoke the script using the following command:
+
+{: .code-box}
+```
+./osrs_cache_version.ps1
+```
+
+The output from the script will be similar to that displayed below. The second to last line of the script output will display the current OSRS cache version.
+
+{: .code-box}
+```
+>>> Starting...
+  > Downloading: jav_config.ws
+  > Download sucessful.
+  > Base URL used: http://oldschool90.runescape.com/
+  > Initial JAR file for download: gamepack_8851460.jar
+  > Downloading: http://oldschool90.runescape.com/gamepack_8851460.jar
+  > Download sucessful.
+  > OSRS version: 160
+>>> Finished.
+```
