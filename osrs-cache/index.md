@@ -37,6 +37,7 @@ The primary data file is named `main_file_cache.dat2`. This file contains the en
 
 As the name suggests, index file are an index for the `main_file_cache.dat2` file. In OSRS there are currently 17 index files named consecutively from `main_file_cache.idx0` to `main_file_cache.idx16`, as well as one index file named `main_file_cache.idx255`. The table below documents each index file, and the data that the index file points to.
 
+{: .content}
 | Index file name        | Content            |
 |------------------------|--------------------|
 | main_file_cache.idx0   | Skeleton           |
@@ -60,23 +61,26 @@ As the name suggests, index file are an index for the `main_file_cache.dat2` fil
 
 The config file, or `main_file_cache.idx2` contains highly useful information.
 
-    0 -
-    1 - Underlay Defintion
-    2 - Empty
-    3 - IdentityKit
-    4 - Overlay Definition
-    5 - Unknown
-    6 - Object Definition
-    7 - Empty
-    8 - MappedValues
-    9 - NPC Definition
-    10 - Item Definition
-    11 - Empty
-    12 - Animation(Sequence) Definition
-    13 - AnimatedGraphic(SpotAnimation/GFX) Definition
-    14 - VarpBit Definition
-    15 - Empty
-    16 - Varp Definition
+{: .content}
+| Index 2 block  | Content                                          |
+|----------------|--------------------------------------------------|
+| 0              | Unknown                                          |
+| 1              | Underlay Defintion                               |
+| 2              | Empty                                            |
+| 3              | IdentityKit                                      |
+| 4              | Overlay Definition                               |
+| 5              | Unknown                                          |
+| 6              | Object Definition                                |
+| 7              | Empty                                            |
+| 8              | Mapped Values                                    |
+| 9              | NPC Definition                                   |
+| 10             | Item Definition                                  |
+| 11             | Empty                                            |
+| 12             | Animation Definition (sequence)                  |
+| 13             | Animated Graphic Definition (Spot Animation/GFX) |
+| 14             | VarpBit Definition                               |
+| 15             | Empty                                            |
+| 16             | Varp Definition                                  |
 
 ### How Index Files Point to Data Blocks
 
@@ -234,7 +238,8 @@ java -jar .\cache-1.2.9-SNAPSHOT-jar-with-dependencies.jar -c C:\Users\ph01l\jag
 
 {: .code-box}
 ```
-# EXTRACT IMAGES
+# EXTRA
+CT IMAGES
 java -jar .\cache-1.2.9-SNAPSHOT-jar-with-dependencies.jar -c C:\Users\ph01l\jagexcache\oldschool\LIVE\ -sprites C:\Users\ph01l\Desktop\sprites
 ```
 
@@ -305,7 +310,7 @@ A simple [BASH script](http://osrsbox.com/osrsbox-cache/osrs_cache_version/osrs_
 
 {: .code-box}
 ```
-./osrs_cache_version.ps1
+./osrs_cache_version.sh
 ```
 
 The output from the script will be similar to that displayed below. The second to last line of the script output will display the current OSRS cache version.
