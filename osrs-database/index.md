@@ -166,7 +166,7 @@ So, if you have read this far, we can fetch OSRS item information using a public
 
 In addition to providing an API to JSON data. This project also provides thumbnail image for a large number of OSRS items in PNG format. All tradeable items have a thumbnails image, and most items which have an accompanying page of the OSRS Wikia site also have a thumbnail image.
 
-Look, it's a ... Black wizard hat (g) ![alt text](https://osrsbox.github.io/osrsbox-db/items-icons/1/12453.png "Black wizard hat (g)")
+Look, it's a ... Black wizard hat (g) ![alt text](https://osrsbox.github.io/osrsbox-db/items-icons/12453.png "Black wizard hat (g)")
 
 ## Project feedback and contribution
 

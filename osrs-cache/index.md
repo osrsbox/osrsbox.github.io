@@ -1,4 +1,10 @@
-# OSRS Cache Documentation
+---
+layout: default
+title: OSRSBox | osrsbox-cache | OSRS Cache Documentation
+---
+
+# osrsbox-cache
+## OSRS Cache Documentation
 
 While making some parts of this website and some other tools I have authored I needed to dabble a little with the OSRS cache. For example, to help build the OSRSBox database of items (osrsbox-db) I needed to extract all items from the cache. Along the way I learnt a lot about the cache structure, the type of information it contains and various tools that are avilable. This page documents some of the more useful information I found to hopefully help someone else who is interested. 
 
