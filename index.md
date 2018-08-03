@@ -1,7 +1,6 @@
 ---
 layout: default
 title: OSRSBox | An Old School RuneScape Project
-include_home: true
 ---
 
 <!-- Header -->
