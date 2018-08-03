@@ -1,0 +1,64 @@
+# Jekyll
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+*.gem
+*.swp
+*~
+.DS_Store
+.analysis
+.bundle/
+.byebug_history
+.ruby-gemset
+.ruby-version
+/test/source/file_name.txt
+/vendor
+bin/
+bbin/
+coverage
+gh-pages/
+pkg/
+site/_site/
+test/dest
+tmp/*
+
+# Jekyll drafts
+_drafts
+
+# Linux
+*~
+.fuse_hidden*
+.Trash-*
+.nfs*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+# MacOS
+*.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
