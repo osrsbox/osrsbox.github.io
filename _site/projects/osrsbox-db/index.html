@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="http://0.0.0.0:4000/projects/osrsbox-db/">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/img/icons/favicon/apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/icons/favicon/apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/icons/favicon/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/icons/favicon/apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/img/icons/favicon/apple-touch-icon-60x60.png" />
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/icons/favicon/apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/icons/favicon/apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/icons/favicon/apple-touch-icon-152x152.png" />
+<link rel="icon" type="image/png" href="/assets/img/icons/favicon/favicon-196x196.png" sizes="196x196" />
+<link rel="icon" type="image/png" href="/assets/img/icons/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/assets/img/icons/favicon/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/assets/img/icons/favicon/favicon-16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/assets/img/icons/favicon/favicon-128.png" sizes="128x128" />
+<meta name="msapplication-TileColor" content="#FFFFFF" />
+<meta name="msapplication-TileImage" content="/assets/img/icons/favicon/mstile-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/assets/img/icons/favicon/mstile-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/assets/img/icons/favicon/mstile-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/assets/img/icons/favicon/mstile-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/assets/img/icons/favicon/mstile-310x310.png" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400|Montserrat:400,700">
+<link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+<title>OSRSBOX | An OSRS Item Database Available via a RESTful API</title>
+</head>
+
+
+<body>
+<nav class="navbar navbar-expand-md bg-dark">
+<a class="navbar-brand" href="http://0.0.0.0:4000"><i class="fa fa-box" aria-hidden="true"></i>OSRSBox</a>
+<button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarsExample04">
+<ul class="navbar-nav ml-auto">
+<li class="nav-item">
+<a class="nav-link" href="http://0.0.0.0:4000/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="http://0.0.0.0:4000/tools/">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="http://0.0.0.0:4000/projects/">Projects</a>
+</li>
+</ul>
+</div>
+</nav>
+
+
+
+<div class="container-fluid">
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1>OSRSBox Database</h1>
+<p class="lead">A database of Old School Runescape (OSRS) items in JSON format with accompanying icon images in PNG format</p>
+</div>
+</div>
+
+<div class="col-sm-12 col-md-8 mx-auto">
+<p>This project is a database of Old School Runescape (OSRS) items in JSON format with accompanying icon images in PNG format. The goal of the project is to provide a JSON object and PNG image for <strong>every item in OSRS</strong>. In addition, the metadata for each item is extensive including as many useful properties as possible.</p>
+
+<p>The repository that accompanies this project provides public access to JSON formatted metadata about every OSRS item in the game; for example, whether an item is tradeable, stackable, or equipable or if the item is members only, or a quest item. For any equipable item, there is metadata about combat stats the item has; for example, what slash attack bonus, magic defence bonus or prayer bonus an item provides. Furthermore, high and low alchemy values are provided. Lastly, each item has a corresponding item icon in PNG format.</p>
+
+<p><strong>NOTE:</strong> This project has not been updated since December 26th, 2017. I am currently rewriting the code to automatically parse the OSRS cache, combined with the tools used to parse the OSRS Wikia. This will hopefully streamline the update process in the future.</p>
+
+<h2 id="json-structured-data">JSON structured data</h2>
+
+<p>The osrsbox-db stores information about OSRS items in separate JSON files. For example, <a href="https://www.osrsbox.com/osrsbox-db/items-json/12453.json">this link</a> provides direct access to the <code class="highlighter-rouge">12453.json</code> file, which holds metadata about the Black wizard hat (g) item. In OSRS, the ID number <code class="highlighter-rouge">12453</code> is unique to the Black wizard hat (g). This is why the item IS is utilised in the database for fetching all item information.</p>
+
+<p>But what is actually contained in these JSON files? Well, it is a collection of metadata (information) about the specific item. There are two main categories of metadata about an item:</p>
+
+<ul>
+  <li>Item properties</li>
+  <li>Item stats</li>
+</ul>
+
+<h3 id="item-properties">Item Properties</h3>
+
+<p>All items have properties; for example, the item’s weight and the items high alchemy value. All item properties are listed below for reference, including the data type (e.g., string, integer, float) for each property and a description of the property.</p>
+
+<table class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Data type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>integer</td>
+      <td>Unique OSRS item ID number</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>string</td>
+      <td>Name of the item</td>
+    </tr>
+    <tr>
+      <td>release_date</td>
+      <td>string</td>
+      <td>Date the item was released</td>
+    </tr>
+    <tr>
+      <td>members_only</td>
+      <td>boolean</td>
+      <td>If the item is a members only item or not</td>
+    </tr>
+    <tr>
+      <td>quest_item</td>
+      <td>boolean</td>
+      <td>If the item is a quest item or not</td>
+    </tr>
+    <tr>
+      <td>tradeable</td>
+      <td>boolean</td>
+      <td>If the item is tradeable or not</td>
+    </tr>
+    <tr>
+      <td>equipable</td>
+      <td>boolean</td>
+      <td>If the item is equipable or not</td>
+    </tr>
+    <tr>
+      <td>stackable</td>
+      <td>boolean</td>
+      <td>If the item is stackable or not</td>
+    </tr>
+    <tr>
+      <td>high_alch</td>
+      <td>integer</td>
+      <td>The high alchemy value of the item</td>
+    </tr>
+    <tr>
+      <td>low_alch</td>
+      <td>integer</td>
+      <td>The low alchemy value of the item</td>
+    </tr>
+    <tr>
+      <td>buy_limit</td>
+      <td>integer</td>
+      <td>The Grand Exchange buy limit of the item</td>
+    </tr>
+    <tr>
+      <td>weight</td>
+      <td>float</td>
+      <td>The weight (in kilograms) of the item</td>
+    </tr>
+    <tr>
+      <td>examine</td>
+      <td>string</td>
+      <td>The examine text of the item</td>
+    </tr>
+    <tr>
+      <td>url</td>
+      <td>string</td>
+      <td>OSRS Wikia URL link</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="item-stats">Item Stats</h3>
+
+<p>If an item is equipable it will have additional metadata about the combat bonuses that it provides; for example, the melee strength bonus the Dragon dagger item provides. The following table specifies the 14 different stats an item has. Please note that all item stats are stored as an integer data type.</p>
+
+<table class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Data type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>attack_stab</td>
+      <td>integer</td>
+      <td>The stab attack bonus of the item</td>
+    </tr>
+    <tr>
+      <td>attack_slash</td>
+      <td>integer</td>
+      <td>The slash attack bonus of the item</td>
+    </tr>
+    <tr>
+      <td>attack_crush</td>
+      <td>integer</td>
+      <td>The crush attack bonus of the item</td>
+    </tr>
+    <tr>
+      <td>attack_magic</td>
+      <td>integer</td>
+      <td>The magic attack bonus of the item</td>
+    </tr>
+    <tr>
+      <td>attack_ranged</td>
+      <td>integer</td>
+      <td>The ranged attack bonus of the item</td>
+    </tr>
+    <tr>
+      <td>defence_stab</td>
+      <td>integer</td>
+      <td>The stab defence bonus of the item</td>
+    </tr>
+    <tr>
+      <td>defence_slash</td>
+      <td>integer</td>
+      <td>The slash defence bonus of the item</td>
+    </tr>
+    <tr>
+      <td>defence_crush</td>
+      <td>integer</td>
+      <td>The crush defence bonus of the item</td>
+    </tr>
+    <tr>
+      <td>defence_magic</td>
+      <td>integer</td>
+      <td>The magic defence bonus of the item</td>
+    </tr>
+    <tr>
+      <td>defence_ranged</td>
+      <td>integer</td>
+      <td>The ranged defence bonus of the item</td>
+    </tr>
+    <tr>
+      <td>melee_strength</td>
+      <td>integer</td>
+      <td>The melee strength bonus of the item</td>
+    </tr>
+    <tr>
+      <td>ranged_strength</td>
+      <td>integer</td>
+      <td>The ranged strength bonus of the item</td>
+    </tr>
+    <tr>
+      <td>magic_damage</td>
+      <td>integer</td>
+      <td>The magic damage bonus of the item</td>
+    </tr>
+    <tr>
+      <td>prayer</td>
+      <td>integer</td>
+      <td>The prayer bonus of the item</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="json-structure">JSON Structure</h3>
+
+<p>So what does this JSON object actually look like? Well, listed below is an example of a complete JSON object for the Black wizard hat (g). You could just click on <a href="https://www.osrsbox.com/osrsbox-db/items-json/12453.json">this link</a> to view the raw JSON using the osrsbox-db API.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12453</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black wizard hat (g)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"tradeable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"stackable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"notable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"equipable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"members"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"buy_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"quest_item"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"release_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12 June 2014"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"lowalch"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"highalch"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"examine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A silly pointed hat, with colourful trim."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://2007.runescape.wikia.com/wiki/Black_wizard_hat_(g)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"bonuses"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"magic_damage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"defence_stab"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"defence_magic"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ranged_strength"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"attack_stab"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"attack_magic"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"defence_crush"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"defence_slash"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"prayer"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"attack_slash"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"defence_ranged"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"attack_crush"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"melee_strength"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"attack_ranged"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"item_slot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"head"</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<h2 id="accessing-json-data-about-osrs-items">Accessing JSON data about OSRS items</h2>
+
+<p>The JSON file for each OSRS item can be directly accessed using unique URLs provide through the <code class="highlighter-rouge">osrsbox.com</code> website. Technically, this provides the functionality of a RESTful API, but only supports GET requests. That is, you can fetch JSON files using a unique URL but cannot modify any JSON content. Below is a list of URL examples for items in the osrsbox-db:</p>
+
+<ul>
+  <li><a href="https://www.osrsbox.com/osrsbox-db/items-json/12453.json">https://www.osrsbox.com/osrsbox-db/items-json/12453.json</a></li>
+  <li><a href="https://www.osrsbox.com/osrsbox-db/items-json/10.json">https://www.osrsbox.com/osrsbox-db/items-json/10.json</a></li>
+  <li><a href="https://www.osrsbox.com/osrsbox-db/items-json/2003.json">https://www.osrsbox.com/osrsbox-db/items-json/2003.json</a></li>
+  <li><a href="https://www.osrsbox.com/osrsbox-db/items-json/3097.json">https://www.osrsbox.com/osrsbox-db/items-json/3097.json</a></li>
+  <li><a href="https://www.osrsbox.com/osrsbox-db/items-json/3098.json">https://www.osrsbox.com/osrsbox-db/items-json/3098.json</a></li>
+</ul>
+
+<p>As displayed by the links above, each item ID is stored in the <code class="highlighter-rouge">osrsbox-db</code> repository, under the <code class="highlighter-rouge">items-json</code> folder.</p>
+
+<p>So how can you get and use these JSON files about OSRS items? It is pretty easy, but really depends on what you are trying to accomplish and what programming language you are using.</p>
+
+<h3 id="accessing-json-using-wget">Accessing JSON Using wget</h3>
+
+<p>Take a simple example of downloading a single JSON file. In a Linux system, we could use the <code class="highlighter-rouge">wget</code> command to download a single JSON file, as illustrated in the example code below:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">wget https://www.osrsbox.com/osrsbox-db/items-json/12453.json</code></pre></figure>
+
+<h3 id="accessing-json-using-python">Accessing JSON Using Python</h3>
+
+<p>Maybe you are interested in downloading a single (or potentially multiple) JSON files about OSRS items and processing the information in a Python program. The short script below downloads the <code class="highlighter-rouge">12453.json</code> file using Python’s urllib library, loads the data as a JSON object and prints the contents to the console. The code is a little messy, primarily due to supporting both Python 2 and 3 (as you can see from the “try” and “except” importing method implemented).</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+<span class="k">except</span> <span class="nb">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">urllib2</span> <span class="kn">import</span> <span class="n">urlopen</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s">"https://www.osrsbox.com/osrsbox-db/items-json/12453.json"</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
+<span class="n">json_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code></pre></figure>
+
+<h3 id="accessing-json-using-javascript">Accessing JSON Using JavaScript</h3>
+
+<p>Finally, let’s have a look at JavaScript (specifically jQuery) example to fetch a JSON file from the osrsbox-db and build an HTML element to display in a web page. The example below is a very simple method to download the JSON file using the jQuery getJSON function. Once we get the JSON file, we loop through the JSON entries and print each key and value (e.g., name and Black wizard hat (g)) on it’s own line in a div element. If you want to experiment with the code, the code is available in a W3Schools TryIt Editor at <a href="https://www.w3schools.com/code/tryit.asp?filename=FDYXVMBAV85L">this link</a>.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+      <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+          <span class="nx">$</span><span class="p">(</span><span class="s2">"button"</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+              <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="s2">"https://www.osrsbox.com/osrsbox-db/items-json/12453.json"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">){</span>
+                  <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">field</span><span class="p">){</span>
+                      <span class="nx">$</span><span class="p">(</span><span class="s2">"div"</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">i</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="nx">field</span> <span class="o">+</span> <span class="s2">"&lt;br&gt;"</span><span class="p">);</span>
+                  <span class="p">});</span>
+              <span class="p">});</span>
+          <span class="p">});</span>
+      <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;button&gt;</span>Get JSON data<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;div&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre></figure>
+
+<p>So, if you have read this far, we can fetch OSRS item information using a public API provided by osrsbox-db… But what can we do with this data? The initial reason the osrsbox-db was created was to enable osrsbox-tooltips! Support for elusive items such as the <span class="tooltip osrs-tooltip" id="11806" title="Please wait ...">[Saradomin godsword]</span>. Please see the <a href="https://github.com/osrsbox/osrsbox-tooltips">osrsbox-tooltips</a> page for information about the project. However, since then I have used the osrsbox-db project in a variety of other projects whenever information about OSRS items are required.</p>
+
+<h2 id="icon-images-in-png-format">Icon images in PNG format</h2>
+
+<p>In addition to providing an API to JSON data. This project also provides thumbnail image in the PNG file format. However, not all OSRS items have an accompanying PNG image - usually untradeable items that have no OSRS Wikia page. As an example, see the image below:</p>
+
+<p>Look, it’s a … Black wizard hat (g) <img src="https://www.osrsbox.com/osrsbox-db/items-icons/12453.png" alt="alt text" /></p>
+
+<p>The Item icon images work in a very similar way to the JSON files. Each image is identified and accessed through the <code class="highlighter-rouge">osrsbox.com</code> website using the unique item ID number. Below is a list of URL examples for items icons in the osrsbox-db:</p>
+
+<ul>
+  <li><a href="https://www.osrsbox.com/osrsbox-db/items-icons/12453.png">https://www.osrsbox.com/osrsbox-db/items-icons/12453.png</a></li>
+  <li><a href="https://www.osrsbox.com/osrsbox-db/items-icons/10.png">https://www.osrsbox.com/osrsbox-db/items-icons/10.png</a></li>
+  <li><a href="https://www.osrsbox.com/osrsbox-db/items-icons/2003.png">https://www.osrsbox.com/osrsbox-db/items-icons/2003.png</a></li>
+  <li><a href="https://www.osrsbox.com/osrsbox-db/items-icons/3097.png">https://www.osrsbox.com/osrsbox-db/items-icons/3097.png</a></li>
+  <li><a href="https://www.osrsbox.com/osrsbox-db/items-icons/3098.png">https://www.osrsbox.com/osrsbox-db/items-icons/3098.png</a></li>
+</ul>
+
+<p>As displayed by the links above, each item ID is stored in the <code class="highlighter-rouge">osrsbox-db</code> repository, under the <code class="highlighter-rouge">items-icon</code> folder.</p>
+
+<h2 id="project-feedback-and-contribution">Project Feedback and Contribution</h2>
+
+<p>This is an independent project (thus far). However, I would thoroughly appreciate any feedback regarding the project, especially problems with the inaccuracies of the JSON files and missing items. The best method is to post a Github issue with a feature request, bug or other problem.</p>
+
+</div>
+</div>
+
+<footer class="footer bg-dark mt-5">
+<div class="container-fluid">
+<span><i class="far fa-copyright"></i> 2018 <a href="https://www.thomaslaurenson.com/">Thomas Laurenson</a>. Developed with <i class="fas fa-heart"></i> and <i class="fas fa-coffee"></i> using <a href="https://jekyllrb.com/">Jekyll</a>, <a href="https://getbootstrap.com/">Bootstrap</a> and <a href="https://fontawesome.com/">Font Awesome</a></span><br>
+<span><i class="far fa-copyright"></i> 2000-2018 <a href="http://www.runescape.com/">RuneScape</a><i class="far fa-registered"></i> and <a href="http://www.jagex.com/">Jagex</a><i class="far fa-registered"></i> are trademarks of Jagex Ltd.</span>
+</div>
+</footer>
+<!-- JavaScript Imports -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS, then OSRSBox JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+<script type="text/javascript" src='/assets/scripts/main.js'></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121684762-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121684762-2');
+</script>
+
+
+
+
+</body>
+</html>

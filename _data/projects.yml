@@ -1,0 +1,15 @@
+- name: "An OSRS Item Database Available via a RESTful API"
+  muted: "Get OSRS Items in JSON Format"
+  date: "2018"
+  description: |
+    A database of Old School Runescape (OSRS) items in JSON format with accompanying icon images in PNG format. This project provides public access to metadata about every OSRS item in the game! Query a specific item ID number and receive back data about items including name, alch values, examine text, and combat bonuses.
+  url: "/projects/osrsbox-db"
+  image: "/300/osrsbox-db.png"
+
+- name: "OSRS Tool Tips Project"
+  muted: "Display a Tool Tip for OSRS Items on Mouse Hover"
+  date: "2018"
+  description: |
+    This project provides the code (JavaScript and CSS) required to implement simple tool tips for OSRS items. When configured for a website a user can hover over an item name and a tool tip will appear that provides information about the item. This project uses the OSRS Item Database RESTful API to populate information dynamically about items.
+  url: "/projects/osrs-tooltips"
+  image: "/300/osrsbox-tooltips.png"

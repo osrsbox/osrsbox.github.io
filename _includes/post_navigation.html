@@ -1,0 +1,30 @@
+<div class="container">
+<div class="row">
+  
+{% if page.previous %}
+<div class="col-6">
+  <a href="{{ page.previous.url }}">
+    <div class="h6">Previous</div>
+    <h4 class="">{{ page.previous.name }}</h4>
+  </a>
+</div>  
+{% endif %}
+  
+{% if page.next and page.previous %}
+<div class="col-6 text-right">
+  <a href="{{ page.next.url }}">
+    <div class="h6">Next</div>
+    <h4 class="">{{ page.next.name }}</h4>
+    </a>
+    </div>
+{% elsif page.next %}
+<div class="col-6 ml-auto text-right">
+    <a href="{{ page.next.url }}">
+      <div class="h6">Next</div>
+      <h4 class="">{{ page.next.name }}</h4>
+      </a>
+      </div>
+{% endif %}
+
+</div>
+</div>

@@ -1,0 +1,34 @@
+---
+layout: default
+title: "OSRSBox | Blog Tags"
+nav_item: blog
+nav_item_blog: all
+header_title: Blog
+include_header: header_tags.html
+include_comments:
+  count: true
+---
+
+{% if site.tags != "" %}
+  {% include collect_tags.html %}
+{% endif %}
+
+<div class="container">
+    <div class="row mx-auto">
+      {% for tag in sortedtags %}
+          <a href="/blog/tags/{{ tag }}" class="px-1 py-1"><button type="button" class="btn btn-outline-dark font-weight-bold">{{ tag }} ({{ site.tags[tag].size }})</button></a>
+      {% endfor %}
+    </div>
+</div>
+
+<div class="container">
+
+    <h1 class="pt-5">{{ page.tag }} <span class="text-muted">({{ site.tags[page.tag].size }} posts)</span></h2>
+    <hr class="divider divider-osrsbox">
+    {% for post in site.tags[page.tag] %}
+      {% include post_outline.html post=post %}
+      {% if forloop.last == false %}
+        <hr class="divider divider-osrsbox">
+      {% endif %}
+    {% endfor %}
+</div>

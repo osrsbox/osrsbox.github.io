@@ -1,0 +1,23 @@
+---
+layout: default
+title: "OSRSBox | Blog | Tags"
+nav_item: blog  
+nav_item_blog: tags  
+header_title: Blog Tags
+include_header: header_tags.html
+is_tags_page: true
+include_comments:
+  count: true
+---
+
+{% if site.tags != "" %}
+  {% include collect_tags.html %}
+{% endif %}
+
+<div class="container">
+<div class="row mx-auto">
+  {% for tag in sortedtags %}
+      <a href="/blog/tags/{{ tag }}" class="px-1 py-1"><button type="button" class="btn btn-outline-dark font-weight-bold">{{ tag }} ({{ site.tags[tag].size }})</button></a>
+  {% endfor %}
+</div>
+</div>

@@ -1,0 +1,19 @@
+{% capture project_title_element %}
+{% if include.project_title_element %}
+    {{ include.project_title_element }}
+{% else %}
+    h2
+{% endif %}
+{% endcapture %}
+<div class="row featurette mx-auto">
+<div class="col-md-4 mx-auto d-none d-md-block">
+    <a href="{{ item.url }}">
+{% capture image_path %}/assets/img/{{ item.image }}{% endcapture %}
+<img class="featurette-image img-fluid mx-auto d-block" src="{{ image_path }}" alt="item.name">
+</a>
+</div>
+<div class="col-sm-12 col-md-8 mx-auto">
+    <h2 class="featurette-heading"><a href="{{ item.url }}" name="{{ item.name | downcase | replace:' ','-' | remove:',' }}">{{ item.name }}<span class="text-muted"> - {{ item.muted }}</span></a></h2>
+    <p class="lead">{{ item.description }}</p>
+    </div>
+</div>

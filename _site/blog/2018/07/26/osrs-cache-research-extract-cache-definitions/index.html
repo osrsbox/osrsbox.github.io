@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="http://0.0.0.0:4000/blog/2018/07/26/osrs-cache-research-extract-cache-definitions/">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/img/icons/favicon/apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/icons/favicon/apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/icons/favicon/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/icons/favicon/apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/img/icons/favicon/apple-touch-icon-60x60.png" />
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/icons/favicon/apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/icons/favicon/apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/icons/favicon/apple-touch-icon-152x152.png" />
+<link rel="icon" type="image/png" href="/assets/img/icons/favicon/favicon-196x196.png" sizes="196x196" />
+<link rel="icon" type="image/png" href="/assets/img/icons/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/assets/img/icons/favicon/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/assets/img/icons/favicon/favicon-16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/assets/img/icons/favicon/favicon-128.png" sizes="128x128" />
+<meta name="msapplication-TileColor" content="#FFFFFF" />
+<meta name="msapplication-TileImage" content="/assets/img/icons/favicon/mstile-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/assets/img/icons/favicon/mstile-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/assets/img/icons/favicon/mstile-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/assets/img/icons/favicon/mstile-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/assets/img/icons/favicon/mstile-310x310.png" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400|Montserrat:400,700">
+<link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+<title>OSRSBox | Blog | Parsing the OSRS Cache using RuneLite</title>
+</head>
+
+
+<body>
+<nav class="navbar navbar-expand-md bg-dark">
+<a class="navbar-brand" href="http://0.0.0.0:4000"><i class="fa fa-box" aria-hidden="true"></i>OSRSBox</a>
+<button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarsExample04">
+<ul class="navbar-nav ml-auto">
+<li class="nav-item">
+<a class="nav-link" href="http://0.0.0.0:4000/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="http://0.0.0.0:4000/tools/">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="http://0.0.0.0:4000/projects/">Projects</a>
+</li>
+</ul>
+</div>
+</nav>
+
+
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1>Parsing the OSRS Cache using RuneLite</h1>
+<p class="lead">Extracting NPC and Item Definitions from the Cache</p>
+<div>
+
+<div class="container-fluid">
+  <span class="pr-2">
+    <i class="fa fa-calendar metadata-icons"></i>
+    <time datetime="2018-07-26" class="text-muted">Jul 26, 2018</time>
+  </span>
+  
+    <span class="pr-2">
+      <i class="fa fa-tag metadata-icons"></i>
+      
+      
+      <a href="/blog/tags/Cache" class="text-muted">Cache</a>,
+      
+      
+      <a href="/blog/tags/RuneLite" class="text-muted">RuneLite</a>
+      
+    </span>
+  
+  
+    <span class="pr-2">
+      <i class="fa fa-comments metadata-icons"></i>
+      
+      <a href="#comments" class="disqus-comment-count text-muted" data-disqus-identifier="/blog/2018/07/26/osrs-cache-research-extract-cache-definitions">Comments</a>
+    </span>
+  
+  
+    
+    <span class="pr-2">
+      <i class="fa fa-clock metadata-icons"></i>
+      <span class="text-muted">14 min read</span>
+    </span>
+  
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="container-fluid">
+<div class="col-md-8 col-12 mx-auto">
+  <p>While making some parts of this website and some authoring other tools I needed to dabble a little with the OSRS cache. For example, to help build the <a href="(/projects/osrsbox-db/)">OSRSBox Item Database project</a> (osrsbox-db), I needed to extract all items from the OSRS cache. Along the way I learnt a lot about the cache structure, the type of information it contains and various tools that are available to help parse the information in the cache. This page documents some of the more useful information I found to hopefully help someone else who is interested.</p>
+
+<p>This post starts with a brief discussion about the OSRS cache, then outlines how to use the open source RuneLite project to extract item definitions and npc definitions from the cache.</p>
+
+<h2 id="osrs-cache-formatstructure">OSRS Cache Format/Structure</h2>
+
+<p>The OSRS Cache structure is pretty much the same as the very well know #317 Runescape 2 cache format. All cache files are stored in the home directory of the user. In Microsoft Windows (Vista onwards), the cache files are stored in the following directory:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">C:<span class="se">\U</span>sers<span class="se">\&lt;</span>username&gt;<span class="se">\j</span>agexcache<span class="se">\o</span>ldschool<span class="se">\L</span>IVE
+OR
+C:<span class="se">\U</span>sers<span class="se">\p</span>h01l<span class="se">\j</span>agexcache<span class="se">\o</span>ldschool<span class="se">\L</span>IVE</code></pre></figure>
+
+<p>Similarly, on Linux-based systems the cache files are stored in the following directory:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">/home/&lt;username&gt;/jagexcache/oldschool/LIVE
+OR
+/home/ph01l/jagexcache/oldschool/LIVE</code></pre></figure>
+
+<p>Inside the cache directory there are a number of files, but there are only two primary file types/formats. These file types are easily identified by their corresponding file extension, namely:</p>
+
+<ol>
+  <li>Data files, with a <code class="highlighter-rouge">.dat</code> extension</li>
+  <li>Index files, with a <code class="highlighter-rouge">.idx</code> extension</li>
+</ol>
+
+<p>The following sections discuss each of these file type/formats in further detail.</p>
+
+<h3 id="data-files-dat">Data Files (dat)</h3>
+
+<p>The primary data file is named <code class="highlighter-rouge">main_file_cache.dat2</code>. This file contains the entire OSRS cache including information about items, npcs, images, sounds, models and animations. However, the file is stored in a complex structure and you cannot just open the <code class="highlighter-rouge">main_file_cache.dat2</code> file and view images or extract music. The file is made up of various <em>blocks</em> of data, some are compressed, some are not, and the information is not trivial to extract. To extract anything from the <code class="highlighter-rouge">main_file_cache.dat2</code> file you must know the location of the data blocks. This information is provided by index files.</p>
+
+<h3 id="index-files-idx">Index Files (idx)</h3>
+
+<p>As the name suggests, index file are an index for the <code class="highlighter-rouge">main_file_cache.dat2</code> file. In OSRS there are currently 17 index files named consecutively from <code class="highlighter-rouge">main_file_cache.idx0</code> to <code class="highlighter-rouge">main_file_cache.idx16</code>, as well as one index file named <code class="highlighter-rouge">main_file_cache.idx255</code>. The table below documents each index file, and the data that the index file points to.</p>
+
+<table class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th>Index file name</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>main_file_cache.idx0</td>
+      <td>Skeleton</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx1</td>
+      <td>Skin</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx2</td>
+      <td>Config (See below)</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx3</td>
+      <td>Interface</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx4</td>
+      <td>Sound Effects 1</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx5</td>
+      <td>Landscape/Maps</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx6</td>
+      <td>Music 1</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx7</td>
+      <td>Models</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx8</td>
+      <td>Sprites</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx9</td>
+      <td>Texture</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx10</td>
+      <td>Huffman</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx11</td>
+      <td>Music 2</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx12</td>
+      <td>Client scripts</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx13</td>
+      <td>Fonts</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx14</td>
+      <td>Sound Effects 2</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx15</td>
+      <td>Sound Effects 3</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx16</td>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <td>main_file_cache.idx255</td>
+      <td>Unknown</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The config file, or <code class="highlighter-rouge">main_file_cache.idx2</code> contains highly useful information.</p>
+
+<table class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th>Index 2 block</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Underlay Definition</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Empty</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>IdentityKit</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Overlay Definition</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Object Definition</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Empty</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Mapped Values</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>NPC Definition</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Item Definition</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>Empty</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Animation Definition (sequence)</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>Animated Graphic Definition (Spot Animation/GFX)</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>VarpBit Definition</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>Empty</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>Varp Definition</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="runelite-tools">RuneLite Tools</h2>
+
+<p>RuneLite is a suite of open source tools for Old School RuneScape. The project provides a free, open-source and super fast client for Old School RuneScape. In addition, the creators also provide a cache extraction tool and used to provide a client deobfuscator. This documentation focuses on the cache tool for extracting information from the OSRS cache, and dabbles a little later with the deobfuscator (using and old version from the RuneLite project) for extracting cache version information. The <a href="https://runelite.net/">RuneLite homepage</a> provide a summary of the project and precompiled downloads for the client. The <a href="https://github.com/runelite/runelite">RuneLite GitHub project page</a> is the official repository to get the source code for the project.</p>
+
+<h3 id="compiling-runelite-tools">Compiling RuneLite Tools</h3>
+
+<p>The RuneLite client comes as a precompiled download (a <code class="highlighter-rouge">.jar</code> file). However, the other tools that are part of the suite of tools do not come precompiled. Therefore, this section documents how to compile the tools. Although this is a pretty staight-forward process, it may be difficult for someone without much programming experience.</p>
+
+<p>The following instructions were performed on Microsoft Windows 10 64-bit. However, the instructions should be suitable for other Microsoft Windows operating systems and also adaptable to other operating systems such as Linux. The following software is required: 1) Git; 2) Netbeans; 3) Java.</p>
+
+<ol>
+  <li>Git SCM. Download from <a href="https://git-scm.com/downloads">here</a>. Select Windows to download the installer for Windows-based systems, and install using default options. Version 2.15.1 was used in this tutorial. Note: You can use any git client.</li>
+  <li>Netbeans and Java. The easiest option is to download the Netbeans IDE that is bundled with Java EE. Download from <a href="https://netbeans.org/downloads/">here</a>. Install using default options. Version 8.2 was used in this tutorial.</li>
+</ol>
+
+<p>Now, clone the RuneLite repository using Git Bash. For those new to git, you need to open Git Bash using the Windows Explorer context menu. In Windows Explorer, browse to a folder where you want to down the RuneLite repository, right-click a white-space area in Windows Explorer, and select <em>Git Bash</em>. Then enter the following command into the Git Bash command prompt to download the source code from the RuneLite GitHub repository:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git clone https://github.com/runelite/runelite.git</code></pre></figure>
+
+<p>Excellent, we have everything ready to go.</p>
+
+<p>Open the NetBeans IDE from the Windows Start Menu. We will start by making a couple of configurations to Netbeans to make life easier. Firstly, we will disable testing, mainly because it takes a very long time to compile the project with additional tests. Perform the following tasks:</p>
+
+<ul>
+  <li>Go to Tools &gt; Options</li>
+  <li>Select Java (the icon on the top bar)</li>
+  <li>Select the Maven tab</li>
+  <li>Add a checkbox in: Skip tests for any build executions no directly related to testing</li>
+  <li>Click Apply, then click OK</li>
+</ul>
+
+<p>Now, open the RuneLite repository in the NetBeans IDE:</p>
+
+<ul>
+  <li>File &gt; Open Project</li>
+  <li>Navigate to the folder of the cloned Runelite repository</li>
+  <li>It will have a little MA icon, to indicate it is a Maven project</li>
+  <li>Double-click the icon to load the project</li>
+  <li>After the project loads:
+    <ul>
+      <li>Expand the Runelite icon</li>
+      <li>Expand the Modules folder</li>
+      <li>Right click Cache, and select Open Project</li>
+      <li>A new project will appear is the navigation pane</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Before we can build the actual cache tool, we need to modify the source code a little. Since RuneLite is a suite of tools, we need to configure the Maven project to only build the Cache tool. Using the navigation menu, open the following file:</p>
+
+<ul>
+  <li>Cache &gt; Project Files &gt; pom.xml</li>
+</ul>
+
+<p>You need to add a line in the <code class="highlighter-rouge">pom.xml</code> file to specify a main class. With a main class, the tool cannot be run correctly. You need to add the following entry:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;manifest&gt;</span>
+	<span class="nt">&lt;mainClass&gt;</span>net.runelite.cache.Cache<span class="nt">&lt;/mainClass&gt;</span>
+<span class="nt">&lt;/manifest&gt;</span></code></pre></figure>
+
+<p>The entry needs to be in the <code class="highlighter-rouge">&lt;plugin&gt;</code> section, specifically in the <code class="highlighter-rouge">maven-assembly-plugin</code> section. Inside this XML entry is a <code class="highlighter-rouge">configuration</code> tag, then a <code class="highlighter-rouge">archive</code> tag. Basically, you need to add a <code class="highlighter-rouge">manifest</code> tag that states that the resultant build file (<code class="highlighter-rouge">.jar</code>), should use the Cache main class as the program entry point. Without this addition, you will get a <code class="highlighter-rouge">no main manifest attribute</code> error when running the <code class="highlighter-rouge">.jar</code> file. The following snippet displays a section of the <code class="highlighter-rouge">pom.xml</code> file, and what it should look like after the entry is added.</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;plugin&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>maven-assembly-plugin<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;configuration&gt;</span>
+            <span class="nt">&lt;archive&gt;</span>
+                <span class="nt">&lt;manifest&gt;</span>
+                    <span class="nt">&lt;mainClass&gt;</span>net.runelite.cache.Cache<span class="nt">&lt;/mainClass&gt;</span>
+                <span class="nt">&lt;/manifest&gt;</span>
+            <span class="nt">&lt;/archive&gt;</span>
+...
+<span class="nt">&lt;/plugin&gt;</span></code></pre></figure>
+
+<p>Great! Now you can build the cache tool. Perform the following tasks:</p>
+
+<ul>
+  <li>Right click the Cache project in the navigation menu</li>
+  <li>Select Build</li>
+</ul>
+
+<p>This will compile the Cache tool and produce a <code class="highlighter-rouge">.jar</code> file that can be executed. The build process may take a while for the first build, because a collection of dependencies need to be downloaded. The <code class="highlighter-rouge">.jar</code> file for the cache tool is available in the following directory:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">runelite<span class="se">\c</span>ache<span class="se">\t</span>arget</code></pre></figure>
+
+<p>Two different versions will be compiled:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">cache-1.4.11-SNAPSHOT-jar-with-dependencies.jar</code></li>
+  <li><code class="highlighter-rouge">cache-1.4.11-SNAPSHOT.jar</code></li>
+</ul>
+
+<p>As illustrated by the naming conventions, one has a <code class="highlighter-rouge">.jar</code> build with all project dependencies. The other is a standalone <code class="highlighter-rouge">.jar</code> file without dependencies. It is recommended to the use the <code class="highlighter-rouge">cache-1.4.11-SNAPSHOT-jar-with-dependencies.jar</code> file to avoid any dependency issues.</p>
+
+<h2 id="extracting-osrs-cache-information-using-runelite">Extracting OSRS Cache Information using Runelite</h2>
+
+<p>The cache tool has support for extracting the following types of data from the OSRS cache:</p>
+
+<ul>
+  <li><strong>items</strong>: Extract JSON files with information about game items</li>
+  <li><strong>npcs</strong>: Extract JSON files with information about game NPCs</li>
+  <li><strong>objects</strong>: Extract JSON files with information about game objects</li>
+  <li><strong>sprites</strong>: Extract graphics from the cache</li>
+  <li><strong>tree</strong>: Extract every file from the cache in <code class="highlighter-rouge">.dat</code> files</li>
+</ul>
+
+<p>You can run the newly build cache tool by using the Windows Command environment. The following steps should help:</p>
+
+<ul>
+  <li>Open the Windows Start Menu</li>
+  <li>Start typing <code class="highlighter-rouge">cmd</code> and left-click to open</li>
+  <li>Navigate to the runelite folder</li>
+  <li>As an alternative method, you can open the runelite folder in Windows Explorer, right-click on any whitespace while holding the Shift key, and open the Command Prompt.</li>
+  <li>NOTE: You can also use Powershell for this task.</li>
+</ul>
+
+<p>The cache tool has the following general syntax:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">java.exe <span class="nt">-jar</span> cache-1.4.11-SNAPSHOT-jar-with-dependencies.jar <span class="nt">-c</span> &lt;cache-location&gt; &lt;cache-extraction-option&gt; &lt;output-directory&gt;</code></pre></figure>
+
+<p>Where each of the inputs are explained below:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">&lt;cache-location&gt;</code> is the location of the OSRS cache. This is usually in the home directory; for example: <code class="highlighter-rouge">C:\Users\&lt;username&gt;\jagexcache\oldschool\LIVE\</code>. In the following command examples, the username is: <code class="highlighter-rouge">ph01l</code>.</li>
+  <li><code class="highlighter-rouge">&lt;cache-extraction-option&gt;</code> is the type of information that you want to extract. Valid options are <code class="highlighter-rouge">-items</code>, <code class="highlighter-rouge">-npcs</code>, <code class="highlighter-rouge">-objects</code> and <code class="highlighter-rouge">-sprites</code>.</li>
+  <li><code class="highlighter-rouge">&lt;output-directory&gt;</code> is the directory to save the output. Sometimes this will be created automatically by the tool, and sometimes you will have to manually create it. In the following command examples, as output is saved to the <code class="highlighter-rouge">Desktop</code> folder for the user named <code class="highlighter-rouge">ph01l</code>.</li>
+</ul>
+
+<p>Examples are helpful for this type of tool, where the command can be complex. The following five snippets provide examples of how to run the RuneLite cache tool.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># EXTRACT ITEM INFORMATION IN JSON FORMAT
+</span>
+java.exe <span class="nt">-jar</span> .<span class="se">\c</span>ache-1.4.11-SNAPSHOT-jar-with-dependencies.jar <span class="nt">-c</span> C:<span class="se">\U</span>sers<span class="se">\p</span>h01l<span class="se">\j</span>agexcache<span class="se">\o</span>ldschool<span class="se">\L</span>IVE<span class="se">\ </span><span class="nt">-items</span> C:<span class="se">\U</span>sers<span class="se">\p</span>h01l<span class="se">\D</span>esktop<span class="se">\i</span>tems</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># EXTRACT NPC INFORMATION IN JSON FORMAT
+</span>
+java.exe <span class="nt">-jar</span> .<span class="se">\c</span>ache-1.4.11-SNAPSHOT-jar-with-dependencies.jar <span class="nt">-c</span> C:<span class="se">\U</span>sers<span class="se">\p</span>h01l<span class="se">\j</span>agexcache<span class="se">\o</span>ldschool<span class="se">\L</span>IVE<span class="se">\ </span><span class="nt">-npcs</span> C:<span class="se">\U</span>sers<span class="se">\p</span>h01l<span class="se">\D</span>esktop<span class="se">\n</span>pcs</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># EXTRACT OBJECT INFORMATION IN JSON FORMAT
+</span>
+java.exe <span class="nt">-jar</span> .<span class="se">\c</span>ache-1.4.11-SNAPSHOT-jar-with-dependencies.jar <span class="nt">-c</span> C:<span class="se">\U</span>sers<span class="se">\p</span>h01l<span class="se">\j</span>agexcache<span class="se">\o</span>ldschool<span class="se">\L</span>IVE<span class="se">\ </span><span class="nt">-objects</span> C:<span class="se">\U</span>sers<span class="se">\p</span>h01l<span class="se">\D</span>esktop<span class="se">\o</span>bjects</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># EXTRACT IMAGES
+</span>
+java.exe <span class="nt">-jar</span> .<span class="se">\c</span>ache-1.4.11-SNAPSHOT-jar-with-dependencies.jar <span class="nt">-c</span> C:<span class="se">\U</span>sers<span class="se">\p</span>h01l<span class="se">\j</span>agexcache<span class="se">\o</span>ldschool<span class="se">\L</span>IVE<span class="se">\ </span><span class="nt">-sprites</span> C:<span class="se">\U</span>sers<span class="se">\p</span>h01l<span class="se">\D</span>esktop<span class="se">\s</span>prites</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># EXTRACT THE ENTIRE CACHE IN DAT FORMAT
+</span>
+java.exe <span class="nt">-jar</span> .<span class="se">\c</span>ache-1.4.11-SNAPSHOT-jar-with-dependencies.jar <span class="nt">-u</span> <span class="nt">-c</span> C:<span class="se">\U</span>sers<span class="se">\p</span>h01l<span class="se">\j</span>agexcache<span class="se">\o</span>ldschool<span class="se">\L</span>IVE<span class="se">\ </span><span class="nt">-t</span> tree</code></pre></figure>
+
+<p>You can also run the cache tool directly in Netbeans. However, to achieve this you must provide command line arguments within the NetBeans IDE. This is complex to setup, but simple after it is configured. To achieve this, in the bottom-right pane (the output/debugging pane) there is a little icon that looks like a fast forward button - colored (yellow). There are two icons which look the same, it is the bottom one! When hovered over, it will read: <em>Re-run with different parameters</em>. This button allows us to enter command line arguments when running the program. The first line needs to have the arguments added to it. In original format, th configuration has the following line:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">exec.args<span class="o">=</span><span class="nt">-classpath</span> %classpath net.runelite.cache.Cache</code></pre></figure>
+
+<p>If you want to <em>Run</em> the cache tool directly in Netbeans you need to add additional arguments. For example, to dump items you can use the following arguments:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">exec.args<span class="o">=</span><span class="nt">-classpath</span> %classpath net.runelite.cache.Cache <span class="nt">-c</span> C:<span class="se">\U</span>sers<span class="se">\p</span>h01l<span class="se">\j</span>agexcache<span class="se">\o</span>ldschool<span class="se">\L</span>IVE <span class="nt">-items</span> C:<span class="se">\U</span>sers<span class="se">\p</span>h01l<span class="se">\D</span>esktop<span class="se">\i</span>tems</code></pre></figure>
+
+<h3 id="example-of-osrs-cache-item-definition">Example of OSRS Cache Item Definition</h3>
+
+<p>The information I wanted to extract from the OSRS Cache was the item definitions. I needed this information to get an up-to-date and complete list of all items in OSRS. The code snippet below show one item definition that has been extracted from the cache. The specific item has the ID number of <code class="highlighter-rouge">22111</code> and is the <code class="highlighter-rouge">Dragonbone necklace</code>.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">22111</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dragonbone necklace"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"resizeX"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"resizeY"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"resizeZ"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"xan2d"</span><span class="p">:</span><span class="w"> </span><span class="mi">417</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"yan2d"</span><span class="p">:</span><span class="w"> </span><span class="mi">81</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"zan2d"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">80000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"isTradeable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"stackable"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"inventoryModel"</span><span class="p">:</span><span class="w"> </span><span class="mi">35102</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"members"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"zoom2d"</span><span class="p">:</span><span class="w"> </span><span class="mi">716</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"xOffset2d"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"yOffset2d"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ambient"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"contrast"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Take"</span><span class="p">,</span><span class="w">
+    </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="kc">null</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"interfaceOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Wear"</span><span class="p">,</span><span class="w">
+    </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Drop"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"maleModel0"</span><span class="p">:</span><span class="w"> </span><span class="mi">34627</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maleModel1"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maleModel2"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maleOffset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maleHeadModel"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maleHeadModel2"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"femaleModel0"</span><span class="p">:</span><span class="w"> </span><span class="mi">34627</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"femaleModel1"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"femaleModel2"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"femaleOffset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"femaleHeadModel"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"femaleHeadModel2"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"notedID"</span><span class="p">:</span><span class="w"> </span><span class="mi">22112</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"notedTemplate"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"team"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"shiftClickDropIndex"</span><span class="p">:</span><span class="w"> </span><span class="mi">-2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"boughtId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"boughtTemplateId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"placeholderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">22113</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"placeholderTemplateId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>As you can see these is a variety of information - some useful, some not. The usefulness of the information really depends on what information you are after!</p>
+
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col"><hr class="divider divider-osrsbox"></div>
+    <div class="col-auto"></div>
+    <div class="col"><hr class="divider divider-osrsbox"></div>
+  </div>
+</div>
+  
+<div class="container">
+<div class="row">
+  
+
+<div class="col-6">
+  <a href="/blog/2018/07/25/fight-caves-tool/">
+    <div class="h6">Previous</div>
+    <h4 class="">Writing a Fight Caves Spawn Predictor</h4>
+  </a>
+</div>  
+
+  
+
+<div class="col-6 text-right">
+  <a href="/blog/2018/08/03/osrs-cache-research-determine-client-version/">
+    <div class="h6">Next</div>
+    <h4 class="">Determine the OSRS Version using RuneLite</h4>
+    </a>
+    </div>
+
+
+</div>
+</div>
+
+<div class="container pt-5">
+  <div class="row">
+    <div class="col align-self-center"><hr class="divider divider-osrsbox divider-box"></div>
+    <div class="col-auto">
+      <span class="fa-stack fa-3x">
+        <i class="fa fa-circle fa-stack-2x icon-background"></i>
+        <i class="fa fa-box fa-stack-1x fa-inverse"></i>
+      </span>
+    </div>
+    <div class="col align-self-center"><hr class="divider divider-osrsbox divider-box"></div>
+  </div>
+</div>
+
+<div class="container pt-5">
+    <div class="row no-gutters">
+      
+    <div class="col-6">
+        <a href="http://0.0.0.0:4000 "><h3>OSRSBOX</h3></a>
+        <p class="">
+            If you enjoyed this post, you may also like my other <a href="http://0.0.0.0:4000/blog/">posts</a>, <a href="http://0.0.0.0:4000/tools/">tools</a> and <a href="http://0.0.0.0:4000/projects/">projects</a>.
+          </p>
+    </div>  
+      
+    <div class="col-6 text-right">
+        <h3>Share this post</h3>
+        
+
+
+
+<a href="https://twitter.com/share?url=/blog/2018/07/26/osrs-cache-research-extract-cache-definitions/&amp;text=OSRSBox | Blog | Parsing the OSRS Cache using RuneLite" target="_blank" class="fab fa-lg fa-twitter-square" style="color:gray"></a>
+<a href="https://www.linkedin.com/shareArticle?url=/blog/2018/07/26/osrs-cache-research-extract-cache-definitions/&amp;title=OSRSBox | Blog | Parsing the OSRS Cache using RuneLite" target="_blank" class="fab fa-fw fa-lg fa-linkedin" style="color:gray"></a>
+<a href="https://www.facebook.com/sharer.php?u=/blog/2018/07/26/osrs-cache-research-extract-cache-definitions/" target="_blank" class="fab fa-fw fa-lg fa-facebook-square" style="color:gray"></a>
+<a href="https://plus.google.com/share?url=/blog/2018/07/26/osrs-cache-research-extract-cache-definitions/" target="_blank" class="fab fa-fw fa-lg fa-google-plus-square" style="color:gray"></a>
+<a href="http://reddit.com/submit?url=/blog/2018/07/26/osrs-cache-research-extract-cache-definitions/&amp;title=OSRSBox | Blog | Parsing the OSRS Cache using RuneLite" target="_blank" class="fab fa-fw fa-lg fa-reddit-square" style="color:gray"></a>
+<a href="http://news.ycombinator.com/submitlink?u=/blog/2018/07/26/osrs-cache-research-extract-cache-definitions/&amp;t=OSRSBox | Blog | Parsing the OSRS Cache using RuneLite" target="_blank" class="fab fa-fw fa-lg fa-hacker-news" style="color:gray"></a>
+
+        </div>
+    
+    </div>
+    </div>
+
+</div>
+
+<footer class="footer bg-dark mt-5">
+<div class="container-fluid">
+<span><i class="far fa-copyright"></i> 2018 <a href="https://www.thomaslaurenson.com/">Thomas Laurenson</a>. Developed with <i class="fas fa-heart"></i> and <i class="fas fa-coffee"></i> using <a href="https://jekyllrb.com/">Jekyll</a>, <a href="https://getbootstrap.com/">Bootstrap</a> and <a href="https://fontawesome.com/">Font Awesome</a></span><br>
+<span><i class="far fa-copyright"></i> 2000-2018 <a href="http://www.runescape.com/">RuneScape</a><i class="far fa-registered"></i> and <a href="http://www.jagex.com/">Jagex</a><i class="far fa-registered"></i> are trademarks of Jagex Ltd.</span>
+</div>
+</footer>
+<!-- JavaScript Imports -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS, then OSRSBox JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+<script type="text/javascript" src='/assets/scripts/main.js'></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121684762-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121684762-2');
+</script>
+
+
+
+
+</body>
+</html>

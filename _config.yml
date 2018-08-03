@@ -1,5 +1,25 @@
+# Website settings
+url: "https://www.osrsbox.com"
+
+title: "OSRSBox"
 name: OSRSBOX
 markdown: kramdown
 
+# Jekyll build settings
+paginate: 10
+paginate_path: "/blog/page:num"
+permalink: "/blog/:year/:month/:day/:title/"
+sass:
+  sass_dir: "/assets/css"
+  style: :compressed
+highlighter: rouge
+timezone: 'Pacific/Auckland'
+repository: osrsbox/osrsbox.github.io
 incremental: true
 baseurl: /
+
+# Plugins
+plugins:
+  - jekyll-redirect-from
+  - jekyll-sitemap
+  - jekyll-paginate

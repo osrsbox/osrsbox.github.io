@@ -1,0 +1,21 @@
+{% capture post_title_element %}
+{% if include.post_title_element %}
+    {{ include.post_title_element }}
+{% else %}
+    h2
+{% endif %}
+{% endcapture %}
+<div class="row featurette mx-auto">
+    <div class="col-md-3 mx-auto d-none d-md-block">
+        <a href="{{ post.url }}">
+            {% capture image_path %}/assets/img/200/{{ post.thumbnail }}{% endcapture %}
+            <img class="featurette-image img-fluid float-right py-3 pr-3" src="{{ image_path }}" alt="post.name">
+            </a>
+    </div>
+    <div class="col-md-9 col-12 mx-auto">
+        <h2 class="featurette-heading"><a href="{{ post.url }}" name="{{ post.name | downcase | replace:' ','-' | remove:',' }}">{{ post.name }}</a><span class="text-muted"> - {{ post.desc }}</span></h2>
+        <p class="left-align">{{ include.post.excerpt | strip_html | truncate: 165, '...' }}</p>
+        <a href="{{ include.post.url }}" class="text-muted">Continue Reading &raquo;</a>
+        {% include post_metadata.html post=include.post %}
+    </div>
+</div>

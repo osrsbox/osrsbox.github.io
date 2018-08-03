@@ -1,0 +1,34 @@
+<hr class="divider divider-osrsbox">
+<div class="container pt-3">
+<div class="row">
+<div class="col-4">
+{% if paginator.previous_page %}
+  {% assign prev_class="" %}
+  {% if paginator.previous_page == 1 %}
+    <a href="/blog" title="Previous Page" class="{{ prev_class }}"><button type="button" class="btn btn-outline-dark font-weight-bold"><i class="fas fa-backward"></i> Newer Posts</button></a>
+  {% else %}
+    <a href="/blog/page{{ paginator.previous_page }}/" title="Previous Page" class="{{ prev_class }}"><button type="button" class="btn btn-outline-dark font-weight-bold"><i class="fas fa-backward"></i> Newer Posts</button></a>
+  {% endif %}
+{% else %}
+  <div class="left px4">&nbsp;</div>
+{% endif %}
+</div>
+
+<div class="col-4">
+  <div class="font-weight-bold text-center"> Page {{paginator.page}} of {{paginator.total_pages}}</div>
+</div>
+  
+<div class="col-4">
+{% if paginator.next_page %} 
+  <a href="/blog/page{{ paginator.next_page }}/" title="Next Page"><button type="button" class="btn btn-outline-dark font-weight-bold">Older Posts <i class="fas fa-forward"></i></button></a>
+{% endif %} 
+</div>
+</div>
+</div>
+
+  
+
+  
+
+
+

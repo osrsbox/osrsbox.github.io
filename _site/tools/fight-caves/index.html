@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="canonical" href="http://0.0.0.0:4000/tools/fight-caves/">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/img/icons/favicon/apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/icons/favicon/apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/icons/favicon/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/icons/favicon/apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/img/icons/favicon/apple-touch-icon-60x60.png" />
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/icons/favicon/apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/icons/favicon/apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/icons/favicon/apple-touch-icon-152x152.png" />
+<link rel="icon" type="image/png" href="/assets/img/icons/favicon/favicon-196x196.png" sizes="196x196" />
+<link rel="icon" type="image/png" href="/assets/img/icons/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/assets/img/icons/favicon/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/assets/img/icons/favicon/favicon-16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="/assets/img/icons/favicon/favicon-128.png" sizes="128x128" />
+<meta name="msapplication-TileColor" content="#FFFFFF" />
+<meta name="msapplication-TileImage" content="/assets/img/icons/favicon/mstile-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/assets/img/icons/favicon/mstile-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/assets/img/icons/favicon/mstile-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/assets/img/icons/favicon/mstile-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/assets/img/icons/favicon/mstile-310x310.png" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400|Montserrat:400,700">
+<link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+<title>OSRSBOX | Fight Caves Spawn Predictor</title>
+</head>
+
+
+<body>
+<nav class="navbar navbar-expand-md bg-dark">
+<a class="navbar-brand" href="http://0.0.0.0:4000"><i class="fa fa-box" aria-hidden="true"></i>OSRSBox</a>
+<button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarsExample04">
+<ul class="navbar-nav ml-auto">
+<li class="nav-item">
+<a class="nav-link" href="http://0.0.0.0:4000/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="http://0.0.0.0:4000/tools/">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="http://0.0.0.0:4000/projects/">Projects</a>
+</li>
+</ul>
+</div>
+</nav>
+
+
+
+<div class="container-fluid">
+<div class="jumbotron jumbotron-fluid">
+<div class="container">
+<h1>Fight Caves Spawn Predictor</h1>
+<p class="lead">Visually maps every mob in the Fight Caves, including Jad!</p>
+</div>
+</div>
+
+<div class="col-sm-12 col-md-8 mx-auto">
+<style>
+/* INTRO BLURB CONFIGURATION */
+.intro {
+	overflow: hidden;
+}
+.intro p {
+	text-align: justify;
+}
+.clear_intro {
+	display: block;
+    margin: 0 auto;    
+	width: 450px;
+	height: 90px;
+	line-height: 30px;	
+	background-color: #4CAF50;
+	font-weight: bold;
+	text-align: center;
+	height: 30px;
+	font-size: large;
+	font-weight: bold;
+    text-align: center;
+}
+.clear_intro:hover {
+	cursor: pointer;
+	color: black;
+}
+
+/* MAIN GUI POSITION */
+.gui-holder {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+    width: 450px;
+    max-width: 450px;
+	min-height: 600px;
+	max-height: 800px;	
+}
+
+/* BASE MAP POSIITON */
+.gui-holder .map-image {
+	position: absolute;
+	top: 120px;
+}
+
+/* TEXT LINE CONFIGURATION */
+.text-line {
+	position: absolute;
+	width: 450px;
+	top: 70px;
+	color: white;
+	text-align: center;
+}
+.wave-text-line {
+	position: absolute;
+	top: 150px;
+	left: 272px;
+	color: red;
+	font-weight: bold;
+}
+
+/* BUTTON POSITIONS AND CONFIGURATION */
+.button {
+	position: absolute;
+	height: 25px;
+	width: 130px;
+	border-radius: 8px;
+	background-color: white;
+	color: black;
+	border: 2px solid #e7e7e7;	
+}
+.button:hover {
+	background-color: #e7e7e7;
+}
+.previous-button {
+    top: 10px;
+	left: 20px;
+}
+.current-button {
+    top: 10px;
+	left: 160px;
+}
+.next-button {
+    top: 10px;
+	left: 300px;
+}
+
+/* PRAYER POSITIONS */
+.prayer-previous {
+	position: absolute;
+	top: 45px;
+	left: 60px;
+}
+.prayer-current {
+	position: absolute;
+	top: 45px;
+	left: 200px;
+}
+.prayer-next {
+	position: absolute;
+	top: 45px;
+	left: 340px;
+}
+
+/* SPAWN POSITIONS */
+.spawn-nw {
+	position: absolute;
+	top: 185px;
+	left: 60px;
+}
+.spawn-c {
+	position: absolute;
+	top: 290px;
+	left: 170px;
+}
+.spawn-sw {
+	position: absolute;
+	top: 410px;
+	left: 55px;
+}
+.spawn-s {
+	position: absolute;
+	top: 410px;
+	left: 180px;
+}
+.spawn-se {
+	position: absolute;
+	top: 345px;
+	left: 300px;
+}
+
+/* SPAWN OFFSET POSITIONS */
+.spawn-nw-offset {
+	position: absolute;
+	top: 205px;
+	left: 80px;
+}
+.spawn-c-offset {
+	position: absolute;
+	top: 310px;
+	left: 190px;
+}
+.spawn-sw-offset {
+	position: absolute;
+	top: 430px;
+	left: 75px;
+}
+.spawn-s-offset {
+	position: absolute;
+	top: 430px;
+	left: 200px;
+}
+.spawn-sw-offset {
+	position: absolute;
+	top: 365px;
+	left: 320px;
+}
+
+/* REFRESH PAGE CONFIGURATION */
+.refresh-page {
+	display: block;
+    margin: 0 auto;
+    width: 450px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	background-color: #4CAF50;
+	font-size: large;
+	font-weight: bold;
+}
+.refresh-page:hover {
+	cursor: pointer;
+	color: black;
+	background-color: #4CAF50;
+}
+</style>
+
+<div id="intro" class="intro">
+    <p>This tool determines where monsters in the fight caves minigame will spawn and then puts them on the map below. Once the spawns are discovered, the map will display the first wave. Use the Previous Wave and Next Wave buttons to go up or down through the waves. Also, under each wave button, there will be an prayer icon to help you choose what overhead prayer to use (e.g. Protect from Missles).</p>
+    <p>All you need to do is start the fight caves minigame, and enter the first few spawns that you observe by clicking the location markers on the map. For example, if the first level 22 Tz-Kih spawns in the north west, hit the NW button. If the next two spawn in the center and south, hit the C and S buttons.</p>
+  
+    <div class="clear_intro" onclick="clear_intro();">
+      CLICK HERE TO HIDE THE PANEL ABOVE
+    </div>
+    <!-- /.clear_intro -->
+  </div>
+<p><!-- /.intro --></p>
+
+<div class="application">
+    <div id="gui-holder" class="gui-holder">
+  
+      <img class="map-image" src="images/map.png" alt="HTML5 Icon" style="width:450px;height:465px;" />
+  
+      <!-- Buttons to control which wave to view -->
+      <button type="button" id="previous-button" class="button previous-button" onclick="javascript:display_wave(63)" disabled="">Previous Wave</button>
+      <button type="button" id="current-button" class="button current-button" onclick="" disabled="">Current Wave</button>
+      <button type="button" id="next-button" class="button next-button" onclick="javascript:display_wave(2)" disabled="">Next Wave</button>
+  
+      <!-- Image placeholders to indicate what overhead prayer to use -->
+      <img id="prayer-previous" class="prayer-previous" src="images/prayer-empty.png" alt="" style="width:50px;height:50px;" />
+      <img id="prayer-current" class="prayer-current" src="images/prayer-empty.png" alt="" style="width:50px;height:50px;" />
+      <img id="prayer-next" class="prayer-next" src="images/prayer-empty.png" alt="" style="width:50px;height:50px;" />
+  
+      <!-- User help text -->
+      <p id="text-line" class="text-line"><b>WAVE 1:</b>
+        <br /> Where did the first level 22 spawn?</p>
+  
+      <!-- Current wave number banner -->
+      <p id="wave-text-line" class="wave-text-line"></p>
+  
+      <!-- Spawn locations -->
+      <img id="spawn-nw" class="spawn-nw" src="images/nw.png" alt="" style="width:100px;height:92px;" onclick="javascript:wave1('nw')" />
+      <img id="spawn-c" class="spawn-c" src="images/c.png" alt="" style="width:100px;height:92px;" onclick="javascript:wave1('c')" />
+      <img id="spawn-sw" class="spawn-sw" src="images/sw.png" alt="" style="width:100px;height:92px;" onclick="javascript:wave1('sw')" />
+      <img id="spawn-s" class="spawn-s" src="images/s.png" alt="" style="width:100px;height:92px;" onclick="javascript:wave1('s')" />
+      <img id="spawn-se" class="spawn-se" src="images/se.png" alt="" style="width:100px;height:92px;" onclick="javascript:wave1('se')" />
+  
+    </div><!-- /.gui-holder -->
+  
+    <div class="refresh-page" onclick="javascript:refresh_page()">
+      Reload Interface
+    </div><!-- /.refresh-page -->
+  </div>
+<!-- /.application -->
+<script type="text/javascript" src="fight-caves.js"></script>
+
+
+</div>
+</div>
+
+<footer class="footer bg-dark mt-5">
+<div class="container-fluid">
+<span><i class="far fa-copyright"></i> 2018 <a href="https://www.thomaslaurenson.com/">Thomas Laurenson</a>. Developed with <i class="fas fa-heart"></i> and <i class="fas fa-coffee"></i> using <a href="https://jekyllrb.com/">Jekyll</a>, <a href="https://getbootstrap.com/">Bootstrap</a> and <a href="https://fontawesome.com/">Font Awesome</a></span><br>
+<span><i class="far fa-copyright"></i> 2000-2018 <a href="http://www.runescape.com/">RuneScape</a><i class="far fa-registered"></i> and <a href="http://www.jagex.com/">Jagex</a><i class="far fa-registered"></i> are trademarks of Jagex Ltd.</span>
+</div>
+</footer>
+<!-- JavaScript Imports -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS, then OSRSBox JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+<script type="text/javascript" src='/assets/scripts/main.js'></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121684762-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121684762-2');
+</script>
+
+
+
+
+</body>
+</html>

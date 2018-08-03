@@ -1,0 +1,46 @@
+{% capture separator %}<span class="px1">|</span>{% endcapture %}
+
+<div class="container-fluid">
+  <span class="pr-2">
+    <i class="fa fa-calendar metadata-icons"></i>
+    <time datetime="{{ include.post.date | date:"%Y-%m-%d" }}" class="text-muted">{{ include.post.date | date:"%b %d, %Y" }}</time>
+  </span>
+  {% if include.post.tags.size > 0 %}
+    <span class="pr-2">
+      <i class="fa fa-tag metadata-icons"></i>
+      {% for tag in include.post.tags %}
+      {% if page.is_tags_page %}
+        {% assign tag_url_base = "" %}
+      {% else %}
+        {% assign tag_url_base = "/blog/tags/" %}
+      {% endif %}
+      <a href="{{ tag_url_base }}{{ tag | uri_escape }}" class="text-muted">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    </span>
+  {% endif %}
+  {% if page.include_comments or layout.include_comments %}
+    <span class="pr-2">
+      <i class="fa fa-comments metadata-icons"></i>
+      {% if page.id == include.post.id %}
+        {% assign comment_url_base = "" %}
+      {% else %}
+        {% capture comment_url_base %}{{ include.post.url }}/{% endcapture %}
+      {% endif %}
+      <a href="{{ comment_url_base }}#comments" class="disqus-comment-count text-muted" data-disqus-identifier="{{ include.post.id }}">Comments</a>
+    </span>
+  {% endif %}
+  {% if include.time_estimate %}
+    {% if include.time_estimate_minutes %}
+      {% assign minutes = include.time_estimate_minutes %}
+    {% else %}
+      {% assign minutes = include.post.content | number_of_words | divided_by: 180 %}
+      {% if minutes == 0 %}
+        {% assign minutes = 1 %}
+      {% endif %}
+    {% endif %}
+    <span class="pr-2">
+      <i class="fa fa-clock metadata-icons"></i>
+      <span class="text-muted">{{ minutes }} min read</span>
+    </span>
+  {% endif %}
+</div>

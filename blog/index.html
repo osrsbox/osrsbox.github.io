@@ -1,0 +1,20 @@
+---
+layout: default
+title: "OSRSBox | Blog"
+nav_item: blog
+nav_item_blog: all
+header_title: Blog
+include_header: header_blog.html
+include_comments:
+  count: true
+---
+
+<div class="container">
+{% for post in paginator.posts %}
+  {% include post_outline.html post=post %}
+  {% if forloop.last == false %}
+    <hr class="divider divider-osrsbox">
+  {% endif %}
+{% endfor %}
+{% include pagination.html %}
+</div>

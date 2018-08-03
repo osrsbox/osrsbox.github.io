@@ -1,0 +1,19 @@
+---
+layout: default
+title: OSRSBox | Projects
+include_header: header_projects.html
+---
+
+<div class="container">
+{% for item in site.data.projects %}
+    {% assign mod = forloop.index | modulo: 2 %}
+    {% if mod == 0 %}
+        {% include featurette_left.html object=item %}
+    {% else %}
+        {% include featurette_right.html object=item %}
+    {% endif %}
+    {% if forloop.last == false %}
+        <hr class="divider divider-osrsbox">
+    {% endif %}
+{% endfor %}
+</div>

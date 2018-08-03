@@ -1,0 +1,37 @@
+---
+layout: default
+bottom_include: "comments.html"
+include_header: "header_post.html"
+include_comments:
+  embed: true
+  count: true
+---
+
+<div class="col-md-8 col-12 mx-auto">
+  {{ content }}
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col"><hr class="divider divider-osrsbox"></div>
+    <div class="col-auto"></div>
+    <div class="col"><hr class="divider divider-osrsbox"></div>
+  </div>
+</div>
+  
+{% include post_navigation.html %}
+
+<div class="container pt-5">
+  <div class="row">
+    <div class="col align-self-center"><hr class="divider divider-osrsbox divider-box"></div>
+    <div class="col-auto">
+      <span class="fa-stack fa-3x">
+        <i class="fa fa-circle fa-stack-2x icon-background"></i>
+        <i class="fa fa-box fa-stack-1x fa-inverse"></i>
+      </span>
+    </div>
+    <div class="col align-self-center"><hr class="divider divider-osrsbox divider-box"></div>
+  </div>
+</div>
+
+{% include post_author_share.html %}

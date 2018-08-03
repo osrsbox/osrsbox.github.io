@@ -1,0 +1,5 @@
+<div class="d-none d-md-block">
+dont display on sm and below, but show on md and above
+
+<div class="mx-auto">
+horizontally center div
