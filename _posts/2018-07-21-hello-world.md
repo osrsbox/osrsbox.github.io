@@ -24,7 +24,7 @@ Basically, osrsbox-db stores information about OSRS items in individual files in
 
 The [OSRSBox ToolTips project](/projects/osrsbox-tooltips/), or osrsbox-tooltips for short, is the primary reason I created the OSRSBox Item Database project. The idea originally came from World of Warcraft (WOW) tooltips - primarily the [WOWhead tooltips](http://www.wowhead.com/tooltips) that are used on the WOWhead website and other WOW fan sites. You can see a more thorough working demo of WOWhead tootips [here](http://wow.zamimg.com/widgets/power/demo.html).
 
-There was no project like this for OSRS and I thought it might be pretty cool to have tooltips for OSRS items. The tooltips are populated with content by querying the osrsbox-db and dynamically generating the tooltip information. For example, check out the lovely <span class="tooltip osrs-tooltip" id='21021' title='Please wait ...'>[Ancestral robe top]</span> and their stats!
+There was no project like this for OSRS and I thought it might be pretty cool to have tooltips for OSRS items. The tooltips are populated with content by querying the osrsbox-db and dynamically generating the tooltip information. For example, check out the lovely <span class="osrstooltip" id='21021' title='Please wait ...'>[Ancestral robe top]</span> and their stats!
 
 ### Fight Caves Spawn Predictor
 

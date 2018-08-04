@@ -35,3 +35,8 @@ include_comments:
 </div>
 
 {% include post_author_share.html %}
+
+<hr class="divider divider-osrsbox">
+{% if layout.bottom_include %}
+{% include {{ layout.bottom_include }} %}
+{% endif %}

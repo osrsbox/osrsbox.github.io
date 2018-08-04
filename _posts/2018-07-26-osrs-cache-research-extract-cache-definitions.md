@@ -9,7 +9,7 @@ tags:
 add_to_popular_list: true
 thumbnail: runelite-coding.png
 redirect_from:
-  - /osrs-cache/
+  - /osrsbox-cache/
 ---
 
 While making some parts of this website and some authoring other tools I needed to dabble a little with the OSRS cache. For example, to help build the [OSRSBox Item Database project]((/projects/osrsbox-db/)) (osrsbox-db), I needed to extract all items from the OSRS cache. Along the way I learnt a lot about the cache structure, the type of information it contains and various tools that are available to help parse the information in the cache. This page documents some of the more useful information I found to hopefully help someone else who is interested. 
