@@ -11,5 +11,5 @@
   date: "2018"
   description: |
     This project provides the code (JavaScript and CSS) required to implement simple tool tips for OSRS items. When configured for a website a user can hover over an item name and a tool tip will appear that provides information about the item. This project uses the OSRS Item Database RESTful API to populate information dynamically about items.
-  url: "/projects/osrs-tooltips"
+  url: "/projects/osrsbox-tooltips"
   image: "/300/osrsbox-tooltips.png"

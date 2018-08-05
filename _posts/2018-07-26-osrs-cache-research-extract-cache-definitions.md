@@ -12,7 +12,7 @@ redirect_from:
   - /osrsbox-cache/
 ---
 
-While making some parts of this website and some authoring other tools I needed to dabble a little with the OSRS cache. For example, to help build the [OSRSBox Item Database project]((/projects/osrsbox-db/)) (osrsbox-db), I needed to extract all items from the OSRS cache. Along the way I learnt a lot about the cache structure, the type of information it contains and various tools that are available to help parse the information in the cache. This page documents some of the more useful information I found to hopefully help someone else who is interested. 
+While making some parts of this website and some authoring other tools I needed to dabble a little with the OSRS cache. For example, to help build the [OSRSBox Item Database project](/projects/osrsbox-db/) (osrsbox-db), I needed to extract all items from the OSRS cache. Along the way I learnt a lot about the cache structure, the type of information it contains and various tools that are available to help parse the information in the cache. This page documents some of the more useful information I found to hopefully help someone else who is interested. 
 
 This post starts with a brief discussion about the OSRS cache, then outlines how to use the open source RuneLite project to extract item definitions and npc definitions from the cache.
 

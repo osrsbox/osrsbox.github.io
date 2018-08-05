@@ -16,7 +16,7 @@ Currently, I have a collection of different projects and online tools that are r
 
 ### OSRSBox Database
 
-The [OSRSBox Item Database project]((/projects/osrsbox-db/)), or osrsbox-db for short, is a database of Old School Runescape (OSRS) items in JSON format with accompanying icon images in PNG format. Database is probably a bad name, as it not technically a database... rather it is a RESTful API. I named it database, as it provides a good indication of what it does, and people who are not die-hard computer geeks probably don't know what a RESTful API is.
+The [OSRSBox Item Database project](/projects/osrsbox-db/), or osrsbox-db for short, is a database of Old School Runescape (OSRS) items in JSON format with accompanying icon images in PNG format. Database is probably a bad name, as it not technically a database... rather it is a RESTful API. I named it database, as it provides a good indication of what it does, and people who are not die-hard computer geeks probably don't know what a RESTful API is.
 
 Basically, osrsbox-db stores information about OSRS items in individual files in JSON format. For example, [this link](https://www.osrsbox.com/osrsbox-db/items-json/12453.json) provides direct access to the `12453.json` file, which holds metadata about the Black wizard hat (g) item. In OSRS, the ID number `12453` is unique to the Black wizard hat (g). This is why the item ID is utilised in the database for fetching all item information.
 
