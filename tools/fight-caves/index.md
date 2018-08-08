@@ -3,6 +3,8 @@ layout: tool
 title: OSRSBOX | Fight Caves Spawn Predictor
 tool_name: Fight Caves Spawn Predictor
 tool_desc: Visually maps every mob in the Fight Caves, including Jad!
+redirect_from:
+  - /fc/fc.html
 ---
 
 <style>
