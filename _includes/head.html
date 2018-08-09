@@ -5,6 +5,7 @@
 {% include favicon.html %}
 {% include head_css.html %}
 <title>{{ page.title }}</title>
+{% if jekyll.environment == "production" %}
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121684762-2"></script>
 <script>
@@ -14,4 +15,5 @@
 
   gtag('config', 'UA-121684762-2');
 </script>
+{% endif %}
 </head>

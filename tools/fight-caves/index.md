@@ -4,7 +4,7 @@ title: OSRSBOX | Fight Caves Spawn Predictor
 tool_name: Fight Caves Spawn Predictor
 tool_desc: Visually maps every mob in the Fight Caves, including Jad!
 redirect_from:
-  - fc/fc.html
+  - /fc/fc.html
 ---
 
 <style>
@@ -62,7 +62,7 @@ redirect_from:
 .wave-text-line {
 	position: absolute;
 	top: 150px;
-	left: 272px;
+	left: 265px;
 	color: red;
 	font-weight: bold;
 }
@@ -70,7 +70,7 @@ redirect_from:
 /* BUTTON POSITIONS AND CONFIGURATION */
 .button {
 	position: absolute;
-	height: 25px;
+	height: 30px;
 	width: 130px;
 	border-radius: 8px;
 	background-color: white;
@@ -96,17 +96,17 @@ redirect_from:
 /* PRAYER POSITIONS */
 .prayer-previous {
 	position: absolute;
-	top: 45px;
+	top: 50px;
 	left: 60px;
 }
 .prayer-current {
 	position: absolute;
-	top: 45px;
+	top: 50px;
 	left: 200px;
 }
 .prayer-next {
 	position: absolute;
-	top: 45px;
+	top: 50px;
 	left: 340px;
 }
 
