@@ -3,6 +3,8 @@ layout: project
 title: OSRSBOX | An OSRS Item Database Available via a RESTful API
 project_name: OSRSBox Database
 project_desc: A database of Old School Runescape (OSRS) items in JSON format with accompanying icon images in PNG format
+redirect_from:
+  - osrs-database
 ---
 
 This project is a database of Old School Runescape (OSRS) items in JSON format with accompanying icon images in PNG format. The goal of the project is to provide a JSON object and PNG image for **every item in OSRS**. In addition, the metadata for each item is extensive including as many useful properties as possible.
