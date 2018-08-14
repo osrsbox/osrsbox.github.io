@@ -5,6 +5,12 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 
+{% if page.include_ads %}
+{% include adsense.html include_ads=page.include_ads %}
+{% elsif layout.include_ads %}
+{% include adsense.html include_ads=layout.include_ads %}    
+{% endif %}
+
 {% include head.html %}
 
 <body>
