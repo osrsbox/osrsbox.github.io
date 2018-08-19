@@ -8,6 +8,8 @@ tags:
 - RuneLite
 add_to_popular_list: true
 thumbnail: runelite-coding.png
+redirect_from:
+  - /blog/2018/08/10/writing-runelite-plugins-part-1/
 ---
 
 This post is the first in a series that documents my journey of writing plugins for the popular open-source RuneLite client for Old School RuneScape. This first post covers how I setup the build environment for RuneLite.

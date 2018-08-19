@@ -56,10 +56,9 @@ title: OSRSBox | An Old School RuneScape Project
 
 <!-- Popular Blog Posts | Content -->
 <div class="container">
-{% for post in site.posts %}
-    {% if post.add_to_popular_list %}
-        {% include post_outline.html post=post %}
-    {% endif %}
+{% assign popular_posts = site.posts | where: "add_to_popular_list","true" %}
+{% for post in popular_posts %}
+    {% include post_outline.html post=post %}
     {% if forloop.last == false %}
         <hr class="divider divider-osrsbox">
     {% endif %}    
