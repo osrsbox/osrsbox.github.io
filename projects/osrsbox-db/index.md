@@ -4,18 +4,24 @@ title: OSRSBOX | An OSRS Item Database Available via a RESTful API
 project_name: OSRSBox Database
 project_desc: A database of Old School Runescape (OSRS) items in JSON format with accompanying icon images in PNG format
 redirect_from:
-  - osrs-database
+  - osrs-database/
 ---
 
 This project is a database of Old School Runescape (OSRS) items in JSON format with accompanying icon images in PNG format. The goal of the project is to provide a JSON object and PNG image for **every item in OSRS**. In addition, the metadata for each item is extensive including as many useful properties as possible.
 
 The repository that accompanies this project provides public access to JSON formatted metadata about every OSRS item in the game; for example, whether an item is tradeable, stackable, or equipable or if the item is members only, or a quest item. For any equipable item, there is metadata about combat stats the item has; for example, what slash attack bonus, magic defence bonus or prayer bonus an item provides. Furthermore, high and low alchemy values are provided. Lastly, each item has a corresponding item icon in PNG format. 
 
-**NOTE:** This project has not been updated since December 26th, 2017. I am currently rewriting the code to automatically parse the OSRS cache, combined with the tools used to parse the OSRS Wikia. This will hopefully streamline the update process in the future.
+## Current Project Status
+
+Since OSRS is a dynamic constantly updated MMO game, the items are continually changing due to game updates (a good thing!). This section briefly summarizes the last update to the three primary data sources:
+
+- `summary.json`: Updated as of 2018/08/26
+- `items-json`: Updated as of 2017/12/26
+- `items-icons`: Updated as of 2018/08/26
 
 ## JSON structured data
 
-The osrsbox-db stores information about OSRS items in separate JSON files. For example, [this link](https://www.osrsbox.com/osrsbox-db/items-json/12453.json) provides direct access to the `12453.json` file, which holds metadata about the Black wizard hat (g) item. In OSRS, the ID number `12453` is unique to the Black wizard hat (g). This is why the item IS is utilised in the database for fetching all item information. 
+The osrsbox-db stores information about OSRS items in separate JSON files. For example, [this link](https://www.osrsbox.com/osrsbox-db/items-json/12453.json) provides direct access to the `12453.json` file, which holds metadata about the Black wizard hat (g) item. In OSRS, the ID number `12453` is unique to the Black wizard hat (g). This is why the item IS is utilized in the database for fetching all item information. 
 
 But what is actually contained in these JSON files? Well, it is a collection of metadata (information) about the specific item. There are two main categories of metadata about an item: 
 
@@ -178,7 +184,7 @@ Finally, let's have a look at JavaScript (specifically jQuery) example to fetch 
 </html>
 {% endhighlight %}
 
-So, if you have read this far, we can fetch OSRS item information using a public API provided by osrsbox-db... But what can we do with this data? The initial reason the osrsbox-db was created was to enable osrsbox-tooltips! Support for elusive items such as the <span class="tooltip osrs-tooltip" id='11806' title='Please wait ...'>[Saradomin godsword]</span>. Please see the [osrsbox-tooltips](https://github.com/osrsbox/osrsbox-tooltips) page for information about the project. However, since then I have used the osrsbox-db project in a variety of other projects whenever information about OSRS items are required.
+So, if you have read this far, we can fetch OSRS item information using a public API provided by osrsbox-db... But what can we do with this data? The initial reason the osrsbox-db was created was to enable osrsbox-tooltips! Support for elusive items such as the <span class="osrs-tooltip" id='11806' title='Please wait ...'>[Saradomin godsword]</span>. Please see the [osrsbox-tooltips](https://github.com/osrsbox/osrsbox-tooltips) page for information about the project. However, since then I have used the osrsbox-db project in a variety of other projects whenever information about OSRS items are required.
 
 ## Icon images in PNG format
 
@@ -195,6 +201,11 @@ The Item icon images work in a very similar way to the JSON files. Each image is
 - [https://www.osrsbox.com/osrsbox-db/items-icons/3098.png](https://www.osrsbox.com/osrsbox-db/items-icons/3098.png)
 
 As displayed by the links above, each item ID is stored in the `osrsbox-db` repository, under the `items-icon` folder. 
+
+## Projects Using osrsbox-db
+
+- [OSRSBox Tooltips (osrsbox-tooltips)]({{ site.url}}/projects/osrsbox-tooltips/)
+- [Item Search for Old School RuneScape]({{ site.url}}/tools/item-search/)
 
 ## Project Feedback and Contribution
 

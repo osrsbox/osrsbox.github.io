@@ -5,3 +5,9 @@
 {% include disqus-scripts.html %}
 <script id="dsq-count-scr" src="//osrsbox.disqus.com/count.js" async></script>
 <script type="text/javascript" src='/assets/scripts/main.js'></script>
+{% if page.include_custom_script %}
+<!-- Custom JavaScript Imports -->
+{% for script in page.include_custom_script %}
+{% include scripts_custom.html script_name=script %}
+{% endfor %}
+{% endif %}

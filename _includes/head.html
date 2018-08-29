@@ -9,6 +9,10 @@
 <link rel="canonical" href="{% include canonical_url.html %}">
 {% include favicon.html %}
 {% include head_css.html %}
+<!-- Custom JavaScript Imports -->
+{% for css in page.include_custom_css %}
+{% include head_css_custom.html css_name=css %}
+{% endfor %}
 <title>{{ page.title }}</title>
 {% if jekyll.environment == "production" %}
 <!-- Global site tag (gtag.js) - Google Analytics -->
