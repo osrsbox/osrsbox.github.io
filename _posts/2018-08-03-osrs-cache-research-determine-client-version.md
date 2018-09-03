@@ -12,6 +12,10 @@ redirect_from:
   - /osrs-cache/
 ---
 
+## Post Update (2018/09/04)
+
+**This post is no longer relevant as the original RuneLite Deobfuscator has been removed from my GitHub osrsbox-cache repo. This is to allign with Jagex policies with the previously available RuneLite Deobfuscator. Sorry for any inconvenience - the post was written a long time ago (and later published) when the deobfuscator was still publically available.**
+
 My previous post discussed [using Runelite to extract NPC and item definitions]( {% post_url 2018-07-26-osrs-cache-research-extract-cache-definitions %}). Leading on from this, I started performing more research and projects using the OSRS cache. One thing I really wanted to know was: _Which version of the client/cache was I working on?_ 
 
 This post answers this question, and outlines methods and simple scripts to extract the cache version on both Windows and Linux operating systems. Both scripts are based on the _RuneLite cache updater_ that is actually no longer available - as the RuneLite deobfuscator tool is no longer released to the public. The full code to accompany this post is provided in the [osrsbox-cache GitHub repository](https://github.com/osrsbox/osrsbox-cache).
