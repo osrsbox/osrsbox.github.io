@@ -15,9 +15,9 @@ The repository that accompanies this project provides public access to JSON form
 
 Since OSRS is a dynamic constantly updated MMO game, the items are continually changing due to game updates (a good thing!). This section briefly summarizes the last update to the three primary data sources:
 
-- `summary.json`: Updated as of 2018/08/26
+- `summary.json`: Updated as of 2018/09/29
 - `items-json`: Updated as of 2017/12/26
-- `items-icons`: Updated as of 2018/08/26
+- `items-icons`: Updated as of 2018/09/29
 
 ## JSON structured data
 
@@ -33,22 +33,26 @@ But what is actually contained in these JSON files? Well, it is a collection of 
 All items have properties; for example, the item's weight and the items high alchemy value. All item properties are listed below for reference, including the data type (e.g., string, integer, float) for each property and a description of the property.
 
 {: .table .table-striped .table-sm}
-| Property     | Data type   | Description                              |
-| ------------ | ------------| ---------------------------------------- |
-| id           | integer     | Unique OSRS item ID number               |
-| name         | string      | Name of the item                         |
-| release_date | string      | Date the item was released               |
-| members_only | boolean     | If the item is a members only item or not |
-| quest_item   | boolean     | If the item is a quest item or not       |
-| tradeable    | boolean     | If the item is tradeable or not          |
-| equipable    | boolean     | If the item is equipable or not          |
-| stackable    | boolean     | If the item is stackable or not          |
-| high_alch    | integer     | The high alchemy value of the item       |
-| low_alch     | integer     | The low alchemy value of the item        |
-| buy_limit    | integer     | The Grand Exchange buy limit of the item |
-| weight       | float       | The weight (in kilograms) of the item    |
-| examine      | string      | The examine text of the item             |
-| url          | string      | OSRS Wikia URL link                      |
+| Property     | Data type   | Description                                    |
+| ------------ | ------------| -----------------------------------------------|
+| id           | integer     | Unique OSRS item ID number                     |
+| name         | string      | Name of the item                               |
+| members      | boolean     | If the item is a members only item or not      |
+| tradeable    | boolean     | If the item is tradeable or not                |
+| stackable    | boolean     | If the item is stackable (in inventory) or not |
+| noted        | boolean     | If the item is noted                           |
+| notable      | boolean     | If the item is notable                         |
+| equipable    | boolean     | If the item is equipable or not                |
+| cost         | integer     | The store price of an item                     |
+| low_alch     | integer     | The low alchemy value of the item (cost * .4)  |
+| high_alch    | integer     | The high alchemy value of the item (cost * .6) |
+| weight       | float       | The weight (in kilograms) of the item          |
+| buy_limit    | integer     | The Grand Exchange buy limit of the item       |
+| quest_item   | array       | Array of quest names (strings)                 |
+| release_date | string      | Date the item was released                     |
+| examine      | array       | Array of examine text(s) for the item          |
+| url          | string      | OSRS Wiki URL link                             |
+| stats        | object      | Object of item bonuses (if equipable)          |
 
 ### Item Stats
 
@@ -71,6 +75,8 @@ If an item is equipable it will have additional metadata about the combat bonuse
 | ranged_strength | integer   | The ranged strength bonus of the item |
 | magic_damage    | integer   | The magic damage bonus of the item    |
 | prayer          | integer   | The prayer bonus of the item          |
+| slot            | string    | The item slot (e.g., head)            |
+| attack_speed    | integer   | The attack speed of an item           |
 
 ### JSON Structure
 
@@ -78,39 +84,43 @@ So what does this JSON object actually look like? Well, listed below is an examp
 
 {% highlight json %}
 {
-  "id": 12453,
-  "name": "Black wizard hat (g)",
-  "tradeable": true,
-  "stackable": false,
-  "notable": true,
-  "equipable": true,
-  "members": false,
-  "weight": 0.4,
-  "buy_limit": -1,
-  "quest_item": true,
-  "release_date": "12 June 2014",
-  "cost": 2,
-  "lowalch": 0,
-  "highalch": 1,
-  "examine": "A silly pointed hat, with colourful trim.",
-  "url": "http://2007.runescape.wikia.com/wiki/Black_wizard_hat_(g)",
-  "bonuses": {
-    "magic_damage": 0,
-    "defence_stab": 0,
-    "defence_magic": 2,
-    "ranged_strength": 0,
-    "attack_stab": 0,
-    "attack_magic": 2,
-    "defence_crush": 0,
-    "defence_slash": 0,
-    "prayer": 0,
-    "attack_slash": 0,
-    "defence_ranged": 0,
-    "attack_crush": 0,
-    "melee_strength": 0,
-    "attack_ranged": 0
-  },
-  "item_slot": "head"
+    "id": 12453,
+    "name": "Black wizard hat (g)",
+    "members": false,
+    "tradeable": true,
+    "stackable": false,
+    "noted": false,
+    "noteable": true,
+    "equipable": true,
+    "cost": 2,
+    "lowalch": 0,
+    "highalch": 1,
+    "weight": 0.4,
+    "buy_limit": null,
+    "quest_item": null,
+    "release_date": "12 June 2014",
+    "examine": [
+        "A silly pointed hat, with colourful trim."
+    ],
+    "url": "http://oldschoolrunescape.wikia.com/wiki/Black_wizard_hat_(g)",
+    "bonuses": {
+        "attack_stab": 0,
+        "attack_slash": 0,
+        "attack_crush": 0,
+        "attack_magic": 2,
+        "attack_ranged": 0,
+        "defence_stab": 0,
+        "defence_slash": 0,
+        "defence_crush": 0,
+        "defence_magic": 2,
+        "defence_ranged": 0,
+        "melee_strength": 0,
+        "ranged_strength": 0,
+        "magic_damage": 0,
+        "prayer": 0,
+        "slot": "head",
+        "attack_speed": 0
+    }
 }
 {% endhighlight %}
 
