@@ -16,7 +16,7 @@ The repository that accompanies this project provides public access to JSON form
 Since OSRS is a dynamic constantly updated MMO game, the items are continually changing due to game updates (a good thing!). This section briefly summarizes the last update to the three primary data sources:
 
 - `summary.json`: Updated as of 2018/09/29
-- `items-json`: Updated as of 2017/12/26
+- `items-json`: Updated as of 2018/09/30
 - `items-icons`: Updated as of 2018/09/29
 
 ## JSON structured data

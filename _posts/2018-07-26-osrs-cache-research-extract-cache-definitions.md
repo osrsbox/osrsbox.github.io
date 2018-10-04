@@ -6,7 +6,7 @@ desc: "Extracting NPC and Item Definitions from the Cache"
 tags:
 - Cache
 - RuneLite
-add_to_popular_list: true
+add_to_popular_list: false
 thumbnail: runelite-coding.png
 redirect_from:
   - /osrsbox-cache/

@@ -7,7 +7,7 @@ tags:
 - Tool
 - Fight Caves
 - Jad
-add_to_popular_list: true
+add_to_popular_list: false
 thumbnail: jad.png
 ---
 
