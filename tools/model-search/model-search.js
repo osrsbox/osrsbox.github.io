@@ -6,9 +6,10 @@ $.getJSON("https://www.osrsbox.com/osrsbox-db/models_summary.json", function(dat
         "order": [[ 0, "asc" ]],
         "iDisplayLength": 50,
         columns: [
-            { data: 'id' },
+            { data: 'model_id' },
             { data: 'name' },
-            { data: 'type' }
+            { data: 'type' },
+            { data: 'type_id' }
         ]
         })  
 });
