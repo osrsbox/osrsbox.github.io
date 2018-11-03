@@ -14,6 +14,12 @@ This post discusses and provides code examples of how to author configuration me
 
 This time, we delve deeper and actually start writing some code! The first step of a plugin is the creation of a RuneLite configuration menu. Although not essential for all plugins, configuration menus and providing options for a plugin is highly useful. This post is based on the [Creating plugin config panels](https://github.com/runelite/runelite/wiki/Creating-plugin-config-panels) on the RuneLite wiki, but goes into much more detail.
 
+## Contents
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding the "Contents" header
+{:toc}
+
 ## Plugin Configuration
 
 The RuneLite config system provides developers the functionality to make complex configuration menus for their plugins with very little effort. These configuration menus are viewable by left-clicking the _wrench_ icon located in the top right corner of the RuneLite client. When you open the menu you will see the configuration options for all RuneLite plugins.

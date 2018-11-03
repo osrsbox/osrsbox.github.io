@@ -16,6 +16,12 @@ While making some parts of this website and some authoring other tools I needed 
 
 This post starts with a brief discussion about the OSRS cache, then outlines how to use the open source RuneLite project to extract item definitions and npc definitions from the cache.
 
+## Contents
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding the "Contents" header
+{:toc}
+
 ## OSRS Cache Format/Structure
 
 The OSRS Cache structure is pretty much the same as the very well know #317 Runescape 2 cache format. All cache files are stored in the home directory of the user. In Microsoft Windows (Vista onwards), the cache files are stored in the following directory:

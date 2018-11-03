@@ -16,6 +16,12 @@ In this post, we continue the journey. This time we are going to discuss the var
 
 This post conveys the basics of the structure of RuneLite plugins. I couldn't find much documentation on this subject, and really needed some of this information when I started out writing plugins. This will be a very generalized post, and we will get into deeper specifics in future posts where we target each aspect of RuneLite plugin development.
 
+## Contents
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding the "Contents" header
+{:toc}
+
 ## RuneLite Project Location
 
 Since we setup the RuneLite development environment in the last post, we are ready to get straight into beginning plugin development. But first, we do need some understanding on how RuneLite is structured. The first thing, finding our way in the RuneLite project source code. So, to start it would be prudent to provide a summary of the project structure. Last post we downloaded the RuneLight project in the IntelliJ IDE. It is, by default, saved to the `IdeaProjects` folder in your home directory. In my Windows 10 system, my downloaded project is located in:

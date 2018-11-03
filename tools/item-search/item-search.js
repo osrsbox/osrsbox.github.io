@@ -1,6 +1,6 @@
-// Fetch summary.json on page load
+// Fetch items_summary.json on page load
 // Then generate osrs-items table
-$.getJSON("https://www.osrsbox.com/osrsbox-db/summary.json", function(data) {
+$.getJSON("https://www.osrsbox.com/osrsbox-db/items_summary.json", function(data) {
     var table = $('#search-results').DataTable({
         data:  sanitizeData(data),
         "fnRowCallback": customFnRowCallback,

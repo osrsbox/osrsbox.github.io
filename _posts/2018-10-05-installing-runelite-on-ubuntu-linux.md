@@ -14,6 +14,12 @@ This post documents how I installed RuneLite on a fresh Ubuntu Desktop Linux ver
 
 The RuneLite installation and configuration tutorial is divided into the following secitons: Installing Java, downloading and installing RuneLite, creating shortcuts to run RuneLite and some additional system configuration tweaks and notes.
 
+## Contents
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding the "Contents" header
+{:toc}
+
 ## Installing Java
 
 The different Java versions available complex and difficult to understand for someone who is not a Java developer. To keep this as short as possible, there are two primary Java versions that you can install:

@@ -20,6 +20,12 @@ My previous post discussed [using Runelite to extract NPC and item definitions](
 
 This post answers this question, and outlines methods and simple scripts to extract the cache version on both Windows and Linux operating systems. Both scripts are based on the _RuneLite cache updater_ that is actually no longer available - as the RuneLite deobfuscator tool is no longer released to the public. The full code to accompany this post is provided in the [osrsbox-cache GitHub repository](https://github.com/osrsbox/osrsbox-cache).
 
+## Contents
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding the "Contents" header
+{:toc}
+
 ### Script Method
 
 To provide some context and further information, both Windows and Linux scripts work in the same way. The script will download the latest OSRS cache version, the same way that any OSRS client would. The RuneLite deobfuscator tool will then be executed against the downloaded `.jar` client and the version number extracted. 

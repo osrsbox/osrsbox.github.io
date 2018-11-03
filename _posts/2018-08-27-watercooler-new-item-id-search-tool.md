@@ -25,6 +25,12 @@ I split the project into two primary categories:
 
 In addition, the tools and general workflow were designed to intergrate (and populate) my existing [OSRSBox Database]({{ site.url }}/projects/osrsbox-db/) project.
 
+## Contents
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding the "Contents" header
+{:toc}
+
 ## Developing a RuneLite Plugin to Extract Item Metadata
 
 Is it just me, or does RuneLite seem to be the current answer for any OSRS problem?! After some serious reading and research about OSRS cache tools, I went full circle and ended up back with RuneLite. I had previously written a blog post about [using Runelite to extract NPC and item definitions]( {% post_url 2018-07-26-osrs-cache-research-extract-cache-definitions %}). This post culminated with a solution to extract the `ItemDefinitions` structure from the OSRS cache, but had no support for image extraction. Also, my build process was rediculously complex and the compiled code, `.jar` files, were messy to run. My ideal solution: _a RuneLite plugin to extract metadata about every OSRS item_! 

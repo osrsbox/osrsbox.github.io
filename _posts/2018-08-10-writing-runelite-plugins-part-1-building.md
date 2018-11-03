@@ -18,6 +18,12 @@ This tutorial is very similar to the official [Building with IntelliJ IDEA](http
 
 This tutorial is performed on Microsoft Windows 10, but should be adaptable to OS X or Linux, or different Windows versions.
 
+## Contents
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding the "Contents" header
+{:toc}
+
 ## Installing the Recommended RuneLite Development Environment
 
 The RuneLite authors recommend using IntelliJ IDEA as the IDE (Integrate Development Environment) of choice. Additionally, they state that the Java Development Kit (JDK) version 8 (or above). The following sections outline where to download and how to install each required component.
