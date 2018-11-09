@@ -12,7 +12,7 @@ redirect_from:
   - /osrsbox-cache/
 ---
 
-While making some parts of this website and some authoring other tools I needed to dabble a little with the OSRS cache. For example, to help build the [OSRSBox Item Database project](/projects/osrsbox-db/) (osrsbox-db), I needed to extract all items from the OSRS cache. Along the way I learnt a lot about the cache structure, the type of information it contains and various tools that are available to help parse the information in the cache. This page documents some of the more useful information I found to hopefully help someone else who is interested. 
+While making some parts of this website and some authoring other tools I needed to dabble a little with the OSRS cache. For example, to help build the [OSRSBox Item Database project](/projects/osrsbox-db/) (osrsbox-db), I needed to extract all items from the OSRS cache. Along the way, I learned a lot about the cache structure, the type of information it contains and various tools that are available to help parse the information in the cache. This page documents some of the more useful information I found to hopefully help someone else who is interested. 
 
 This post starts with a brief discussion about the OSRS cache, then outlines how to use the open source RuneLite project to extract item definitions and npc definitions from the cache.
 
@@ -40,7 +40,7 @@ OR
 /home/ph01l/jagexcache/oldschool/LIVE
 {% endhighlight %}
 
-Inside the cache directory there are a number of files, but there are only two primary file types/formats. These file types are easily identified by their corresponding file extension, namely:
+Inside the cache directory, there are a number of files, but there are only two primary file types/formats. These file types are easily identified by their corresponding file extension, namely:
 
 1. Data files, with a `.dat` extension
 2. Index files, with a `.idx` extension
@@ -49,11 +49,11 @@ The following sections discuss each of these file type/formats in further detail
 
 ### Data Files (dat)
 
-The primary data file is named `main_file_cache.dat2`. This file contains the entire OSRS cache including information about items, npcs, images, sounds, models and animations. However, the file is stored in a complex structure and you cannot just open the `main_file_cache.dat2` file and view images or extract music. The file is made up of various _blocks_ of data, some are compressed, some are not, and the information is not trivial to extract. To extract anything from the `main_file_cache.dat2` file you must know the location of the data blocks. This information is provided by index files. 
+The primary data file is named `main_file_cache.dat2`. This file contains the entire OSRS cache including information about items, npcs, images, sounds, models, and animations. However, the file is stored in a complex structure and you cannot just open the `main_file_cache.dat2` file and view images or extract music. The file is made up of various _blocks_ of data, some are compressed, some are not, and the information is not trivial to extract. To extract anything from the `main_file_cache.dat2` file you must know the location of the data blocks. This information is provided by index files. 
 
 ### Index Files (idx)
 
-As the name suggests, index file are an index for the `main_file_cache.dat2` file. In OSRS there are currently 17 index files named consecutively from `main_file_cache.idx0` to `main_file_cache.idx16`, as well as one index file named `main_file_cache.idx255`. The table below documents each index file, and the data that the index file points to.
+As the name suggests, the index file is an index for the `main_file_cache.dat2` file. In OSRS there are currently 17 index files named consecutively from `main_file_cache.idx0` to `main_file_cache.idx16`, as well as one index file named `main_file_cache.idx255`. The table below documents each index file, and the data that the index file points to.
 
 {: .table .table-striped .table-sm}
 | Index file name        | Content            |
@@ -71,7 +71,7 @@ As the name suggests, index file are an index for the `main_file_cache.dat2` fil
 | main_file_cache.idx10  | Huffman            |
 | main_file_cache.idx11  | Music 2            |
 | main_file_cache.idx12  | Client scripts     |
-| main_file_cache.idx13  | Fonts	          |
+| main_file_cache.idx13  | Fonts              |
 | main_file_cache.idx14  | Sound Effects 2    |
 | main_file_cache.idx15  | Sound Effects 3    |
 | main_file_cache.idx16  | Unknown            |
@@ -102,11 +102,11 @@ The config file, or `main_file_cache.idx2` contains highly useful information.
 
 ## RuneLite Tools
 
-RuneLite is a suite of open source tools for Old School RuneScape. The project provides a free, open-source and super fast client for Old School RuneScape. In addition, the creators also provide a cache extraction tool and used to provide a client deobfuscator. This documentation focuses on the cache tool for extracting information from the OSRS cache, and dabbles a little later with the deobfuscator (using and old version from the RuneLite project) for extracting cache version information. The [RuneLite homepage](https://runelite.net/) provide a summary of the project and precompiled downloads for the client. The [RuneLite GitHub project page](https://github.com/runelite/runelite) is the official repository to get the source code for the project.
+RuneLite is a suite of open source tools for Old School RuneScape. The project provides a free, open-source and super fast client for Old School RuneScape. In addition, the creators also provide a cache extraction tool and used to provide a client deobfuscator. This documentation focuses on the cache tool for extracting information from the OSRS cache, and dabbles a little later with the deobfuscator (using an old version from the RuneLite project) for extracting cache version information. The [RuneLite homepage](https://runelite.net/) provides a summary of the project and precompiled downloads for the client. The [RuneLite GitHub project page](https://github.com/runelite/runelite) is the official repository to get the source code for the project.
 
 ### Compiling RuneLite Tools
 
-The RuneLite client comes as a precompiled download (a `.jar` file). However, the other tools that are part of the suite of tools do not come precompiled. Therefore, this section documents how to compile the tools. Although this is a pretty staight-forward process, it may be difficult for someone without much programming experience.
+The RuneLite client comes as a pre-compiled download (a `.jar` file). However, the other tools that are part of the suite of tools do not come precompiled. Therefore, this section documents how to compile the tools. Although this is a pretty straight-forward process, it may be difficult for someone without much programming experience.
 
 The following instructions were performed on Microsoft Windows 10 64-bit. However, the instructions should be suitable for other Microsoft Windows operating systems and also adaptable to other operating systems such as Linux. The following software is required: 1) Git; 2) Netbeans; 3) Java.
 
@@ -139,17 +139,17 @@ Now, open the RuneLite repository in the NetBeans IDE:
     + Expand the Runelite icon
     + Expand the Modules folder
     + Right click Cache, and select Open Project
-	+ A new project will appear is the navigation pane
+    + A new project will appear in the navigation pane
 
 Before we can build the actual cache tool, we need to modify the source code a little. Since RuneLite is a suite of tools, we need to configure the Maven project to only build the Cache tool. Using the navigation menu, open the following file:
 
 + Cache > Project Files > pom.xml
 
-You need to add a line in the `pom.xml` file to specify a main class. With a main class, the tool cannot be run correctly. You need to add the following entry:
+You need to add a line in the `pom.xml` file to specify the main class. With the main class, the tool cannot be run correctly. You need to add the following entry:
 
 {% highlight xml %}
 <manifest>
-	<mainClass>net.runelite.cache.Cache</mainClass>
+    <mainClass>net.runelite.cache.Cache</mainClass>
 </manifest>
 {% endhighlight %}
 
@@ -167,13 +167,13 @@ The entry needs to be in the `<plugin>` section, specifically in the `maven-asse
 ...
 </plugin>
 {% endhighlight %}
-										
+                                        
 Great! Now you can build the cache tool. Perform the following tasks:
 
 + Right click the Cache project in the navigation menu
 + Select Build
 
-This will compile the Cache tool and produce a `.jar` file that can be executed. The build process may take a while for the first build, because a collection of dependencies need to be downloaded. The `.jar` file for the cache tool is available in the following directory:
+This will compile the Cache tool and produce a `.jar` file that can be executed. The build process may take a while for the first build because a collection of dependencies need to be downloaded. The `.jar` file for the cache tool is available in the following directory:
 
 {% highlight bash %}
 runelite\cache\target
@@ -243,7 +243,7 @@ java.exe -jar .\cache-1.4.11-SNAPSHOT-jar-with-dependencies.jar -c C:\Users\ph01
 java.exe -jar .\cache-1.4.11-SNAPSHOT-jar-with-dependencies.jar -u -c C:\Users\ph01l\jagexcache\oldschool\LIVE\ -t tree
 {% endhighlight %}
 
-You can also run the cache tool directly in Netbeans. However, to achieve this you must provide command line arguments within the NetBeans IDE. This is complex to setup, but simple after it is configured. To achieve this, in the bottom-right pane (the output/debugging pane) there is a little icon that looks like a fast forward button - colored (yellow). There are two icons which look the same, it is the bottom one! When hovered over, it will read: _Re-run with different parameters_. This button allows us to enter command line arguments when running the program. The first line needs to have the arguments added to it. In original format, th configuration has the following line:
+You can also run the cache tool directly in Netbeans. However, to achieve this you must provide command line arguments within the NetBeans IDE. This is complex to set up, but simple after it is configured. To achieve this, in the bottom-right pane (the output/debugging pane) there is a little icon that looks like a fast-forward button - colored (yellow). There are two icons which look the same, it is the bottom one! When hovered over, it will read: _Re-run with different parameters_. This button allows us to enter command line arguments when running the program. The first line needs to have the arguments added to it. In the original format, the configuration has the following line:
 
 {% highlight bash %}
 exec.args=-classpath %classpath net.runelite.cache.Cache
@@ -257,7 +257,7 @@ exec.args=-classpath %classpath net.runelite.cache.Cache -c C:\Users\ph01l\jagex
 
 ### Example of OSRS Cache Item Definition
 
-The information I wanted to extract from the OSRS Cache was the item definitions. I needed this information to get an up-to-date and complete list of all items in OSRS. The code snippet below show one item definition that has been extracted from the cache. The specific item has the ID number of `22111` and is the `Dragonbone necklace`.
+The information I wanted to extract from the OSRS Cache was the item definitions. I needed this information to get an up-to-date and complete list of all items in OSRS. The code snippet below shows one item definition that has been extracted from the cache. The specific item has the ID number of `22111` and is the `Dragonbone necklace`.
 
 {% highlight json %}
 {
@@ -316,4 +316,4 @@ The information I wanted to extract from the OSRS Cache was the item definitions
 }
 {% endhighlight %}
 
-As you can see these is a variety of information - some useful, some not. The usefulness of the information really depends on what information you are after! 
+As you can see there is a variety of information - some useful, some not. The usefulness of the information really depends on what information you are after! 

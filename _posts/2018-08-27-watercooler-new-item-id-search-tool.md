@@ -16,7 +16,7 @@ This post discusses a collection of new tools that I recently wrote and released
 
 {% include figure.html path="blog/item-search/item-search-interface.png" alt="Example use of the OSRSBox Item Search tool" %}
 
-My OSRS item search tool fills a much needed void. When starting doing some OSRS software development, I found that there were no up-to-date item ID databases or search tools. There were some solutions floating around the Internet, but none of them had game items that were recently added. This raised a big question in my brain... _Why are there no up-to-date item databases?_ Potential answer laziness of web devs? More probable answer: bad workflow for dumping the OSRS cache and updating databases. This lead me on a path to find a decent solution to providing a consistantly up-to-date item search tool.
+My OSRS item search tool fills a much-needed void. When starting doing some OSRS software development, I found that there were no up-to-date item ID databases or search tools. There were some solutions floating around the Internet, but none of them had game items that were recently added. This raised a big question in my brain... _Why are there no up-to-date item databases?_ Potential answer laziness of web devs? More probable answer: bad workflow for dumping the OSRS cache and updating databases. This leads me on a path to find a decent solution to providing a consistently up-to-date item search tool.
 
 I split the project into two primary categories:
 
@@ -33,19 +33,19 @@ In addition, the tools and general workflow were designed to intergrate (and pop
 
 ## Developing a RuneLite Plugin to Extract Item Metadata
 
-Is it just me, or does RuneLite seem to be the current answer for any OSRS problem?! After some serious reading and research about OSRS cache tools, I went full circle and ended up back with RuneLite. I had previously written a blog post about [using Runelite to extract NPC and item definitions]( {% post_url 2018-07-26-osrs-cache-research-extract-cache-definitions %}). This post culminated with a solution to extract the `ItemDefinitions` structure from the OSRS cache, but had no support for image extraction. Also, my build process was rediculously complex and the compiled code, `.jar` files, were messy to run. My ideal solution: _a RuneLite plugin to extract metadata about every OSRS item_! 
+Is it just me, or does RuneLite seem to be the current answer for any OSRS problem?! After some serious reading and research about OSRS cache tools, I went full circle and ended up back with RuneLite. I had previously written a blog post about [using Runelite to extract NPC and item definitions]( {% post_url 2018-07-26-osrs-cache-research-extract-cache-definitions %}). This post culminated with a solution to extract the `ItemDefinitions` structure from the OSRS cache but had no support for image extraction. Also, my build process was ridiculously complex and the compiled code, `.jar` files were messy to run. My ideal solution: _a RuneLite plugin to extract metadata about every OSRS item_! 
 
-I always start a project (even an informal project) with a list of requirements for what the plugin needed to do! This lead to the following functionality requirements:
+I always start a project (even an informal project) with a list of requirements for what the plugin needed to do! This lead to the following functional requirements:
 
-- Extract metadata for every OSRS item available in game
+- Extract metadata for every OSRS item available in-game
 - Export item metadata to JSON format
-- Extarct icon images for every OSRS item available in game
+- Extract icon images for every OSRS item available in-game
 - Export item icon image to PNG format
-- A reliable and easily run solution to extract new game items after every weekly updates
+- A reliable and easily run solution to extract new game items after every weekly update
 
 ### Adding JSON Support for Plugins
 
-Before doing anything, I started looking for a JSON library that could be integrated easily into the RuneLite build process. I found lots of solutions that involved importing `.jar` files - which is fine, but not exactly scalable to different development evironments (read: different computers that I, or anyone else, wants to compile RuneLite on). It seems like a Maven dependency was the best solution.  
+Before doing anything, I started looking for a JSON library that could be integrated easily into the RuneLite build process. I found lots of solutions that involved importing `.jar` files - which is fine, but not exactly scalable to different development environments (read: different computers that I, or anyone else, wants to compile RuneLite on). It seems like a Maven dependency was the best solution.  
 
 I found a decent JSON library called _json-simple_. However, finding the best solution to use as a Maven import was difficult. There were license issues with one version I initially tried (so I was told in a blog post). Then I found a fork of the original project supported by Maven, named [JSON.simple](https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple). After finding the right library, the import was relatively easy. I simply added the dependency to the `pom.xml` file for the `runelite-client`. To be specific, this involved editing the following file:
 
@@ -72,7 +72,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 {% endhighlight %}
 
-This was the last step to modify the RuneLite client to support JSON generation. Later in the article I briefly discuss how to actually use the _JSON Simple_ library to create JSON objects containing item metadata.
+This was the last step to modify the RuneLite client to support JSON generation. Later in the article, I briefly discuss how to actually use the _JSON Simple_ library to create JSON objects containing item metadata.
 
 ## Writing the RuneLite ItemScraper Plugin
 
@@ -87,7 +87,7 @@ You can view all the code and the structure I used by looking at my `orsrsbox-pl
 
 I started by setting up a base plugin structure with the mandatory imports (writing this I think someone, maybe me, should author a base plugin for starting plugin development - let me know in the comments if you are interested in this). Anyway, the first thing to do is determine when and how to start the _Item Scraper_ plugin. All plugins usually have a `startUp()` function that is run when a plugin is started. The code to extract item metadata could be included here, but I thought that it might be better to have an _action_ that can be triggered to run the plugin. The idea of using a command seemed like a good idea, which I ended up going with.
 
-Even the OSRS vanilla client supports a variety of commands. For example, the `::renderself` command can be used to remove visibility of your OSRS character in-game. There are a bunch of other commands, and even chat effect commands. RuneLite itself uses commands in a variety of plugins. For example, check out the [Chat Commands Plugin](https://github.com/runelite/runelite/wiki/Chat-Commands) which can use commands such as `!total` and `!price`. 
+Even the OSRS vanilla client supports a variety of commands. For example, the `::renderself` command can be used to remove visibility of your OSRS character in-game. There are a bunch of other commands and even chat effect commands. RuneLite itself uses commands in a variety of plugins. For example, check out the [Chat Commands Plugin](https://github.com/runelite/runelite/wiki/Chat-Commands) which can use commands such as `!total` and `!price`. 
 
 According to the [DevToolsPlugin class](https://static.runelite.net/api/runelite-client/net/runelite/client/plugins/devtools/DevToolsPlugin.html), there is an `onCommand()` function that listens to entries in the chat box. Any chat that is entered and contains two colons (`::`) can be caught and handled in a RuneLite plugin. I wrote a simple function based on other plugins to listen to chat commands, specifically, my implementation listens for a `::dump` command and then executes my custom `dumpItems()` function. An example of my `onCommand()` method is provided below.
 
@@ -107,11 +107,11 @@ public void onCommand(CommandExecuted commandExecuted)
 }
 {% endhighlight %}
 
-Notice how the `case` statement (similar to switch for non-Java people!) looks for the `dump` command, then runs a function called `dumpItems()` ... this is the function where the magic happens! Well it is not very magical, it is more logical!
+Notice how the `case` statement (similar to switch for non-Java people!) looks for the `dump` command, then runs a function called `dumpItems()` ... this is the function where the magic happens! Well, it is not very magical, it is more logical!
 
 ### Saving Item Metadata to JSON Format
 
-After adding a new `dumpItems()` function, I started to write the code to dump the actual items. In OSRS, every item has a unique ID number, so the first thing is to loop every item ID and then process each item. However, I could not find any RuneLite API methods to determine the total number of item ID numbers or to provide a list of valid item ID numbers. Furthermore, any list would be dynamic and would be extended every game update. I went with a dirty hack, and wrote a simple `for` loop to start from `0` and iterate through to the highest item ID number. To find the highest item ID value I looked at the [ItemID.java](https://github.com/runelite/runelite/blob/master/runelite-api/src/main/java/net/runelite/api/ItemID.java) file from RuneLite which contains a list of all items. I decided to create a loop from 0 to 25,000 to ensure complete coverage.
+After adding a new `dumpItems()` function, I started to write the code to dump the actual items. In OSRS, every item has a unique ID number, so the first thing is to loop every item ID and then process each item. However, I could not find any RuneLite API methods to determine the total number of item ID numbers or to provide a list of valid item ID numbers. Furthermore, any list would be dynamic and would be extended every game update. I went with a dirty hack and wrote a simple `for` loop to start from `0` and iterate through to the highest item ID number. To find the highest item ID value I looked at the [ItemID.java](https://github.com/runelite/runelite/blob/master/runelite-api/src/main/java/net/runelite/api/ItemID.java) file from RuneLite which contains a list of all items. I decided to create a loop from 0 to 25,000 to ensure complete coverage.
 
 {% highlight java %}
 private void dumpItems()
@@ -137,14 +137,14 @@ if (itemComposition != null)
 
 In addition to performing a check to see if the `itemComposition` is `null`, I also checked the item name for `Null`, `null` or `""` (an empty string). This was to remove any item ID numbers that were not valid. The [RuneLite API documents the ItemComposition](https://static.runelite.net/api/runelite-api/net/runelite/api/ItemComposition.html) methods, which can return a variety of useful information. Check the API documentation for a complete list - but some of the methods I used are listed below:
 
-- `getID()`: Gets the items ID (we already have this)
+- `getID()`: Gets the item's ID (we already have this)
 - `getName()`: Gets the items name
 - `getNote()`: Gets a value specifying whether the item is noted
 - `getPrice()`: Gets the store price of the item
 - `isMembers()`: Checks whether the item is members only
 - `isStackable()`: Checks whether the item is able to stack in a players inventory
 - `isTradeable()`: Returns whether or not the item can be traded to other players
-- `getInventoryActions()`: Gets an array of possible right-click menu actions the item has in a player inventory (useful to determine if an item is equipable)
+- `getInventoryActions()`: Gets an array of possibilities of right-click menu actions the item has in a player inventory (useful to determine if an item is equipable)
 
 From here, it was as simple as creating a JSON object and populating it with item metadata. The code snippet below displays the process of creating a new `JSONObject` then populating it with the item ID and name. 
 
@@ -215,7 +215,7 @@ try
 
 Saving the image was the final part of the RuneLite plugin design. The full source code of the [ItemScraperPlugin.java](https://github.com/osrsbox/runelite/blob/osrsbox-plugins/runelite-client/src/main/java/net/runelite/client/plugins/itemscraper/ItemScraperPlugin.java) is provided on my GitHub repository. It is much easier to read the code in completed format - so make sure to have a look.
 
-## Writing a Item Search Web Application
+## Writing an Item Search Web Application
 
 After getting an up-to-date list of item ID numbers and names, it was possible for me to make an item ID and item name search tool using the [summary.json](https://www.osrsbox.com/osrsbox-db/summary.json) file. Aside from an up-to-date item list, it was important that the item ID and item search was fast and responsive. I am never a fan of re-inventing the wheel, so the first objective was to find a decent library for building a table solution to handle the following requirements:
 
@@ -231,6 +231,6 @@ The only issue I faced was that when loading the initial table using DataTables,
 
 ## Conclusion
 
-I hope you found this an entertaining and informative blog post. Looking back, this project was somewhat different from regular RuneLite plugin development like creating overlays - but I thought it was an interesting journey to document. Hopefully you have found some of the techniques and thought process interesting!
+I hope you found this an entertaining and informative blog post. Looking back, this project was somewhat different from regular RuneLite plugin development like creating overlays - but I thought it was an interesting journey to document. Hopefully, you have found some of the techniques and thought process interesting!
 
-As always please leave and feedback or comments below. Always happy to hear from other avid OSRS players and developers. See you all next time!
+As always please leave any feedback or comments below. Always happy to hear from other avid OSRS players and developers. See you all next time!

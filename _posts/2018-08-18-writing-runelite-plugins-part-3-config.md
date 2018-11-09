@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "OSRSBox | Blog | Writing RuneLite Pulgins - Part 3 - Creating a RuneLite Plugin Config Menu"
-name: "Writing RuneLite Pulgins - Part 3"
+title: "OSRSBox | Blog | Writing RuneLite Plugins - Part 3 - Creating a RuneLite Plugin Config Menu"
+name: "Writing RuneLite Plugins - Part 3"
 desc: "Creating a RuneLite Plugin Config Menu"
 tags:
 - Plugin
@@ -12,7 +12,7 @@ thumbnail: runelite-coding.png
 
 This post discusses and provides code examples of how to author configuration menus for RuneLite plugins. This post is part of a series about writing RuneLite plugins. Previously, I documented how to [configure the Build Environment for RuneLite]({% post_url 2018-08-10-writing-runelite-plugins-part-1-building %}), then provided a high-level overview of the [General Structure of RuneLite Plugins]({% post_url 2018-08-12-writing-runelite-plugins-part-2-structure %})).
 
-This time, we delve deeper and actually start writing some code! The first step of a plugin is the creation of a RuneLite configuration menu. Although not essential for all plugins, configuration menus and providing options for a plugin is highly useful. This post is based on the [Creating plugin config panels](https://github.com/runelite/runelite/wiki/Creating-plugin-config-panels) on the RuneLite wiki, but goes into much more detail.
+This time, we delve deeper and actually start writing some code! The first step of a plugin is the creation of a RuneLite configuration menu. Although not essential for all plugins, configuration menus and providing options for a plugin is highly useful. This post is based on the [Creating plugin config panels](https://github.com/runelite/runelite/wiki/Creating-plugin-config-panels) on the RuneLite wiki but goes into much more detail.
 
 ## Contents
 {:.no_toc}
@@ -30,7 +30,7 @@ Most OSRS players have most likely already seen examples of these menus. But, ju
 
 {% include figure.html path="blog/runelite-part3/config-menu-examples.png" alt="Example configuration menus for RuneLite plugins" %}
 
-As you can see from the examples, the RuneLite configuration system allows for inclusion of a variety of different methods to store and set configuration options. Specifically, there are six different options. I have classified these below based on the type of value they are designed to store.
+As you can see from the examples, the RuneLite configuration system allows for the inclusion of a variety of different methods to store and set configuration options. Specifically, there are six different options. I have classified these below based on the type of value they are designed to store.
 
 - **Boolean:** Implemented using a simple _checkbox_. Check for enabled (true) or unchecked for disabled (false)
 - **Integer:** Implemented using a simple _spinner_ box. Can use up and down arrows to increase or decrease the integer value, or type an integer value directly in the box
@@ -55,7 +55,7 @@ Remember from my past post ([General Structure of RuneLite Plugins]( {% post_url
 runelite/runelite-client/src/main/java/net/runelite/client/plugins/
 {% endhighlight %}
 
-Inside this folder you can create a package (basically a folder) which contains all the source code (Java class files) for your plugin. Make sure to pick a descriptive name. In this example, my plugin is named _Config Example_. To start development of the plugin, I have made the following directory (the RuneLite plugin uses a lowercase naming convention for plugins):
+Inside this folder, you can create a package (basically a folder) which contains all the source code (Java class files) for your plugin. Make sure to pick a descriptive name. In this example, my plugin is named _Config Example_. To start development of the plugin, I have made the following directory (the RuneLite plugin uses a lowercase naming convention for plugins):
 
 - `configexample`
 
@@ -81,7 +81,7 @@ import net.runelite.client.config.ConfigItem;
 @ConfigGroup("package_name")
 public interface plugin_config_file_name extends Config
 {
-	// Configuration menu items go here
+    // Configuration menu items go here
 }
 {% endhighlight %}
 
@@ -91,7 +91,7 @@ As with most Java classes, the first line summarizes the package. Based on the R
 package net.runelite.client.plugins.package_name;
 {% endhighlight %}
 
-In our _Config Example_ plugin we would simply replace `package-name` with the name of the actual package. In our example, we would name it: `configexample`, as illustrated below.
+In our _Config Example_ plugin, we would simply replace `package-name` with the name of the actual package. In our example, we would name it: `configexample`, as illustrated below.
 
 {% highlight java %}
 package net.runelite.client.plugins.configexample;
@@ -112,15 +112,15 @@ The remainder of the configuration file is the body of the configuration file. T
 @ConfigGroup("package_name")
 public interface plugin_config_file_name extends Config
 {
-	// Configuration menu entries go here
+    // Configuration menu entries go here
 }
 {% endhighlight %}
 
-Note how the Java class `extends Config`. This is exceptionally important, and is basically saying that we want to _add on to_ the configuration system that is provided by the RuneLite client. This is why making configuration menus in RuneLite is so simple.
+Note how the Java class `extends Config`. This is exceptionally important and is basically saying that we want to _add on to_ the configuration system that is provided by the RuneLite client. This is why making configuration menus in RuneLite is so simple.
 
 ## Config Items Syntax
 
-Now that we have the skeleton structure of the configuration file we can start adding actual configuration menu items. These are quite easy to add, and basically, we just need to figure out what sort of configuration menu entry to add and give it a good naming convention and description. The basic syntax of an configuration menu item is displayed in the code snippet below. 
+Now that we have the skeleton structure of the configuration file we can start adding actual configuration menu items. These are quite easy to add, and basically, we just need to figure out what sort of configuration menu entry to add and give it a good naming convention and description. The basic syntax of a configuration menu item is displayed in the code snippet below. 
 
 {% highlight java %}
 @ConfigItem
@@ -148,7 +148,7 @@ default boolean booleanConfig() { return false; }
 
 It is prudent to discuss how each entry is used in the RuneLite configuration menu. The following items are all useful for configuration of menu items:
 
-- `position`: Where the configuration menu item will appear. This is an integer value which starts form number 1 (not 0!). You can use this value to control what order menu items appear in the RuneLite configuration menu.
+- `position`: Where the configuration menu item will appear. This is an integer value which starts from number 1 (not 0!). You can use this value to control what order menu items appear in the RuneLite configuration menu.
 - `keyName`: This value is used to refer to the configuration value when writing a plugin, so it is useful to specify a short and descriptive name. For example, the Agility plugin has `showLapCount` to toggle whether to display the number of laps done, and `highlightMarks` to toggle whether to highlight Marks of grace on the client.
 - `name`: A short, but descriptive, name that summarizes the configuration item purpose. The configuration menu is not very wide, so long names do not work well here. Using the same examples as above, _Show Lap count_ and _Highlight Marks of Grace_ are the name values for the `keyName`s specified above.
 - `description`: This value is displayed when hovering a mouse over the menu item. This value should be long and descriptive (but not too long!), providing additional information about a specific configuration.
@@ -159,9 +159,9 @@ The final piece of code for each config item is the setting of a default value. 
 default boolean booleanConfig() { return false; }
 {% endhighlight %}
 
-In the above example, we are specifying that the `boolean` data type is used which makes a checkbox that can be toggled on and off - which, behind the scenes, is using a true/false value. You also need to `return` a value, in this case we are returning `false` to set the default configuration to a boolean that is false, or switched off. 
+In the above example, we are specifying that the `boolean` data type is used which makes a checkbox that can be toggled on and off - which, behind the scenes, is using a true/false value. You also need to `return` a value, in this case, we are returning `false` to set the default configuration to a boolean that is false or switched off. 
 
-I think each of the config items require additional discussion, as they can vary a little in use. Below is a section for each of the six different items (data types) that we can specify in RuneLite plugin configuration.
+I think each of the config items requires additional discussion, as they can vary a little in use. Below is a section for each of the six different items (data types) that we can specify in RuneLite plugin configuration.
 
 ### Boolean Value (Checkbox)
 
@@ -233,7 +233,7 @@ default Color colorConfig() { return Color.GREEN; }
 
 The enum data type creates a _combobox_ menu where a user can select from a set of predefined values in a drop-down menu. An example of the entry in the RuneLite configuration menu is displayed below, followed by an example of the code required to implement it:
 
-{% include figure.html path="blog/runelite-part3/config-menu-enum.png" alt="Example configuration menu item for a combobox selector" %}
+{% include figure.html path="blog/runelite-part3/config-menu-enum.png" alt="Example configuration menu item for a combo box selector" %}
 
 {% highlight java %}
 enum OptionEnum
@@ -300,7 +300,7 @@ private ConfigExampleConfig config;
 
 The code snippet above injects the `ConfigExampleConfig` class. This class can now be accessed using the `config` keyword. You will need to change your class to your own plugin configuration class, which will vary depending on the naming convention you used for your configuration file.
 
-From here, you can simple call the `config` class, followed by the configuration menu item `keyName`. As an example, I created a menu entry with the `keyName` value of `booleanConfig`. I an call the `config` class with this key name to get the actual value of the configuration file entry. 
+From here, you can simply call the `config` class, followed by the configuration menu item `keyName`. As an example, I created a menu entry with the `keyName` value of `booleanConfig`. I can call the `config` class with this key name to get the actual value of the configuration file entry. 
 
 {% highlight java %}
 config.booleanConfig()
@@ -329,4 +329,4 @@ config.colorConfig()
 
 As I mentioned previously, have a look at my [configexample](https://github.com/osrsbox/runelite/tree/osrsbox-plugins/runelite-client/src/main/java/net/runelite/client/plugins/configexample) plugin to see the complete source used in this post. However, this is a very bare-bones plugin. I would recommend reading the code from other plugins to see how other developers utilize the menu configuration in their plugins.
 
-I hope this post helped you understand the RuneLite plugin configuration system and helped you start developing RuneLite plugins. As always, please leave a comment below if you notice and errors, or have any feedback. I really enjoy writing these posts and really hope that you have found it useful and informative! Thanks!
+I hope this post helped you understand the RuneLite plugin configuration system and helped you start developing RuneLite plugins. As always, please leave a comment below if you notice any errors, or have any feedback. I really enjoy writing these posts and really hope that you have found it useful and informative! Thanks!

@@ -14,11 +14,11 @@ redirect_from:
 
 ## Post Update (2018/09/04)
 
-**This post is no longer relevant as the original RuneLite Deobfuscator has been removed from my GitHub osrsbox-cache repo. This is to allign with Jagex policies with the previously available RuneLite Deobfuscator. Sorry for any inconvenience - the post was written a long time ago (and later published) when the deobfuscator was still publically available.**
+**This post is no longer relevant as the original RuneLite Deobfuscator has been removed from my GitHub osrsbox-cache repo. This is to align with Jagex policies with the previously available RuneLite Deobfuscator. Sorry for any inconvenience - the post was written a long time ago (and later published) when the deobfuscator was still publically available.**
 
 My previous post discussed [using Runelite to extract NPC and item definitions]( {% post_url 2018-07-26-osrs-cache-research-extract-cache-definitions %}). Leading on from this, I started performing more research and projects using the OSRS cache. One thing I really wanted to know was: _Which version of the client/cache was I working on?_ 
 
-This post answers this question, and outlines methods and simple scripts to extract the cache version on both Windows and Linux operating systems. Both scripts are based on the _RuneLite cache updater_ that is actually no longer available - as the RuneLite deobfuscator tool is no longer released to the public. The full code to accompany this post is provided in the [osrsbox-cache GitHub repository](https://github.com/osrsbox/osrsbox-cache).
+This post answers this question and outlines methods and simple scripts to extract the cache version on both Windows and Linux operating systems. Both scripts are based on the _RuneLite cache updater_ that is actually no longer available - as the RuneLite deobfuscator tool is no longer released to the public. The full code to accompany this post is provided in the [osrsbox-cache GitHub repository](https://github.com/osrsbox/osrsbox-cache).
 
 ## Contents
 {:.no_toc}
@@ -129,7 +129,7 @@ initial_jar=gamepack_4515750.jar
 
 If we concatenate (combine) these two values, we get a full URL to download the initial `.jar` file. In this file, we can examine the contents (using the RuneLite deobfuscator) and reveal the OSRS client version number.
 
-Calling the deobfuscator is easy once we have all the information. Basically, we run a Java command with the deobfuscator in the classpath, and specify a specific function to run against the `.jar` file we downloaded. The function required is:
+Calling the deobfuscator is easy once we have all the information. Basically, we run a Java command with the deobfuscator in the classpath and specify a specific function to run against the `.jar` file we downloaded. The function required is:
 
 {% highlight bash %}
 net.runelite.deob.clientver.ClientVersionMain
@@ -181,7 +181,7 @@ As you can see, there is a line that specifies the _OSRS cache version_.
 
 ### Extract the Current OSRS Cache Version (Linux BASH)
 
-A simple [BASH script](https://github.com/osrsbox/osrsbox-cache/blob/master/determine_cache_version/osrs_cache_version.sh) is provided to download the latest OSRS cache and determine the current version number. The easiest method to run this code is to clone the entire repository. If you are using a Debian-based Linux distribution, for example Ubuntu, I would recommend installing `git` from the distribution repositories using `apt`. The following command will achieve this:
+A simple [BASH script](https://github.com/osrsbox/osrsbox-cache/blob/master/determine_cache_version/osrs_cache_version.sh) is provided to download the latest OSRS cache and determine the current version number. The easiest method to run this code is to clone the entire repository. If you are using a Debian-based Linux distribution, for example, Ubuntu, I would recommend installing `git` from the distribution repositories using `apt`. The following command will achieve this:
 
 {% highlight bash %}
 sudo apt install git
@@ -199,7 +199,7 @@ If you don't already have Java, the easiest option for installing Java on a Debi
 sudo apt-get install default-jdk
 {% endhighlight %}
 
-Make sure you are in the osrsbox-cache directory, and `determine_cache_version` sub-folder. Now invoke the script using the following command:
+Make sure you are in the osrsbox-cache directory and `determine_cache_version` sub-folder. Now invoke the script using the following command:
 
 {% highlight bash %}
 ./osrs_cache_version.sh

@@ -12,11 +12,11 @@ redirect_from:
   - /blog/2018/08/10/writing-runelite-plugins-part-1/
 ---
 
-This post is the first in a series that documents my journey of writing plugins for the popular open-source RuneLite client for Old School RuneScape. This first post covers how I setup the build environment for RuneLite.
+This post is the first in a series that documents my journey of writing plugins for the popular open-source RuneLite client for Old School RuneScape. This first post covers how I set up the built environment for RuneLite.
 
-This tutorial is very similar to the official [Building with IntelliJ IDEA](https://github.com/runelite/runelite/wiki/Building-with-IntelliJ-IDEA) documentation provided on the [RuneLite GitHub Wiki](https://github.com/runelite/runelite/wiki). However, this post includes additional discussion on setting up the development environment for those who are new to the project. Rather than a quick start style tutorial (like on the RuneLite Wiki), this post covers topics more deeply and document some things I learnt along the way. The post is targeted to those who have programming experience, but might not be Java experts and those who have not had previous experience with the RuneLite project.
+This tutorial is very similar to the official [Building with IntelliJ IDEA](https://github.com/runelite/runelite/wiki/Building-with-IntelliJ-IDEA) documentation provided on the [RuneLite GitHub Wiki](https://github.com/runelite/runelite/wiki). However, this post includes additional discussion on setting up the development environment for those who are new to the project. Rather than a quick start style tutorial (like on the RuneLite Wiki), this post covers topics more deeply and document some things I learned along the way. The post is targeted to those who have programming experience, but might not be Java experts and those who have not had previous experience with the RuneLite project.
 
-This tutorial is performed on Microsoft Windows 10, but should be adaptable to OS X or Linux, or different Windows versions.
+This tutorial is performed on Microsoft Windows 10 but should be adaptable to OS X or Linux, or different Windows versions.
 
 ## Contents
 {:.no_toc}
@@ -26,7 +26,7 @@ This tutorial is performed on Microsoft Windows 10, but should be adaptable to O
 
 ## Installing the Recommended RuneLite Development Environment
 
-The RuneLite authors recommend using IntelliJ IDEA as the IDE (Integrate Development Environment) of choice. Additionally, they state that the Java Development Kit (JDK) version 8 (or above). The following sections outline where to download and how to install each required component.
+The RuneLite authors recommend using IntelliJ IDEA as the IDE (Integrated Development Environment) of choice. Additionally, they state that the Java Development Kit (JDK) version 8 (or above). The following sections outline where to download and how to install each required component.
 
 #### Downloading and Installing Java Development Kit (JDK)
 
@@ -40,15 +40,15 @@ Since I am using Windows 10, I downloaded the _Windows x64_ download option. Mak
 
 #### Downloading and Installing IntelliJ IDEA
 
-The [Download IntelliJ IDEA](https://www.jetbrains.com/idea/download/) website has packages for Windows, OS X and Linux. There are two version available, the _Ultimate_ and the _Community_ editions. The _Ultimate_ edition is a commercial product which requires payment but does net you extra features. We do not need these, and the RuneLite developers state that the _Community_ edition is sufficient. The _Community_ edition is released under the Apache 2.0 license, so it open source and completely free.
+The [Download IntelliJ IDEA](https://www.jetbrains.com/idea/download/) website has packages for Windows, OS X, and Linux. There are two version available, the _Ultimate_ and the _Community_ editions. The _Ultimate_ edition is a commercial product which requires payment but does net you extra features. We do not need these, and the RuneLite developers state that the _Community_ edition is sufficient. The _Community_ edition is released under the Apache 2.0 license, so it open source and completely free.
 
 {% include figure.html path="blog/runelite-part1/intellij-download.png" alt="Download page for IntelliJ IDEA" %}
 
-Download the _Community_ edition for your specific platform. Since I am using Windows 10,, I selected the **Windows (.exe)** download, to install IntelliJ IDEA on a Windows 10 system. The file downloaded was named: `ideaIC-2018.2.exe`. The setup is simple, just install using default options.
+Download the _Community_ edition for your specific platform. Since I am using Windows 10, I selected the **Windows (.exe)** download, to install IntelliJ IDEA on a Windows 10 system. The file downloaded was named: `ideaIC-2018.2.exe`. The setup is simple, just install using default options.
 
 ## Configuring IntelliJ and the RuneLite Development Environment
 
-The RuneLite authors recommend using IntelliJ, and specify a number of customizations to configure the build environment after installation. After you complete the IntelliJ installation and run the IDE for the first time, you will be prompted to perform some customizations of the software. None of these are critical, but can be useful.
+The RuneLite authors recommend using IntelliJ and specify the number of customizations to configure the build environment after installation. After you complete the IntelliJ installation and run the IDE for the first time, you will be prompted to perform some customizations of the software. None of these are critical but can be useful.
 
 Firstly, there is an option to import previous settings. If you have never used IntelliJ, just select _Do not import settings_. Accept the _JetBrains Privacy Policy_. You can select whether or not to send _Usage Statistics_.
 
@@ -56,7 +56,7 @@ Secondly, you will be prompted to perform basic customizations, including the th
 
 {% include figure.html path="blog/runelite-part1/intellij-customize.png" alt="IntelliJ IDEA Customization" %}
 
-IntelliJ will now start and present you with the normal _Welcome Screen_. A good option here is to download and setup the RuneLite project. This is easily achieved using the _Check out from Version Control_ and then select _Git_ from the drop down menu.
+IntelliJ will now start and present you with the normal _Welcome Screen_. A good option here is to download and set up the RuneLite project. This is easily achieved using the _Check out from Version Control_ and then select _Git_ from the drop-down menu.
 
 {% include figure.html path="blog/runelite-part1/intellij-welcome.png" alt="IntelliJ IDEA Welcome Screen" %}
 
@@ -92,7 +92,7 @@ The next step in importing RuneLite is to associate a JDK version with the proje
 C:\Program Files\Java\jdk.1.8.0_181
 {% endhighlight %}
 
-Your installation path may vary, depending on the configuration options you selected when install the Java Development Kit (JDK). Nevertheless, when you load the correct JDK location, you should see JDK libraries load in the panel.
+Your installation path may vary, depending on the configuration options you selected when installing the Java Development Kit (JDK). Nevertheless, when you load the correct JDK location, you should see JDK libraries load in the panel.
 
 {% include figure.html path="blog/runelite-part1/intellij-import-jdk.png" alt="IntelliJ IDEA import RuneLite with specific JDK version" %}
 
@@ -137,7 +137,7 @@ These steps should solve any _Cannot resolve symbol_ or _Cannot resolve method_ 
 
 #### Creating a New Maven Project
 
-The configuration of the RuneLite project provides an _Application_ to run the RuneLite client. Basically, our setup of RuneLite so far has only provided an _Application_ to execute the RuneLite client - this is similar to running any type of application. However, we now want to add a Maven project and configure the build, or compilation, environment. This will allow us to actual make changes to the source code, then compile the source code. The following steps outline how to accomplish this:
+The configuration of the RuneLite project provides an _Application_ to run the RuneLite client. Basically, our setup of RuneLite so far has only provided an _Application_ to execute the RuneLite client - this is similar to running any type of application. However, we now want to add a Maven project and configure the build, or compilation, environment. This will allow us to actually make changes to the source code, then compile the source code. The following steps outline how to accomplish this:
 
 - Navigate to the _Run_ menu
 - Select _Edit Configurations..._
@@ -149,7 +149,7 @@ The configuration of the RuneLite project provides an _Application_ to run the R
 
 This process will create a new configuration for your IntelliJ project. In this new configuration we need to set a few configuration options:
 
-- Set the _Name_ of the new configuration. I would recommend using a descriptive name that summarizes the purpose of the configuration, so I named this configuration `Build` - as it builds, or compiles, the RuneLite source code
+- Set the _Name_ of the new configuration. I would recommend using a descriptive name that summarizes the purpose of the configuration, so I named this configuration `Build` - as it builds, or compiles the RuneLite source code
 - Set the _Working directory_ to be the RuneLite folder. This is easily achieved by left-clicking the _Folder icon_ at the end of the input box and selecting `runelite-parent`
 - Set the _Command Line_ option to skip tests while building (this will save a lot of time during project building). The value to set is:
 
@@ -165,10 +165,10 @@ The output of this process is a new Maven project for **building RuneLite**. Thi
 
 {% include figure.html path="blog/runelite-part1/maven-both-configurations.png" alt="RuneLite configurations" %}
 
-This part of the process confused me a little the first time I was setting up the RuneLite development environment. I didn't quite get why we were creating a new Maven project when RuneLite was already shipped with one. However, I learnt that each project has a different purpose:
+This part of the process confused me a little the first time I was setting up the RuneLite development environment. I didn't quite get why we were creating a new Maven project when RuneLite was already shipped with one. However, I learned that each project has a different purpose:
 
 - _RuneLite_: This configuration is for running RuneLite. So basically, we build the source code then run it using this configuration
-- _Build_: This is the configuration we created. Like the name _Build_ (that we gave it) suggests, it is for building, or compiling, the RuneLite project. Simply, building all the source code into an executable file.
+- _Build_: This is the configuration we created. Like the name _Build_ (that we gave it) suggests, it is for building or compiling, the RuneLite project. Simply, building all the source code into an executable file.
 
 After figuring this out, the entire process made a lot more sense! As a summary, when I am developing I use the following process:
 
@@ -182,13 +182,13 @@ More information about building and running RuneLite is discussed below in dedic
 
 #### Enabling the Client Developer Tools
 
-Last configuration! It is highly recommended that you enable the RuneLite Developer Tools. This part was a mystery to me, as there is limited documentation on the developer tools. Not complaining at all, the RuneLite developers do a fantastic job - and it is very hard to maintain thorough and comprehensive documentation for such a fast moving, popular project. Their new JavaDocs documentation for the API is amazing! We will discuss this is a later post...
+Last configuration! It is highly recommended that you enable the RuneLite Developer Tools. This part was a mystery to me, as there is limited documentation on the developer tools. Not complaining at all, the RuneLite developers do a fantastic job - and it is very hard to maintain thorough and comprehensive documentation for such a fast-moving, popular project. Their new JavaDocs documentation for the API is amazing! We will discuss this is a later post...
 
 Anyway, the RuneLite Developer Tools are pretty much what the named would suggest. A set of tools to help developers write code for the RuneLite project. The image below displays the Panel menu for the developer tools to give you an idea of what is provided.
 
 {% include figure.html path="blog/runelite-part1/runelite-dev-tools.png" alt="RuneLite developer tools panel" %}
 
-As you can see, the developer tools have a Panel menu, similar to other RuneLite plugins. From the names used on the different buttons you can probably get a good idea of the different functionality provided by these tools. After writing some plugins for RuneLite, I thoroughly recommend using these tools. They are excellent!
+As you can see, the developer tools have a Panel menu, similar to other RuneLite plugins. From the names used on the different buttons, you can probably get a good idea of the different functionality provided by these tools. After writing some plugins for RuneLite, I thoroughly recommend using these tools. They are excellent!
 
 The image below shows a simple example of the developer tools in action. Notice how the _Players_ tool has been enabled - the button in the Panel has turned green (enabled) and the tool highlights all players in your characters immediate environment. I think I was making cannonballs just before taking this screenshot!
 
@@ -201,8 +201,8 @@ To enable the developer tools, we need to edit the _RuneLite_ configuration. Thi
 - A new dialog box will appear
 - Expand the _Application_ drop-down box (using the little arrow icon)
 - From the drop-down menu, highlight _RuneLite_
-- The right-side of the panel will change
-- We need to edit the _VM options_ and _Program Arguments_ to include the developed tools
+- The right side of the panel will change
+- We need to edit the _VM options_ and _Program Arguments_ to include the developer tools
 - The _VM options_ require the following option added:
 
 {% highlight bash %}
@@ -221,7 +221,7 @@ At this stage, it is also recommended to add debugging support to your _RuneLite
 --debug
 {% endhighlight %}
 
-The final configuration should look like the image below. Make sure you are editing the _RuneLite_ configuration, and not the _Build_ configuration!
+The final configuration should look like the image below. Make sure you are editing the _RuneLite_ configuration and not the _Build_ configuration!
 
 {% include figure.html path="blog/runelite-part1/runelite-enable-developer-mode.png" alt="RuneLite developer tools enabling" %}
 
@@ -231,13 +231,13 @@ Done! We have finished configuring IntelliJ and the RuneLite project and are rea
 
 After finishing the configuration of IntelliJ and RuneLite, the building of the project is relatively straightforward. This is because we have already made all the required configurations. 
 
-The key thing here: make sure you are on the _Build_ configuration. This can be selected using the configuration drop down menu in the IntelliJ IDE. This can be found in the top menu bar, and has a cog icon next to it (check the image below for an example).
+The key thing here: make sure you are on the _Build_ configuration. This can be selected using the configuration drop-down menu in the IntelliJ IDE. This can be found in the top menu bar and has a cog icon next to it (check the image below for an example).
 
 After selecting the _Build_ configuration, we need to just _Run_ the build process specified by the Maven project. You can use a variety of methods achieve this:
 
 - Left-click the green arrow icon next to the configuration menu
 - Navigate to _Run_, then select _Run 'Build'_
-- Or simple use the shortcut hot keys `Shift` + `F10`
+- Or simply use the shortcut hotkeys `Shift` + `F10`
 
 {% include figure.html path="blog/runelite-part1/building-runelite.png" alt="Building RuneLite" %}
 
@@ -247,15 +247,15 @@ After selecting the _Build_ configuration, we need to just _Run_ the build proce
 
 Once the RuneLite project has been built, we can finally run RuneLite that we have compiled by ourselves! The first step in development!
 
-Like all IDEs, IntelliJ has a bunch of options to achieve this (similar to the build process that can be accomplished many ways). The RuneLite Wiki recommend finding the `RuneLite.class` in the `runelite-client` folder, and running the project from the _Run RuneLite.main()_ content menu entry. This is a little cumbersome, and I would recommend using the _RuneLite_ configuration we have made, and running it like we did the build process.
+Like all IDEs, IntelliJ has a bunch of options to achieve this (similar to the build process that can be accomplished in many ways). The RuneLite Wiki recommend finding the `RuneLite.class` in the `runelite-client` folder, and running the project from the _Run RuneLite.main()_ content menu entry. This is a little cumbersome, and I would recommend using the _RuneLite_ configuration we have made and running it like we did the build process.
 
-The key thing here: make sure you are on the _RuneLite_ configuration. This can be selected using the configuration drop down menu in the IntelliJ IDE. This can be found in the top menu bar, and has a cog icon next to it (check the image below for an example).
+The key thing here: make sure you are on the _RuneLite_ configuration. This can be selected using the configuration drop-down menu in the IntelliJ IDE. This can be found in the top menu bar and has a cog icon next to it (check the image below for an example).
 
 After selecting the _RuneLite_ configuration, we need to just _Run_ the build process specified by the Maven project. You can use a variety of methods achieve this:
 
 - Left-click the green arrow icon next to the configuration menu
 - Navigate to _Run_, then select _Run 'Build'_
-- Or simple use the shortcut hot keys `Shift` + `F10`
+- Or simply use the shortcut hotkeys `Shift` + `F10`
 
 {% include figure.html path="blog/runelite-part1/running-runelite.png" alt="Running RuneLite" %}
 
@@ -265,6 +265,6 @@ After selecting the _RuneLite_ configuration, we need to just _Run_ the build pr
 
 Success! I hope you have made it this far and got a RuneLite development environment configured and have compiled and run the client. After looking back at this post, it is quite lengthy. But I hope that the descriptive nature helped you - and if not, you can be proud that you already have a great understanding of the RuneLite project and programming in IntelliJ and Java.
 
-I learnt a lot from this process, and feel I always learn more when trying to convey useful information to others. Keep a lookout for a new post soon that covers Part 2 of this series, where we look at the fundamentals of authoring a RuneLite plugin including the basic plugin structure and useful methods in the RuneLite API. 
+I learned a lot from this process, and feel I always learn more when trying to convey useful information to others. Keep a lookout for a new post soon that covers Part 2 of this series, where we look at the fundamentals of authoring a RuneLite plugin including the basic plugin structure and useful methods in the RuneLite API. 
 
 Finally, if you have any questions, feedback or discovered any issues with this documentation please leave a comment below. I am happy to help if I can (for the love of OSRS!). Also, make sure to check out the official RuneLite discord, they are really helpful. Thanks!
