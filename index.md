@@ -11,6 +11,7 @@ title: OSRSBox | An Old School RuneScape Project
         <div class="h1">Welcome to OSRSBox</div>
         <div class="h3 text-muted">A Website for Old School RuneScape Enthusiasts</div>
         <div class="d-none d-md-block">
+            <a href="mailto:phoil@osrsbox.com"><i class="header-icon fas fa-envelope-square fa-4x pr-2"></i></a>
             <a href="https://github.com/osrsbox"><i class="header-icon fab fa-github-square fa-4x pr-2"></i></a>
             <a href="https://www.reddit.com/user/PH01L/"><i class="header-icon fab fa-reddit-square fa-4x pr-2"></i></a>
             <a href="https://twitter.com/PH01L"><i class="header-icon fab fa-twitter-square fa-4x pr-2"></i></a>
