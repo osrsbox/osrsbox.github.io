@@ -4,7 +4,7 @@
   {% if include.url %}
     <a href="{{ include.url }}" target="_blank">{{ image_html }}</a>
   {% elsif include.link_to_full_size_image %}
-    <a href="{% include image-url.html path=include.path external=include.external %}" target="_blank">{{ image_html }}</a>
+    <a href="{% include image_url.html path=include.path external=include.external %}" target="_blank">{{ image_html }}</a>
   {% else %}
     {{ image_html }}
   {% endif %}

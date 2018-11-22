@@ -1,0 +1,6 @@
+{% capture full_path %}/assets/img/{{ include.path }}{% endcapture %}
+{% capture alt %}{% if include.caption %}{{ include.caption }}{% else %}{{ include.alt }}{% endif %}{% endcapture %}
+{% capture image_html %}{% include image.html path=include.path external=include.external alt=alt class=include.image_class style=include.style %}{% endcapture %}
+<a href="{{ full_path }}" data-toggle="lightbox">
+  {{ image_html }}
+</a>

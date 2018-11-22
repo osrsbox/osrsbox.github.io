@@ -14,3 +14,9 @@ $(".header a").click(function(){
         scrollTop:$("#" + $(this).data('value')).offset().top
     },1000)
 })
+
+// Lightbox plugin listener
+$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+    event.preventDefault();
+    $(this).ekkoLightbox();
+});
