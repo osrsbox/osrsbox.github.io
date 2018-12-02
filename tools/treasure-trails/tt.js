@@ -1,8 +1,8 @@
 // Check for the various File API support.
-if (window.File && window.FileReader && window.FileList && window.Blob) {
+if (window.File && window.FileReader) {
   // Great success! All the File APIs are supported.
 } else {
-  alert('The File APIs are not fully supported in this browser.');
+  alert('Required File APIs to save/load progress are not available.');
 }
 
 function update_rewards(item_id, clue_level) {
@@ -88,7 +88,8 @@ window.onload = function() {
         // Loop the input JSON file and set entries to true
         for (var clue_level in jsonObject) {
           for (var item_id in jsonObject[clue_level]) {
-            reload_rewards(clue_level, item_id, true);
+            var status = jsonObject[clue_level][item_id]
+            reload_rewards(clue_level, item_id, status);
           }
         }
       }
