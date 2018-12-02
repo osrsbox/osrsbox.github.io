@@ -1,6 +1,6 @@
 "use strict";
 
-// Author: Thomas Laurenson (rsn = PHOIL)
+// Author: PH01L
 // Name: fight-caves.js
 // Version: 1.0.0
 // Description: Javascript file to predict OSRS fight caves spawns and map then accordingly

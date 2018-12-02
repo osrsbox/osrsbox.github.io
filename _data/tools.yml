@@ -6,6 +6,14 @@
   url: "/tools/fight-caves"
   image: "/300/jad.png"
 
+- name: "Treasure Trails Tracker"
+  muted: "Keep track of your unique clue scroll rewards"
+  date: "2018"
+  description: |
+    Are you a treasure hunter? Trouble managing your rewards from clure scrolls? This tool provides an online, graphical platform for keeping track of your unique treasure trail items.
+  url: "/tools/treasure-trails"
+  image: "/300/clue.png"
+
 - name: "Item ID Search"
   muted: "Search an exhaustive and up-to-date list of OSRS Item ID numbers and Item names"
   date: "2018"
