@@ -4,11 +4,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
 {% include disqus-scripts.html %}
-<script id="dsq-count-scr" src="//osrsbox.disqus.com/count.js" async></script>
-<script type="text/javascript" src='/assets/scripts/main.js'></script>
 {% if page.include_custom_script %}
 <!-- Custom JavaScript Imports -->
 {% for script in page.include_custom_script %}
 {% include scripts_custom.html script_name=script %}
 {% endfor %}
 {% endif %}
+<script type="text/javascript" src='/assets/scripts/main.js'></script>
