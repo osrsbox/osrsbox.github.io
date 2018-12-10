@@ -3,6 +3,7 @@ layout: project
 title: OSRSBOX | An OSRS Item Database Available via a RESTful API
 project_name: OSRSBox Database
 project_desc: A database of Old School Runescape (OSRS) items in JSON format with accompanying icon images in PNG format
+include_tooltips: true
 redirect_from:
   - osrs-database/
 ---
@@ -11,26 +12,45 @@ This project is a database of Old School Runescape (OSRS) items in JSON format w
 
 The repository that accompanies this project provides public access to JSON formatted metadata about every OSRS item in the game; for example, whether an item is tradeable, stackable, or equipable or if the item is members only, or a quest item. For any equipable item, there is metadata about combat stats the item has; for example, what slash attack bonus, magic defence bonus or prayer bonus an item provides. Furthermore, high and low alchemy values are provided. Lastly, each item has a corresponding item icon in PNG format. 
 
-## Current Project Status
+## Contents
+{:.no_toc}
+
+* Will be replaced with the ToC, excluding the "Contents" header
+{:toc}
+
+## Project Overview
+
+This section provides some brief summary information about the status of the OSRSBox database including the current project status and some useful links.
+
+### Current Project Status
 
 Since OSRS is a dynamic constantly updated MMO game, the items are continually changing due to game updates (a good thing!). This section briefly summarizes the last update to the three primary data sources:
 
-- `summary.json`: Updated as of 2018/09/29
-- `items-json`: Updated as of 2018/09/30
-- `items-icons`: Updated as of 2018/09/29
+- `items_complete.json`: Updated as of 2018/12/10
+- `items_summary.json`: Updated as of 2018/12/10
+- `items-json`: Updated as of 2018/12/10
+- `items-icons`: Updated as of 2018/12/10
+
+### Useful Links
+
+This project is hosted on GitHub, where you will find the database, as well as the tools used to create the database contents.
+
+- [osrsbox-db GitHub repository](https://github.com/osrsbox/osrsbox-db): The project repository
+- [osrsbox-db raw data](https://github.com/osrsbox/osrsbox-db/tree/master/docs): The actual database contents
+- [osrsbox-db GitHub issues tracker](https://github.com/osrsbox/osrsbox-db/issues): Location for checking or submitting issues
 
 ## JSON structured data
 
-The osrsbox-db stores information about OSRS items in separate JSON files. For example, [this link](https://www.osrsbox.com/osrsbox-db/items-json/12453.json) provides direct access to the `12453.json` file, which holds metadata about the Black wizard hat (g) item. In OSRS, the ID number `12453` is unique to the Black wizard hat (g). This is why the item IS is utilized in the database for fetching all item information. 
+The osrsbox-db stores information about OSRS items in separate JSON files. For example, [this link](https://www.osrsbox.com/osrsbox-db/items-json/12453.json) provides direct access to the `12453.json` file, which holds metadata about the Black wizard hat (g) item. In OSRS, the ID number `12453` is unique to the Black wizard hat (g). This is why the item ID is utilized in the database for fetching all item information - it is unique! 
 
-But what is actually contained in these JSON files? Well, it is a collection of metadata (information) about the specific item. There are two main categories of metadata about an item: 
+But what is actually contained in these JSON files? Well, it is a collection of metadata (information) about each specific item. There are two main categories of metadata about an item: 
 
-- Item properties
-- Item stats
+- Item property information
+- Item equipment information
 
-### Item Properties
+### Item Property Information
 
-All items have properties; for example, the item's weight and the items high alchemy value. All item properties are listed below for reference, including the data type (e.g., string, integer, float) for each property and a description of the property.
+All items have properties; for example, the item's weight and the high alchemy value. All item properties are listed below for reference, including the data type for each property (e.g., string, integer, float) and a description of the property.
 
 {: .table .table-striped .table-sm}
 | Property     | Data type   | Description                                    |
@@ -50,13 +70,29 @@ All items have properties; for example, the item's weight and the items high alc
 | buy_limit    | integer     | The Grand Exchange buy limit of the item       |
 | quest_item   | array       | Array of quest names (strings)                 |
 | release_date | string      | Date the item was released                     |
-| examine      | array       | Array of examine text(s) for the item          |
+| examine      | string      | The examine text(s) for the item               |
 | url          | string      | OSRS Wiki URL link                             |
-| stats        | object      | Object of item bonuses (if equipable)          |
+| equipment    | object      | Object of item equipment info (if equipable)   |
+| bonuses      | object      | Object of item bonuses (if equipable)          |
 
-### Item Stats
+### Item Equipment Information
 
-If an item is equipable it will have additional metadata about the combat bonuses that it provides; for example, the melee strength bonus the Dragon dagger item provides. The following table specifies the 14 different stats an item has. Please note that all item stats are stored as an integer data type.
+If an item is equipable it will have additional metadata about the combat bonuses that it provides; for example, the melee strength bonus the Dragon dagger item provides. In addition, each equipable item will also have generic equipment information including the item slot, attack speed (if a weapon) and the skill requirements to equip the item. 
+
+#### Item Equipment
+
+The following table specifies the 12 different bonuses (stats) an item has. Please note that all item stats are stored as an integer data type.
+
+{: .table .table-striped .table-sm}
+| Property        | Data type | Description                           |
+| --------------- | --------- | ------------------------------------- |
+| slot            | string    | The item slot (e.g., head)            |
+| attack_speed    | integer   | The attack speed of an item           |
+| skill_reqs      | array     | An array of objects (skill, level)    |
+
+#### Item Bonuses
+
+The following table specifies the 12 different bonuses (stats) an item has. Please note that all item stats are stored as an integer data type.
 
 {: .table .table-striped .table-sm}
 | Property        | Data type | Description                           |
@@ -75,8 +111,6 @@ If an item is equipable it will have additional metadata about the combat bonuse
 | ranged_strength | integer   | The ranged strength bonus of the item |
 | magic_damage    | integer   | The magic damage bonus of the item    |
 | prayer          | integer   | The prayer bonus of the item          |
-| slot            | string    | The item slot (e.g., head)            |
-| attack_speed    | integer   | The attack speed of an item           |
 
 ### JSON Structure
 
@@ -99,10 +133,8 @@ So what does this JSON object actually look like? Well, listed below is an examp
     "buy_limit": null,
     "quest_item": null,
     "release_date": "12 June 2014",
-    "examine": [
-        "A silly pointed hat, with colourful trim."
-    ],
-    "url": "http://oldschoolrunescape.wikia.com/wiki/Black_wizard_hat_(g)",
+    "examine": "A silly pointed hat, with colourful trim.",
+    "url": "https://oldschool.runescape.wiki/w/Black_wizard_hat_(g)",
     "bonuses": {
         "attack_stab": 0,
         "attack_slash": 0,
@@ -117,9 +149,12 @@ So what does this JSON object actually look like? Well, listed below is an examp
         "melee_strength": 0,
         "ranged_strength": 0,
         "magic_damage": 0,
-        "prayer": 0,
+        "prayer": 0
+    },
+    "equipment": {
         "slot": "head",
-        "attack_speed": 0
+        "attack_speed": 0,
+        "skill_reqs": null
     }
 }
 {% endhighlight %}
@@ -168,7 +203,7 @@ print(data)
 
 ### Accessing JSON Using JavaScript
 
-Finally, let's have a look at JavaScript (specifically jQuery) example to fetch a JSON file from the osrsbox-db and build an HTML element to display in a web page. The example below is a very simple method to download the JSON file using the jQuery getJSON function. Once we get the JSON file, we loop through the JSON entries and print each key and value (e.g., name and Black wizard hat (g)) on it's own line in a div element. If you want to experiment with the code, the code is available in a W3Schools TryIt Editor at [this link](https://www.w3schools.com/code/tryit.asp?filename=FDYXVMBAV85L).
+Finally, let's have a look at JavaScript (specifically jQuery) example to fetch a JSON file from the osrsbox-db and build an HTML element to display in a web page. The example below is a very simple method to download the JSON file using the jQuery getJSON function. Once we get the JSON file, we loop through the JSON entries and print each key and value (e.g., name and Black wizard hat (g)) on it's own line in a div element. If you want to experiment with the code, the code is available in a W3Schools TryIt Editor at [this link](https://www.w3schools.com/code/tryit.asp?filename=FY2CQ7W1J346).
 
 {% highlight html %}
 <!DOCTYPE html>
@@ -194,7 +229,7 @@ Finally, let's have a look at JavaScript (specifically jQuery) example to fetch 
 </html>
 {% endhighlight %}
 
-So, if you have read this far, we can fetch OSRS item information using a public API provided by osrsbox-db... But what can we do with this data? The initial reason the osrsbox-db was created was to enable osrsbox-tooltips! Support for elusive items such as the <span class="osrs-tooltip" id='11806' title='Please wait ...'>[Saradomin godsword]</span>. Please see the [osrsbox-tooltips](https://github.com/osrsbox/osrsbox-tooltips) page for information about the project. However, since then I have used the osrsbox-db project in a variety of other projects whenever information about OSRS items are required.
+So, if you have read this far, we can fetch OSRS item information using a public API provided by osrsbox-db... But what can we do with this data? The initial reason the osrsbox-db was created was to enable osrsbox-tooltips! Support for elusive items such as the <span class="osrstooltip" id='11806' title='Please wait ...'>[Saradomin godsword]</span>. Please see the [osrsbox-tooltips](https://github.com/osrsbox/osrsbox-tooltips) page for information about the project. However, since then I have used the osrsbox-db project in a variety of other projects whenever information about OSRS items are required.
 
 ## Icon images in PNG format
 
@@ -219,4 +254,9 @@ As displayed by the links above, each item ID is stored in the `osrsbox-db` repo
 
 ## Project Feedback and Contribution
 
-This is an independent project (thus far). However, I would thoroughly appreciate any feedback regarding the project, especially problems with the inaccuracies of the JSON files and missing items. The best method is to post a Github issue with a feature request, bug or other problem. 
+I would thoroughly appreciate any feedback regarding the OSRSBox database project, especially problems with the inaccuracies of the data provided in the database. So if encounter any issue, could you please let me know. The same goes for any discovered bugs, or if you have a specific feature request. The best method is to [open a new Github issue](https://github.com/osrsbox/osrsbox-db/issues) in the project repository. In addition, please feel free to submit a pull request if you have code that you wish to contribute - I would thoroughly appreciate the helping hand. For any code contributions, the best method is to [open a new GitHub pull request](https://github.com/osrsbox/osrsbox-db/pulls) in the project repository.
+
+This project has started to be used by other developers of Old School RuneScape fan websites - which is great! Also, a special thanks to the following GitHub users who have already contributed to the project:
+
+- @jburleigh1
+- @sheymyster
