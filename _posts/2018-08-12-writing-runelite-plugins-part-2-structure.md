@@ -6,7 +6,7 @@ desc: "General Structure of RuneLite Plugins"
 tags:
 - Plugin
 - RuneLite
-add_to_popular_list: true
+add_to_popular_list: false
 thumbnail: runelite-coding.png
 ---
 

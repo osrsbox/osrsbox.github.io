@@ -22,28 +22,55 @@ include_custom_script:
     h1 {
         padding-top: 1.5em;
         padding-bottom: 0.5em;
+    }
+    #top {
+        position: relative;
+        background-image: url('top.gif');
+        background-size: 100% auto;
+        background-repeat: no-repeat; 
+        width: 100%;
+        z-index: 999;
+    }
+    #tt-block {
+        position: relative;
+        margin-top: -20px;
+        margin-right: auto;
+        margin-bottom: -20px;
+        margin-left: auto;
+        background-image: url('middle.gif');
+        background-size: 100% auto;
+        width: 97%;
+    }
+    #bottom {
+        position: relative;
+        background-image: url('bottom.gif');
+        background-size: 100% auto;
+        background-repeat: no-repeat; 
+        width: 100%;
+        z-index: 999;
     }    
 </style>
 
 <!-- Buttons to save and clear -->
-<div class="container">
-    <div class="row mx-auto justify-content-md-center">
+<div class="container pb-2">
+    <div class="row mx-auto justify-content-center">
         <button type="button" class="button btn btn-outline-secondary mx-2 my-2" onclick="javascript:clear_interface()">Clear progress</button>
         <!-- <button id="save_image" type="button" class="button btn btn-outline-secondary mx-2 my-2" onclick="javascript:screenshot()">Take screenshot</button> -->
     </div>
-    <div class="row mx-auto justify-content-md-center">
+    <div class="row mx-auto justify-content-center">
         <button id="save_json" type="button" class="button btn btn-outline-secondary mx-2 my-2" onclick="javascript:save_json()">Save progress</button>
         <label for="file_input" class="button btn btn-outline-secondary mx-2 my-2">Load progress</label>
         <input id="file_input" type="file" class="button btn btn-outline-secondary mx-2 my-2" accept=".json, .txt" style="display: none">
     </div>
 </div> 
 
-<div class="container" id="tt-block">
+<div class="container px-0" id="top"><img src="top.gif" style="visibility: hidden; width: 100%;"></div>
+<div class="container px-0 pb-5 w-95" id="tt-block">
     <!-- Easy Clues -->
     <div class="container">
         <h1>Easy Clues</h1>
     </div>
-    <div id="easy_clue_rewards">
+    <div class="container" id="easy_clue_rewards">
         <div class="container-fluid mx-auto text-center">
             <div class="row">
                 <div class="col py-2"><span class="osrstooltip" data-type="short" id="12221" title="Please wait ..."><img id="12221-img" class="tt-notselected" src="https://www.osrsbox.com/osrsbox-db/items-icons/12221.png" alt="alt text" onclick="javascript:update_rewards('12221','easy')"></span></div>
@@ -172,7 +199,7 @@ include_custom_script:
     <div class="container">
         <h1>Medium Clues</h1>
     </div>
-    <div id="medium_clue_rewards">
+    <div class="container"  id="medium_clue_rewards">
         <div class="container-fluid mx-auto text-center">
             <div class="row">
                 <div class="col py-2"><span class="osrstooltip" data-type="short" id="12293" title="Please wait ..."><img id="12293-img" class="tt-notselected" src="https://www.osrsbox.com/osrsbox-db/items-icons/12293.png" alt="alt text" onclick="javascript:update_rewards('12293','medium')"></span></div>
@@ -287,7 +314,7 @@ include_custom_script:
     <div class="container">
         <h1>Hard Clues</h1>
     </div>
-    <div id="hard_clue_rewards">
+    <div class="container"  id="hard_clue_rewards">
         <div class="container-fluid mx-auto text-center">
             <div class="row">
                 <div class="col py-2"><span class="osrstooltip" data-type="short" id="2627" title="Please wait ..."><img id="2627-img" class="tt-notselected" src="https://www.osrsbox.com/osrsbox-db/items-icons/2627.png" alt="alt text" onclick="javascript:update_rewards('2627','hard')"></span></div>
@@ -436,7 +463,7 @@ include_custom_script:
     <div class="container">
         <h1>Elite Clues</h1>
     </div>
-    <div id="elite_clue_rewards">
+    <div class="container"  id="elite_clue_rewards">
         <div class="container-fluid mx-auto text-center">
             <div class="row">
                 <div class="col py-2"><span class="osrstooltip" data-type="short" id="12538" title="Please wait ..."><img id="12538-img" class="tt-notselected" src="https://www.osrsbox.com/osrsbox-db/items-icons/12538.png" alt="alt text" onclick="javascript:update_rewards('12538','elite')"></span></div>
@@ -506,7 +533,7 @@ include_custom_script:
     <div class="container">
         <h1>Master Clues</h1>
     </div>
-    <div id="master_clue_rewards">
+    <div class="container"  id="master_clue_rewards">
         <div class="container-fluid mx-auto text-center">
             <div class="row">
                 <div class="col py-2"><span class="osrstooltip" data-type="short" id="20143" title="Please wait ..."><img id="20143-img" class="tt-notselected" src="https://www.osrsbox.com/osrsbox-db/items-icons/20143.png" alt="alt text" onclick="javascript:update_rewards('20143','master')"></span></div>
@@ -561,3 +588,5 @@ include_custom_script:
         </div>
     </div>
 </div>
+<div class="container px-0" id="top"><img src="bottom.gif" style="visibility: hidden; width: 100%;"></div>
+

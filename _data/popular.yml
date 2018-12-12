@@ -6,6 +6,22 @@
   url: "/tools/fight-caves"
   image: "/300/jad.png"
 
+- name: "Treasure Trails Tracker"
+  muted: "Keep track of your unique clue scroll rewards"
+  date: "2018"
+  description: |
+    Are you a treasure hunter? Trouble managing your rewards from clue scrolls? This tool provides an online, graphical platform for keeping track of your unique treasure trail items.
+  url: "/tools/treasure-trails"
+  image: "/300/clue.png"
+
+- name: "An OSRS Item Database Available via a RESTful API"
+  muted: "Get OSRS Items in JSON Format"
+  date: "2018"
+  description: |
+    A database of Old School Runescape (OSRS) items in JSON format with accompanying icon images in PNG format. This project provides public access to metadata about every OSRS item in the game! Query a specific item ID number and receive back data about items including name, alch values, examine text, and combat bonuses.
+  url: "/projects/osrsbox-db"
+  image: "/300/osrsbox-db.png"
+
 - name: "Item ID Search"
   muted: "Search an exhaustive and up-to-date list of OSRS Item ID numbers"
   date: "2018"
@@ -13,11 +29,3 @@
     Do you want to know the ID number of a specific item? Would you like to keyword search a complete and up-to-date database of OSRS items? This tool provides access to an online database of OSRS items to identify the name or ID number of specific items.
   url: "/tools/item-search"
   image: "/300/osrsbox-db.png"
-
-- name: "OSRS Tool Tips Project"
-  muted: "Display a Tool Tip for OSRS Items on Mouse Hover"
-  date: "2018"
-  description: |
-    This project provides the code (JavaScript and CSS) required to implement simple tool tips for OSRS items. When configured for a website a user can hover over an item name and a tool tip will appear that provides information about the item. This project uses the OSRS Item Database RESTful API to populate information dynamically about items.
-  url: "/projects/osrsbox-tooltips"
-  image: "/300/osrsbox-tooltips.png"

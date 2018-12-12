@@ -8,7 +8,7 @@ tags:
 - Cache
 - 3D Models
 - Sprites
-add_to_popular_list: false
+add_to_popular_list: true
 thumbnail: osrs-coding.png
 ---
 
