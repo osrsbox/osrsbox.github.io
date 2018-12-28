@@ -26,10 +26,10 @@ This section provides some brief summary information about the status of the OSR
 
 Since OSRS is a dynamic constantly updated MMO game, the items are continually changing due to game updates (a good thing!). This section briefly summarizes the last update to the three primary data sources:
 
-- `items_complete.json`: Updated as of 2018/12/10
-- `items_summary.json`: Updated as of 2018/12/10
-- `items-json`: Updated as of 2018/12/10
-- `items-icons`: Updated as of 2018/12/10
+- `items_complete.json`: Updated as of 2018/12/13
+- `items_summary.json`: Updated as of 2018/12/13
+- `items-json`: Updated as of 2018/12/13
+- `items-icons`: Updated as of 2018/12/13
 
 ### Useful Links
 

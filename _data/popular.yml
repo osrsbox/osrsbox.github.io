@@ -1,11 +1,3 @@
-- name: "Fight Caves Spawn Predictor"
-  muted: "Visually maps every mob in the Fight Caves, including Jad!"
-  date: "2018"
-  description: |
-    Ever wanted to know where Jad will spawn? Having problems with getting that fire cape? Don't know the spawns and what to pray? This tool will help! The Fight Caves spawn predictor will map the entire fight caves mob rotation - when and where each and every mob spawn.
-  url: "/tools/fight-caves"
-  image: "/300/jad.png"
-
 - name: "Treasure Trails Tracker"
   muted: "Keep track of your unique clue scroll rewards"
   date: "2018"
@@ -13,6 +5,14 @@
     Are you a treasure hunter? Trouble managing your rewards from clue scrolls? This tool provides an online, graphical platform for keeping track of your unique treasure trail items.
   url: "/tools/treasure-trails"
   image: "/300/clue.png"
+
+- name: "Fight Caves Spawn Predictor"
+  muted: "Visually maps every mob in the Fight Caves, including Jad!"
+  date: "2018"
+  description: |
+    Ever wanted to know where Jad will spawn? Having problems with getting that fire cape? Don't know the spawns and what to pray? This tool will help! The Fight Caves spawn predictor will map the entire fight caves mob rotation - when and where each and every mob spawn.
+  url: "/tools/fight-caves"
+  image: "/300/jad.png"
 
 - name: "An OSRS Item Database Available via a RESTful API"
   muted: "Get OSRS Items in JSON Format"

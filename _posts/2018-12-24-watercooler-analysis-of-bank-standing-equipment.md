@@ -7,6 +7,7 @@ tags:
 - Plugin
 - RuneLite
 - Tool
+- WaterCooler
 add_to_popular_list: true
 thumbnail: watercooler.png
 ---
