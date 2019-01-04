@@ -62,6 +62,7 @@ All items have properties; for example, the item's weight and the high alchemy v
 | stackable    | boolean     | If the item is stackable (in inventory) or not |
 | noted        | boolean     | If the item is noted                           |
 | notable      | boolean     | If the item is notable                         |
+| linked_id    | integer     | The noted/unnoted equivalent of the item       |
 | equipable    | boolean     | If the item is equipable or not                |
 | cost         | integer     | The store price of an item                     |
 | low_alch     | integer     | The low alchemy value of the item (cost * .4)  |
