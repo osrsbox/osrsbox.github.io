@@ -26,18 +26,19 @@ This section provides some brief summary information about the status of the OSR
 
 Since OSRS is a dynamic constantly updated MMO game, the items are continually changing due to game updates (a good thing!). This section briefly summarizes the last update to the three primary data sources:
 
-- `items_complete.json`: Updated as of 2018/12/13
-- `items_summary.json`: Updated as of 2018/12/13
-- `items-json`: Updated as of 2018/12/13
-- `items-icons`: Updated as of 2018/12/13
+- `items_complete.json`: Updated as of 2019/01/10
+- `items_summary.json`: Updated as of 2019/01/10
+- `items-json`: Updated as of 2019/01/10
+- `items-icons`: Updated as of 2019/01/10
 
 ### Useful Links
 
 This project is hosted on GitHub, where you will find the database, as well as the tools used to create the database contents.
 
 - [osrsbox-db GitHub repository](https://github.com/osrsbox/osrsbox-db): The project repository
-- [osrsbox-db raw data](https://github.com/osrsbox/osrsbox-db/tree/master/docs): The actual database contents
+- [osrsbox-db raw data](https://github.com/osrsbox/osrsbox-db/tree/master/docs): The actual database contents including JSON files for all items in OSRS
 - [osrsbox-db GitHub issues tracker](https://github.com/osrsbox/osrsbox-db/issues): Location for checking or submitting issues
+- [osrsbox-db Blog Posts](https://www.osrsbox.com/blog/tags/Database/): A list of any blog post I have written that includes the osrsbox-db
 
 ## JSON structured data
 
@@ -53,28 +54,29 @@ But what is actually contained in these JSON files? Well, it is a collection of 
 All items have properties; for example, the item's weight and the high alchemy value. All item properties are listed below for reference, including the data type for each property (e.g., string, integer, float) and a description of the property.
 
 {: .table .table-striped .table-sm}
-| Property     | Data type   | Description                                    |
-| ------------ | ------------| -----------------------------------------------|
-| id           | integer     | Unique OSRS item ID number                     |
-| name         | string      | Name of the item                               |
-| members      | boolean     | If the item is a members only item or not      |
-| tradeable    | boolean     | If the item is tradeable or not                |
-| stackable    | boolean     | If the item is stackable (in inventory) or not |
-| noted        | boolean     | If the item is noted                           |
-| notable      | boolean     | If the item is notable                         |
-| linked_id    | integer     | The noted/unnoted equivalent of the item       |
-| equipable    | boolean     | If the item is equipable or not                |
-| cost         | integer     | The store price of an item                     |
-| low_alch     | integer     | The low alchemy value of the item (cost * .4)  |
-| high_alch    | integer     | The high alchemy value of the item (cost * .6) |
-| weight       | float       | The weight (in kilograms) of the item          |
-| buy_limit    | integer     | The Grand Exchange buy limit of the item       |
-| quest_item   | array       | Array of quest names (strings)                 |
-| release_date | string      | Date the item was released                     |
-| examine      | string      | The examine text(s) for the item               |
-| url          | string      | OSRS Wiki URL link                             |
-| equipment    | object      | Object of item equipment info (if equipable)   |
-| bonuses      | object      | Object of item bonuses (if equipable)          |
+| Property        | Data type   | Description                                       |
+| --------------- | ------------| --------------------------------------------------|
+| id              | integer     | Unique OSRS item ID number                        |
+| name            | string      | Name of the item                                  |
+| members         | boolean     | If the item is a members only item                |
+| tradeable       | boolean     | If the item is tradeable (between players and GE) |
+| tradeable_on_ge | boolean     | If the item is tradeable (only on GE)             |
+| stackable       | boolean     | If the item is stackable (in inventory)           |
+| noted           | boolean     | If the item is noted                              |
+| notable         | boolean     | If the item is notable                            |
+| linked_id       | integer     | The noted/unnoted equivalent of the item          |
+| equipable       | boolean     | If the item is equipable                          |
+| cost            | integer     | The store price of an item                        |
+| low_alch        | integer     | The low alchemy value of the item (cost * .4)     |
+| high_alch       | integer     | The high alchemy value of the item (cost * .6)    |
+| weight          | float       | The weight (in kilograms) of the item             |
+| buy_limit       | integer     | The Grand Exchange buy limit of the item          |
+| quest_item      | array       | Array of quest names (strings)                    |
+| release_date    | string      | Date the item was released                        |
+| examine         | string      | The examine text(s) for the item                  |
+| url             | string      | OSRS Wiki URL link                                |
+| equipment       | object      | Object of item equipment info (if equipable)      |
+| bonuses         | object      | Object of item bonuses (if equipable)             |
 
 ### Item Equipment Information
 
@@ -123,6 +125,7 @@ So what does this JSON object actually look like? Well, listed below is an examp
     "name": "Black wizard hat (g)",
     "members": false,
     "tradeable": true,
+    "tradeable_on_ge": true,
     "stackable": false,
     "noted": false,
     "noteable": true,
@@ -162,7 +165,7 @@ So what does this JSON object actually look like? Well, listed below is an examp
 
 ## Accessing JSON data about OSRS items
 
-The JSON file for each OSRS item can be directly accessed using unique URLs provide through the `osrsbox.com` website. Technically, this provides the functionality of a RESTful API, but only supports GET requests. That is, you can fetch JSON files using a unique URL but cannot modify any JSON content. Below is a list of URL examples for items in the osrsbox-db:
+The JSON file for each OSRS item can be directly accessed using unique URLs provide through the `osrsbox.com` website. Technically, this provides some of the functionality of a RESTful API, but only supports GET requests. That is, you can fetch JSON files using a unique URL but cannot modify any JSON content. Below is a list of URL examples for items in the osrsbox-db:
 
 - [https://www.osrsbox.com/osrsbox-db/items-json/12453.json](https://www.osrsbox.com/osrsbox-db/items-json/12453.json)
 - [https://www.osrsbox.com/osrsbox-db/items-json/10.json](https://www.osrsbox.com/osrsbox-db/items-json/10.json)
@@ -170,7 +173,24 @@ The JSON file for each OSRS item can be directly accessed using unique URLs prov
 - [https://www.osrsbox.com/osrsbox-db/items-json/3097.json](https://www.osrsbox.com/osrsbox-db/items-json/3097.json)
 - [https://www.osrsbox.com/osrsbox-db/items-json/3098.json](https://www.osrsbox.com/osrsbox-db/items-json/3098.json)
 
-As displayed by the links above, each item ID is stored in the `osrsbox-db` repository, under the `items-json` folder. 
+As displayed by the links above, each item ID is stored in the `osrsbox-db` repository, under the [`items-json`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-json) folder. 
+
+In addition to the single JSON files for each item, there is also a collection of JSON files that contain combined items. The following list documents the additional JSON files that are available:
+
+- `items_complete.json`: A single JSON file containing every item. This file is also provided through the API and is available from [https://www.osrsbox.com/osrsbox-db/items_complete.json](https://www.osrsbox.com/osrsbox-db/items_complete.json)
+- `items-json-slot`: A collection of JSON files that have the same database contents as `ītems_complete.json`, but are split into the different equipment slots. The following list documents all the files available:
+    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items_2h.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items_2h.json)
+    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items_ammo.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items_ammo.json)
+    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items_body.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items_body.json)
+    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items_cape.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items_cape.json)
+    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items_feet.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items_feet.json)
+    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items_hands.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items_hands.json)
+    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items_head.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items_head.json)
+    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items_legs.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items_legs.json)
+    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items_neck.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items_neck.json)
+    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items_ring.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items_ring.json)
+    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items_shield.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items_shield.json)
+    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items_weapon.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items_weapon.json)
 
 So how can you get and use these JSON files about OSRS items? It is pretty easy, but really depends on what you are trying to accomplish and what programming language you are using. 
 
@@ -252,6 +272,13 @@ As displayed by the links above, each item ID is stored in the `osrsbox-db` repo
 
 - [OSRSBox Tooltips (osrsbox-tooltips)]({{ site.url}}/projects/osrsbox-tooltips/)
 - [Item Search for Old School RuneScape]({{ site.url}}/tools/item-search/)
+
+## Project Acknowledgements
+
+This project uses a collection of resources, and was only achievable using tools and data provided by other people who contribute to the OSRS community. A special thanks to:
+
+- The amazing open source [RuneLite](https://runelite.net/) client which was used to create a custom plugin to dump item data and item icons from the OSRS cache
+- The fantastic community driven [OSRS Wiki](https://oldschool.runescape.wiki/) which was used to augment the item data from the OSRS cache
 
 ## Project Feedback and Contribution
 
