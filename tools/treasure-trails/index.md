@@ -19,7 +19,7 @@ include_custom_script:
   	    filter:alpha(opacity=100);
         opacity:1.0; 
     }
-    h1 {
+    .level-heading {
         padding-top: 1.5em;
         padding-bottom: 0.5em;
     }
@@ -51,6 +51,10 @@ include_custom_script:
     }    
 </style>
 
+<p>This tool is a simple web application for tracking your rewards from Old School RuneScape (OSRS) treasure trails - aka Clue scrolls! There are categories for each level of Clue scroll available. You can select or de-select a specific item reward by left-clicking the image. When an item is selected, the item will turn from transparent to solid. You can de-select the item, by left-clicking it again. When you hover over the image a small tooltip will appear showing the full name of the item - to help identify certain items.</p>
+
+<p>If you want to save your progress, you can use the "Save progress" button, which will download a JSON file called "rewards.json" containing plaintext data that has a record of which items you have selected. Then you can load this file later using the "Load progress" button, and uploading your previously saved "rewards.json" file. You can also use the "Clear progress" button to reset all the items.</p>
+
 <!-- Buttons to save and clear -->
 <div class="container pb-2">
     <div class="row mx-auto justify-content-center">
@@ -67,10 +71,10 @@ include_custom_script:
 <div class="container px-0" id="top"><img src="top.gif" style="visibility: hidden; width: 100%;"></div>
 <div class="container px-0 pb-5 w-95" id="tt-block">
     <!-- Easy Clues -->
-    <div class="container">
-        <h1>Easy Clues</h1>
+    <div class="container px-5">
+        <h1 class="level-heading">Easy Clues</h1>
     </div>
-    <div class="container" id="easy_clue_rewards">
+    <div class="container px-5" id="easy_clue_rewards">
         <div class="container-fluid mx-auto text-center">
             <div class="row">
                 <div class="col py-2"><span class="osrstooltip" data-type="short" id="12221" title="Please wait ..."><img id="12221-img" class="tt-notselected" src="https://www.osrsbox.com/osrsbox-db/items-icons/12221.png" alt="alt text" onclick="javascript:update_rewards('12221','easy')"></span></div>
@@ -196,10 +200,10 @@ include_custom_script:
         </div>
     </div>
     <!-- Medium Clues -->
-    <div class="container">
-        <h1>Medium Clues</h1>
+    <div class="container px-5">
+        <h1 class="level-heading">Medium Clues</h1>
     </div>
-    <div class="container"  id="medium_clue_rewards">
+    <div class="container px-5"  id="medium_clue_rewards">
         <div class="container-fluid mx-auto text-center">
             <div class="row">
                 <div class="col py-2"><span class="osrstooltip" data-type="short" id="12293" title="Please wait ..."><img id="12293-img" class="tt-notselected" src="https://www.osrsbox.com/osrsbox-db/items-icons/12293.png" alt="alt text" onclick="javascript:update_rewards('12293','medium')"></span></div>
@@ -311,10 +315,10 @@ include_custom_script:
         </div>
     </div>
     <!-- Hard Clues -->
-    <div class="container">
-        <h1>Hard Clues</h1>
+    <div class="container px-5">
+        <h1 class="level-heading">Hard Clues</h1>
     </div>
-    <div class="container"  id="hard_clue_rewards">
+    <div class="container px-5"  id="hard_clue_rewards">
         <div class="container-fluid mx-auto text-center">
             <div class="row">
                 <div class="col py-2"><span class="osrstooltip" data-type="short" id="2627" title="Please wait ..."><img id="2627-img" class="tt-notselected" src="https://www.osrsbox.com/osrsbox-db/items-icons/2627.png" alt="alt text" onclick="javascript:update_rewards('2627','hard')"></span></div>
@@ -460,10 +464,10 @@ include_custom_script:
         </div>
     </div>
     <!-- Elite Clues -->
-    <div class="container">
-        <h1>Elite Clues</h1>
+    <div class="container px-5">
+        <h1 class="level-heading">Elite Clues</h1>
     </div>
-    <div class="container"  id="elite_clue_rewards">
+    <div class="container px-5"  id="elite_clue_rewards">
         <div class="container-fluid mx-auto text-center">
             <div class="row">
                 <div class="col py-2"><span class="osrstooltip" data-type="short" id="12538" title="Please wait ..."><img id="12538-img" class="tt-notselected" src="https://www.osrsbox.com/osrsbox-db/items-icons/12538.png" alt="alt text" onclick="javascript:update_rewards('12538','elite')"></span></div>
@@ -530,10 +534,10 @@ include_custom_script:
         </div>
     </div>
     <!-- Master Clues -->
-    <div class="container">
-        <h1>Master Clues</h1>
+    <div class="container px-5">
+        <h1 class="level-heading">Master Clues</h1>
     </div>
-    <div class="container"  id="master_clue_rewards">
+    <div class="container px-5"  id="master_clue_rewards">
         <div class="container-fluid mx-auto text-center">
             <div class="row">
                 <div class="col py-2"><span class="osrstooltip" data-type="short" id="20143" title="Please wait ..."><img id="20143-img" class="tt-notselected" src="https://www.osrsbox.com/osrsbox-db/items-icons/20143.png" alt="alt text" onclick="javascript:update_rewards('20143','master')"></span></div>
