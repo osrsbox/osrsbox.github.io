@@ -225,7 +225,7 @@ So how can you dump definitions for objects, npcs, and items? I wrote a post a w
 -cache /home/ph01l/jagexcache/oldschool/LIVE/ -items /home/ph01l/Desktop/items/
 {% endhighlight %}
 
-After extracting all the ObjectDefinition, ItemDefinition and NpcDefinition data files for every single in-game object, item and NPC I wanted to automate the parsing of all files to get a sleek list of all model ID numbers and an associated name. I whipped up a quick Python script to do this, and output a complete JSON file with all model numbers. The [Python script is available on my osrsbox-db GitHub repository](https://github.com/osrsbox/osrsbox-db/tree/master/model_db_tools). I also added the resultant JSON file to my publicly available [osrsbox-db](https://github.com/osrsbox/osrsbox-db/tree/master/docs), specifically, the `models_summary.json` file. 
+After extracting all the ObjectDefinition, ItemDefinition and NpcDefinition data files for every single in-game object, item and NPC I wanted to automate the parsing of all files to get a sleek list of all model ID numbers and an associated name. I whipped up a quick Python script to do this, and output a complete JSON file with all model numbers. The [Python script is available on my osrsbox-db GitHub repository](https://github.com/osrsbox/osrsbox-db/tree/master/extraction_tools_cache). I also added the resultant JSON file to my publicly available [osrsbox-db](https://github.com/osrsbox/osrsbox-db/tree/master/docs), specifically, the `models_summary.json` file. 
 
 With all this being said, the best and easiest method to lookup object, npc or item model numbers is to use my [Model ID Search tool]({{ site.url }}/tools/model-search/).
 

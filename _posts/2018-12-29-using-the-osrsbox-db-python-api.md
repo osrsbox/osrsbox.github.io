@@ -12,6 +12,8 @@ add_to_popular_list: false
 thumbnail: api.png
 ---
 
+**This post is no longer up-to-date as the osrsbox-db project is currently under active development and the Python API is undergoing dramatic changes. I will update the post when the API is bought up-to-date.**
+
 This post presents a quick introduction to the Python API that I have authored for my [OSRSBox Item Database]({{ site.url }}/projects/osrsbox-db/). The database contains every item in Old School RuneScape (OSRS) with lots of properties for each item, including alchemy values, examine text, quest status and item bonuses and equipment properties. 
 
 The API is a simple implementation that makes processing the item database easier. You can load the database, and interact with each item as an object. This makes it simple and fast to author basic Python scripts to extract or manipulate item information from the database. You can also do funky things such as import the item "database" into an actual database such as MySQL or MongoDB. I prefer to write Python scripts, but both of these options could be very useful. 

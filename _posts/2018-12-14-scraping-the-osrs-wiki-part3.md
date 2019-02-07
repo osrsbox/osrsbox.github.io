@@ -229,4 +229,4 @@ for template in templates:
 
 This post concluded this series on _scraping_ or extracting, data from the OSRS Wiki. We covered extracting wikitext and then parsing Infobox templates to get useful data about items, monsters or quests. Like I have previously mentioned ... multiple times ... please adhere to the OSRS Wiki terms of use. They provide an excellent _ad free_ resource and we should not overuse their service. 
 
-You can also check out some Python tools I have written to extract data from the OSRS Wiki for my OSRS Item Database project (osrsbox-db). They are available on my [OSRSBox GitHub database repository](https://github.com/osrsbox/osrsbox-db/tree/master/wiki_extraction_tools). Until next time... happy scaping everyone!
+You can also check out some Python tools I have written to extract data from the OSRS Wiki for my OSRS Item Database project (osrsbox-db). They are available on my [OSRSBox GitHub database repository](https://github.com/osrsbox/osrsbox-db/tree/master/extraction_tools_cache). Until next time... happy scaping everyone!

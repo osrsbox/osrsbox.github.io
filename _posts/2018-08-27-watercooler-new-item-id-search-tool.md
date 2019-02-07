@@ -194,7 +194,7 @@ The end result from this process is approximately 21,000 individual JSON files. 
 In addition to the individual JSON files (one for each item), I also added support to generate a `summary.json` file that contains every item name and item ID number. This is the file that I use for the actual item search web application. For interest sake, this file is available from:
 
 {% highlight plaintext %}
-https://www.osrsbox.com/osrsbox-db/summary.json
+https://www.osrsbox.com/osrsbox-db/items-summary.json
 {% endhighlight %}
 
 ### Saving Item Icon to PNG Format
