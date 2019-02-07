@@ -10,6 +10,8 @@ include_custom_script:
 - model-search.js
 ---
 
+<p>This tool is a simple web application for looking up the model ID numbers when the item name or item ID is known. You can also search in reverse, looking up a specific model ID number and getting the corresponding item name or item ID. The table is dynamic and can be sorted on each column, and searched interactively.</p>
+
 <table id="search-results" class="table table-striped">
   <thead>
     <tr>

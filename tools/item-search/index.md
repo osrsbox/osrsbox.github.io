@@ -10,6 +10,8 @@ include_custom_script:
 - item-search.js
 ---
 
+<p>This tool is a simple web application for looking up item names and finding the in-game item ID. You can also search in reverse, looking up a specific item ID number and getting the corresponding item name. The table is dynamic and can be sorted on each column, and searched interactively.</p>
+
 <table id="search-results" class="table table-striped">
   <thead>
     <tr>

@@ -1,6 +1,6 @@
 // Fetch models_summary.json on page load
 // Then generate osrs-models table
-$.getJSON("https://www.osrsbox.com/osrsbox-db/models_summary.json", function(data) {
+$.getJSON("https://www.osrsbox.com/osrsbox-db/models-summary.json", function(data) {
     var table = $('#search-results').DataTable({
         data:  sanitizeData(data),
         "order": [[ 0, "asc" ]],
