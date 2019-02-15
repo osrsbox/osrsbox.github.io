@@ -24,12 +24,12 @@ This section provides some brief summary information about the status of the OSR
 
 ### Current Project Status
 
-Since OSRS is a dynamic constantly updated MMO game, the items are continually changing due to game updates (a good thing!). This section briefly summarizes the last update to the three primary data sources:
+Since OSRS is a dynamic constantly updated MMO game, the items are continually changing due to game updates (a good thing!). This section briefly summarizes the last update to the primary data sources:
 
-- [`items-complete.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-complete.json): Updated as of 2019/01/31
-- [`items-summary.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-summary.json): Updated as of 2019/01/31
-- [`items-json`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-json): Updated as of 2019/01/31
-- [`items-icons`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-icons): Updated as of 2019/01/31
+- [`items-complete.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-complete.json): Updated as of 2019/02/16
+- [`items-summary.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-summary.json): Updated as of 2019/02/16
+- [`items-json`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-json): Updated as of 2019/02/16
+- [`items-icons`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-icons): Updated as of 2019/02/16
 
 ### Useful Links
 
@@ -71,7 +71,7 @@ All items have properties; for example, the item's weight and the high alchemy v
 | high_alch       | integer     | The high alchemy value of the item (cost * .6)    |
 | weight          | float       | The weight (in kilograms) of the item             |
 | buy_limit       | integer     | The Grand Exchange buy limit of the item          |
-| quest_item      | array       | Array of quest names (strings)                    |
+| quest_item      | boolean     | If the item is associated with a quest            |
 | release_date    | string      | Date the item was released                        |
 | examine         | string      | The examine text(s) for the item                  |
 | url             | string      | OSRS Wiki URL link                                |
@@ -84,14 +84,14 @@ If an item is equipable it will have additional metadata about the combat bonuse
 
 #### Item Equipment
 
-The following table specifies the 12 different bonuses (stats) an item has. Please note that all item stats are stored as an integer data type.
+The following table specifies the three different item equipment properties. This information includes the item slot, attack speed (if a weapon), and the skill requirements to equip an item.
 
 {: .table .table-striped .table-sm}
 | Property        | Data type | Description                           |
 | --------------- | --------- | ------------------------------------- |
 | slot            | string    | The item slot (e.g., head)            |
 | attack_speed    | integer   | The attack speed of an item           |
-| skill_reqs      | array     | An array of objects (skill, level)    |
+| skill_reqs      | array     | An array of objects {skill: level}    |
 
 #### Item Bonuses
 
@@ -177,20 +177,20 @@ As displayed by the links above, each item ID is stored in the `osrsbox-db` repo
 
 In addition to the single JSON files for each item, there is also a collection of JSON files that contain combined items. The following list documents the additional JSON files that are available:
 
-- `items-complete.json`: A single JSON file containing every item. This file is also provided through the API and is available from [https://www.osrsbox.com/osrsbox-db/items-complete.json](https://www.osrsbox.com/osrsbox-db/items-complete.json)
+- `items-complete.json`: A single JSON file containing every item. This file is also provided through the API and is available from [items-complete.json](https://www.osrsbox.com/osrsbox-db/items-complete.json)
 - `items-json-slot`: A collection of JSON files that have the same database contents as `ītems-complete.json`, but are split into the different equipment slots. The following list documents all the files available:
-    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items-2h.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-2h.json)
-    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items-ammo.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-ammo.json)
-    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items-body.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-body.json)
-    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items-cape.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-cape.json)
-    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items-feet.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-feet.json)
-    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items-hands.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-hands.json)
-    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items-head.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-head.json)
-    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items-legs.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-legs.json)
-    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items-neck.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-neck.json)
-    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items-ring.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-ring.json)
-    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items-shield.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-shield.json)
-    - [https://www.osrsbox.com/osrsbox-db/items-json-slot/items-weapon.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-weapon.json)
+    - [items-2h.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-2h.json)
+    - [items-ammo.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-ammo.json)
+    - [items-body.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-body.json)
+    - [items-cape.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-cape.json)
+    - [items-feet.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-feet.json)
+    - [items-hands.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-hands.json)
+    - [items-head.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-head.json)
+    - [items-legs.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-legs.json)
+    - [items-neck.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-neck.json)
+    - [items-ring.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-ring.json)
+    - [items-shield.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-shield.json)
+    - [items-weapon.json](https://www.osrsbox.com/osrsbox-db/items-json-slot/items-weapon.json)
 
 So how can you get and use these JSON files about OSRS items? It is pretty easy, but really depends on what you are trying to accomplish and what programming language you are using. 
 
