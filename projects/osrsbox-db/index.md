@@ -26,10 +26,10 @@ This section provides some brief summary information about the status of the OSR
 
 Since OSRS is a dynamic constantly updated MMO game, the items are continually changing due to game updates (a good thing!). This section briefly summarizes the last update to the primary data sources:
 
-- [`items-complete.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-complete.json): Updated as of 2019/02/16
-- [`items-summary.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-summary.json): Updated as of 2019/02/16
-- [`items-json`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-json): Updated as of 2019/02/16
-- [`items-icons`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-icons): Updated as of 2019/02/16
+- [`items-complete.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-complete.json): Updated as of 2019/02/21
+- [`items-summary.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-summary.json): Updated as of 2019/02/21
+- [`items-json`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-json): Updated as of 2019/02/21
+- [`items-icons`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-icons): Updated as of 2019/02/21
 
 ### Useful Links
 
@@ -84,18 +84,7 @@ If an item is equipable it will have additional metadata about the combat bonuse
 
 #### Item Equipment
 
-The following table specifies the three different item equipment properties. This information includes the item slot, attack speed (if a weapon), and the skill requirements to equip an item.
-
-{: .table .table-striped .table-sm}
-| Property        | Data type | Description                           |
-| --------------- | --------- | ------------------------------------- |
-| slot            | string    | The item slot (e.g., head)            |
-| attack_speed    | integer   | The attack speed of an item           |
-| skill_reqs      | array     | An array of objects {skill: level}    |
-
-#### Item Bonuses
-
-The following table specifies the 12 different bonuses (stats) an item has. Please note that all item stats are stored as an integer data type.
+The following table specifies the different item equipment properties. This information includes the item bonuses, as well as the item slot, attack speed (if a weapon), and the skill requirements to equip an item.
 
 {: .table .table-striped .table-sm}
 | Property        | Data type | Description                           |
@@ -114,51 +103,58 @@ The following table specifies the 12 different bonuses (stats) an item has. Plea
 | ranged_strength | integer   | The ranged strength bonus of the item |
 | magic_damage    | integer   | The magic damage bonus of the item    |
 | prayer          | integer   | The prayer bonus of the item          |
+| slot            | string    | The item slot (e.g., head)            |
+| attack_speed    | integer   | The attack speed of an item           |
+| skill_reqs      | array     | An array of objects {skill: level}    |
 
 ### JSON Structure
 
-So what does this JSON object actually look like? Well, listed below is an example of a complete JSON object for the Black wizard hat (g). You could just click on [this link](https://www.osrsbox.com/osrsbox-db/items-json/12453.json) to view the raw JSON using the osrsbox-db API.
+So what does this JSON object actually look like? Well, listed below is an example of a complete JSON object for the Abyssal whip. You could just click on [this link](https://www.osrsbox.com/osrsbox-db/items-json/4151.json) to view the raw JSON using the osrsbox-db API.
 
 {% highlight json %}
 {
-    "id": 12453,
-    "name": "Black wizard hat (g)",
-    "members": false,
+    "id": 4151,
+    "name": "Abyssal whip",
+    "members": true,
     "tradeable": true,
     "tradeable_on_ge": true,
     "stackable": false,
     "noted": false,
     "noteable": true,
+    "linked_id": 4152,
     "equipable": true,
-    "cost": 2,
-    "lowalch": 0,
-    "highalch": 1,
-    "weight": 0.4,
-    "buy_limit": null,
-    "quest_item": null,
-    "release_date": "12 June 2014",
-    "examine": "A silly pointed hat, with colourful trim.",
-    "url": "https://oldschool.runescape.wiki/w/Black_wizard_hat_(g)",
-    "bonuses": {
+    "cost": 120001,
+    "lowalch": 48000,
+    "highalch": 72000,
+    "weight": 0.453,
+    "buy_limit": 70,
+    "quest_item": false,
+    "release_date": "26 January 2005",
+    "examine": "A weapon from the abyss.",
+    "url": "https://oldschool.runescape.wiki/w/Abyssal_whip",
+    "equipment": {
         "attack_stab": 0,
-        "attack_slash": 0,
+        "attack_slash": 82,
         "attack_crush": 0,
-        "attack_magic": 2,
+        "attack_magic": 0,
         "attack_ranged": 0,
         "defence_stab": 0,
         "defence_slash": 0,
         "defence_crush": 0,
-        "defence_magic": 2,
+        "defence_magic": 0,
         "defence_ranged": 0,
-        "melee_strength": 0,
+        "melee_strength": 82,
         "ranged_strength": 0,
         "magic_damage": 0,
-        "prayer": 0
-    },
-    "equipment": {
-        "slot": "head",
-        "attack_speed": 0,
-        "skill_reqs": null
+        "prayer": 0,
+        "slot": "weapon",
+        "attack_speed": 4,
+        "skill_reqs": [
+            {
+                "skill": "attack",
+                "level": 70
+            }
+        ]
     }
 }
 {% endhighlight %}
@@ -197,7 +193,6 @@ So how can you get and use these JSON files about OSRS items? It is pretty easy,
 ### Accessing JSON Using wget
 
 Take a simple example of downloading a single JSON file. In a Linux system, we could use the `wget` command to download a single JSON file, as illustrated in the example code below:
-
 
 {% highlight bash %}
 wget https://www.osrsbox.com/osrsbox-db/items-json/12453.json
