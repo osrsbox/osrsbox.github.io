@@ -26,10 +26,10 @@ This section provides some brief summary information about the status of the OSR
 
 Since OSRS is a dynamic constantly updated MMO game, the items are continually changing due to game updates (a good thing!). This section briefly summarizes the last update to the primary data sources:
 
-- [`items-complete.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-complete.json): Updated as of 2019/02/21
-- [`items-summary.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-summary.json): Updated as of 2019/02/21
-- [`items-json`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-json): Updated as of 2019/02/21
-- [`items-icons`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-icons): Updated as of 2019/02/21
+- [`items-complete.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-complete.json): Updated as of 2019/03/16
+- [`items-summary.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-summary.json): Updated as of 2019/03/16
+- [`items-json`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-json): Updated as of 2019/03/16
+- [`items-icons`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-icons): Updated as of 2019/03/16
 
 ### Useful Links
 
@@ -54,35 +54,34 @@ But what is actually contained in these JSON files? Well, it is a collection of 
 All items have properties; for example, the item's weight and the high alchemy value. All item properties are listed below for reference, including the data type for each property (e.g., string, integer, float) and a description of the property.
 
 {: .table .table-striped .table-sm}
-| Property        | Data type   | Description                                       |
-| --------------- | ------------| --------------------------------------------------|
-| id              | integer     | Unique OSRS item ID number                        |
-| name            | string      | Name of the item                                  |
-| members         | boolean     | If the item is a members only item                |
-| tradeable       | boolean     | If the item is tradeable (between players and GE) |
-| tradeable_on_ge | boolean     | If the item is tradeable (only on GE)             |
-| stackable       | boolean     | If the item is stackable (in inventory)           |
-| noted           | boolean     | If the item is noted                              |
-| notable         | boolean     | If the item is notable                            |
-| linked_id       | integer     | The noted/unnoted equivalent of the item          |
-| equipable       | boolean     | If the item is equipable                          |
-| cost            | integer     | The store price of an item                        |
-| low_alch        | integer     | The low alchemy value of the item (cost * .4)     |
-| high_alch       | integer     | The high alchemy value of the item (cost * .6)    |
-| weight          | float       | The weight (in kilograms) of the item             |
-| buy_limit       | integer     | The Grand Exchange buy limit of the item          |
-| quest_item      | boolean     | If the item is associated with a quest            |
-| release_date    | string      | Date the item was released                        |
-| examine         | string      | The examine text(s) for the item                  |
-| url             | string      | OSRS Wiki URL link                                |
-| equipment       | object      | Object of item equipment info (if equipable)      |
-| bonuses         | object      | Object of item bonuses (if equipable)             |
+| Property            | Data type   | Description                                       |
+| ------------------- | ------------| --------------------------------------------------|
+| id                  | integer     | Unique OSRS item ID number                        |
+| name                | string      | Name of the item                                  |
+| members             | boolean     | If the item is a members only item                |
+| tradeable           | boolean     | If the item is tradeable (between players and GE) |
+| tradeable_on_ge     | boolean     | If the item is tradeable (only on GE)             |
+| stackable           | boolean     | If the item is stackable (in inventory)           |
+| noted               | boolean     | If the item is noted                              |
+| notable             | boolean     | If the item is notable                            |
+| linked_id           | integer     | The noted/unnoted equivalent of the item          |
+| placeholder         | boolean     | If the item is a placeholder                      |
+| equipable           | boolean     | If the item is equipable (based on menu entry)    |
+| equipable_by_player | boolean     | If the item is equipable by a player              |
+| cost                | integer     | The store price of an item                        |
+| lowalch             | integer     | The low alchemy value of the item (cost * .4)     |
+| highalch            | integer     | The high alchemy value of the item (cost * .6)    |
+| weight              | float       | The weight (in kilograms) of the item             |
+| buy_limit           | integer     | The Grand Exchange buy limit of the item          |
+| quest_item          | boolean     | If the item is associated with a quest            |
+| release_date        | string      | Date the item was released                        |
+| examine             | string      | The examine text(s) for the item                  |
+| url                 | string      | OSRS Wiki URL link                                |
+| equipment           | object      | Object of item equipment info (if equipable)      |
 
 ### Item Equipment Information
 
 If an item is equipable it will have additional metadata about the combat bonuses that it provides; for example, the melee strength bonus the Dragon dagger item provides. In addition, each equipable item will also have generic equipment information including the item slot, attack speed (if a weapon) and the skill requirements to equip the item. 
-
-#### Item Equipment
 
 The following table specifies the different item equipment properties. This information includes the item bonuses, as well as the item slot, attack speed (if a weapon), and the skill requirements to equip an item.
 
@@ -122,7 +121,9 @@ So what does this JSON object actually look like? Well, listed below is an examp
     "noted": false,
     "noteable": true,
     "linked_id": 4152,
+    "placeholder": false,
     "equipable": true,
+    "equipable_by_player": true,
     "cost": 120001,
     "lowalch": 48000,
     "highalch": 72000,
@@ -275,12 +276,24 @@ This project uses a collection of resources, and was only achievable using tools
 - The amazing open source [RuneLite](https://runelite.net/) client which was used to create a custom plugin to dump item data and item icons from the OSRS cache
 - The fantastic community driven [OSRS Wiki](https://oldschool.runescape.wiki/) which was used to augment the item data from the OSRS cache
 
-## Project Feedback and Contribution
+## Project Feedback
 
-I would thoroughly appreciate any feedback regarding the OSRSBox database project, especially problems with the inaccuracies of the data provided in the database. So if encounter any issue, could you please let me know. The same goes for any discovered bugs, or if you have a specific feature request. The best method is to [open a new Github issue](https://github.com/osrsbox/osrsbox-db/issues) in the project repository. In addition, please feel free to submit a pull request if you have code that you wish to contribute - I would thoroughly appreciate the helping hand. For any code contributions, the best method is to [open a new GitHub pull request](https://github.com/osrsbox/osrsbox-db/pulls) in the project repository.
+I would thoroughly appreciate any feedback regarding the osrsbox-db project, especially problems with the inaccuracies of the data provided. So if you notice any problem with the accuracy of item property data, could you please let me know. The same goes for any discovered bugs, or if you have a specific feature request. The best method is to [open a new Github issue](https://github.com/osrsbox/osrsbox-db/issues) in the project repository. 
 
-This project has started to be used by other developers of Old School RuneScape fan websites - which is great! Also, a special thanks to the following GitHub users who have already contributed to the project:
+## Project Contribution
 
-- @nwalsh1995: Helping with general code review, continuous integration, unit tests and project packaging.
-- @jburleigh1: Helped identify issues with some equipable items which led to implementation of infobox versioning support when extracting data from the OSRS Wiki.
-- @sheymyster: Heled identify issues with the tradeable item property which led to addition of a `tradeable_on_ge` property and `tradeable` (between players) property.
+This project would thoroughly benefit from contribution from additional developers. Please feel free to submit a pull request if you have code that you wish to contribute - I would thoroughly appreciate the helping hand. For any code contributions, the best method is to [open a new GitHub pull request](https://github.com/osrsbox/osrsbox-db/pulls) in the project repository. Also, feel free to contact me (e.g., email) if you wish to discuss contribution before making a pull request.
+
+## Project License
+
+The osrsbox-db project is released under the GNU General Public License version 3 as published by the Free Software Foundation. You can read the [LICENSE](LICENSE) file for the full license, check the [GNU GPL](https://www.gnu.org/licenses/gpl-3.0.en.html) page for additional information, or check the [tl;drLegal](https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3) documentation for the license explained in simple english. The GPL license is specified for all source code contained in this project. Other content is specified under GPL if not listed in the **Exceptions to GPL** below.
+
+#### Exceptions to GPL
+
+Old School RuneScape (OSRS) content and materials are trademarks and copyrights of JaGeX or its licensors. All rights reserved. OSRSBox, and the osrsbox-db project, is not associated or affiliated with JaGeX or its licensors. 
+
+Additional data to help build this project is sourced from the [OSRS Wiki](https://oldschool.runescape.wiki/). This primarily includes item metadata. As specified by the [Weird Gloop Copyright](https://meta.weirdgloop.org/w/Meta:Copyrights) page, this content is licensed under CC BY-NC-SA 3.0 - [Attribution-NonCommercial-ShareAlike 3.0 Unported](https://creativecommons.org/licenses/by-nc-sa/3.0/) license.
+
+## Project Attribution
+
+The osrsbox-db project is a labour of love. I put a huge amount of time and effort into the project, and I want people to use it. That is the entire reason for it's existence. I am not too fussed about attribution guidelines... but if you want to use the project please adhere to the licenses used. Please feel free to link to this repository or my [OSRSBox website](https://www.osrsbox.com/) if you use it in your project - mainly so others can find it, and hopefully use it too!
