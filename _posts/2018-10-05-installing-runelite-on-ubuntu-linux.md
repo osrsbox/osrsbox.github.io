@@ -14,6 +14,8 @@ This post documents how I installed RuneLite on a fresh Ubuntu Desktop Linux ver
 
 The RuneLite installation and configuration tutorial is divided into the following sections: Installing Java, downloading and installing RuneLite, creating shortcuts to run RuneLite and some additional system configuration tweaks and notes.
 
+- **Update: 2019-03-17**: Updated the post to align with the most recent release of the RuneLite Launcher - version 1.6.2. Also added a small section on troubleshooting the client.
+
 ## Contents
 {:.no_toc}
 
@@ -78,7 +80,7 @@ However, you probably don't have multiple Java versions, so this command is not 
 
 ## Downloading RuneLite Launcher
 
-In order to install RuneLite, we need to download and run the **RuneLite Launcher**. The launcher is available for multiple operating system types including Microsoft Windows (`.exe`), OS X (`.dmg`) and any other platforms (`.jar`). Since we are on Linux, we need the `.jar` version. You can download the launcher from the [Official RuneLite website](https://runelite.net/) or from the [RuneLite Launcher releases page](https://github.com/runelite/launcher/releases) which is hosted on GitHub. I prefer to use the GitHub page. The official RuneLite website points to the RuneLite launcher repository anyway - so no matter what, you will download the launcher from the same place. When I wrote this post, the version of the RuneLite launcher was 1.6.0. You can view and download the latest RuneLite launcher from:
+In order to install RuneLite, we need to download and run the **RuneLite Launcher**. The launcher is available for multiple operating system types including Microsoft Windows (`.exe`), OS X (`.dmg`) and any other platforms (`.jar`). Since we are on Linux, we need the `.jar` version. You can download the launcher from the [Official RuneLite website](https://runelite.net/) or from the [RuneLite Launcher releases page](https://github.com/runelite/launcher/releases) which is hosted on GitHub. I prefer to use the GitHub page. The official RuneLite website points to the RuneLite launcher repository anyway - so no matter what, you will download the launcher from the same place. When I wrote this post, the version of the RuneLite launcher was 1.6.2. You can view and download the latest RuneLite launcher from:
 
 {% highlight plaintext %}
 https://github.com/runelite/launcher/releases
@@ -86,18 +88,18 @@ https://github.com/runelite/launcher/releases
 
 You can download the version using the hyperlink provided on the releases page, or right-click and _Copy the link location_ and download using the `wget` tool.
 
-The best location to save binary files in Linux is using the `/usr/local/bin` directory. According to the [Filesystem Hierarchy Standard](http://refspecs.linuxfoundation.org/FHS_2.3/fhs-2.3.html#USRLOCALLOCALHIERARCHY), the `/usr/local/` directory is for use by the system administrator when installing software locally that is not from a package repository. You could technically save and run the `RuneLite.jar` file anywhere, but we should adhere to best Linux practices. Therefore, the best location to save the executable is `/usr/local/bin`. The following command will download version 1.6.0 of the launcher to the `/usr/local/bin/` folder using the following command:
+The best location to save binary files in Linux is using the `/usr/local/bin` directory. According to the [Filesystem Hierarchy Standard](http://refspecs.linuxfoundation.org/FHS_2.3/fhs-2.3.html#USRLOCALLOCALHIERARCHY), the `/usr/local/` directory is for use by the system administrator when installing software locally that is not from a package repository. You could technically save and run the `RuneLite.jar` file anywhere, but we should adhere to best Linux practices. Therefore, the best location to save the executable is `/usr/local/bin`. The following command will download version 1.6.2 of the launcher to the `/usr/local/bin/` folder using the following command:
 
 {% highlight plaintext %}
-sudo wget -O /usr/local/bin/RuneLite.jar https://github.com/runelite/launcher/releases/download/1.6.0/RuneLite.jar
+sudo wget -O /usr/local/bin/RuneLite.jar https://github.com/runelite/launcher/releases/download/1.6.2/RuneLite.jar
 {% endhighlight %}
 
 Just to summarize the command. The `-O /usr/local/bin/RuneLite.jar` option forces `wget` to download the file to a specific location. In this case save the file to the folder `/usr/local/bin/`, with the file name of `RuneLite.jar`. If you want to download a different (newer) version of the RuneLite launcher just update the trailing URL at the end of the `wget` command.
 
-The [RuneLite Launcher releases page](https://github.com/runelite/launcher/releases) page provides a SHA-256 hash value for all downloads. This hash value can be used to check the integrity of the downloaded file. The hash value for version 1.6.0 of the `RuneLite.jar` file is:
+The [RuneLite Launcher releases page](https://github.com/runelite/launcher/releases) page provides a SHA-256 hash value for all downloads. This hash value can be used to check the integrity of the downloaded file. The hash value for version 1.6.2 of the `RuneLite.jar` file is:
 
 {% highlight plaintext %}
-fdcfdd51b033815c4f45025c315175b8a20cc080b65a8b76aee5519b39e85d60 *RuneLite.jar
+1f8e54d902f06e7d16dc1c49f920a7c42971e8b7e8a558204edbd2304a02c92a *RuneLite.jar
 {% endhighlight %}
 
 The simplest method to check the SHA 256 hash value is to run the `sha256sum` tool using the `RuneLite.jar` file as input, then manually check the hash values are the same. For example, you can run the following command 
@@ -111,7 +113,7 @@ The output should be similar to the listing below:
 
 {% highlight plaintext %}
 ph01l@ubuntu-laptop:~$ sha256sum /usr/local/bin/RuneLite.jar 
-fdcfdd51b033815c4f45025c315175b8a20cc080b65a8b76aee5519b39e85d60  RuneLite.jar
+1f8e54d902f06e7d16dc1c49f920a7c42971e8b7e8a558204edbd2304a02c92a RuneLite.jar
 {% endhighlight %}
 
 Now we have downloaded and verified the hash value of the `RuneLite.jar` file. Next, we need to adjust the permissions on the RuneLite launcher. The file should be owned by the `root` user already (because we downloaded using `sudo` permissions), so we need to make sure that any _other_ user should have the appropriate permissions to execute the program. The following command will set _read_ and _execute_ permissions for _other_ users, while matching the usual permissions you would set for the user and group for executable binaries:
@@ -217,6 +219,14 @@ If you directly followed this tutorial you will have exactly the same files. You
 sudo rm /usr/local/bin/RuneLite.jar
 sudo rm /usr/local/share/RuneLite.png
 sudo rm /usr/share/applications/runelite.desktop
+{% endhighlight %}
+
+## Troubleshooting
+
+The RuneLite client runs really well on Linux, so this troubleshooting section is pretty minimal. The primary problem people seem to face is graphical issues. This is easily resolved by [disabling hardware acceleration as documented on the RuneLite wiki](https://github.com/runelite/runelite/wiki/Disable-Hardware-Acceleration). Basically, you just add `--mode=OFF` to the end of the command to run RuneLite. This method works for running from the command line, making a command alias or running the client using an application launcher. Below is an example of the modified command required:
+
+{% highlight plaintext %}
+java -jar /usr/local/bin/RuneLite.jar --mode=OFF
 {% endhighlight %}
 
 ## Conclusion
