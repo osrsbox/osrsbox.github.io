@@ -2,15 +2,21 @@
 layout: project
 title: OSRSBOX | An OSRS Item Database Available via a RESTful API
 project_name: OSRSBox Database
-project_desc: A database of Old School Runescape (OSRS) items in JSON format with accompanying icon images in PNG format
+project_desc: A database of Old School Runescape (OSRS) items in JSON format available via a JSON API or used in a Python package.
 include_tooltips: true
 redirect_from:
   - osrs-database/
 ---
 
-This project is a database of Old School Runescape (OSRS) items in JSON format with accompanying icon images in PNG format. The goal of the project is to provide a JSON object and PNG image for **every item in OSRS**. In addition, the metadata for each item is extensive including as many useful properties as possible.
+## A complete and up-to-date database of Old School Runescape (OSRS) items
 
-The repository that accompanies this project provides public access to JSON formatted metadata about every OSRS item in the game; for example, whether an item is tradeable, stackable, or equipable or if the item is members only, or a quest item. For any equipable item, there is metadata about combat stats the item has; for example, what slash attack bonus, magic defence bonus or prayer bonus an item provides. Furthermore, high and low alchemy values are provided. Lastly, each item has a corresponding item icon in PNG format. 
+[![Build Status](https://travis-ci.org/osrsbox/osrsbox-db.svg?branch=master)](https://travis-ci.org/osrsbox/osrsbox-db) [![PyPI version](https://badge.fury.io/py/osrsbox.svg)](https://badge.fury.io/py/osrsbox)
+
+This project contains a complete and up-to-date database of every item in OSRS. **Complete** means it holds every single items in OSRS. **Up-to-date** means this database is updated after every weekly game update to ensure accurate information. 
+
+The item database has extensive properties for each item: a total of 21 properties for every item, and an additional 17 properties for equipable items. Each item has properties including whether an item is tradeable, stackable, or equipable or if the item is members only, or an item associated with a quest. For any equipable item, there are additional properties about combat stats the item has; for example, what slash attack bonus, magic defence bonus or prayer bonus an item provides.
+
+Current development is working towards adding a similar database for monsters.
 
 ## Contents
 {:.no_toc}
@@ -35,6 +41,7 @@ Since OSRS is a dynamic constantly updated MMO game, the items are continually c
 
 This project is hosted on GitHub, where you will find the database, as well as the tools used to create the database contents.
 
+- [osrsbox package on PyPi](https://pypi.org/project/osrsbox/): The Python package PyPi page
 - [osrsbox-db GitHub repository](https://github.com/osrsbox/osrsbox-db): The project repository
 - [osrsbox-db raw data](https://github.com/osrsbox/osrsbox-db/tree/master/docs): The actual database contents including JSON files for all items in OSRS
 - [osrsbox-db GitHub issues tracker](https://github.com/osrsbox/osrsbox-db/issues): Location for checking or submitting issues
@@ -160,7 +167,7 @@ So what does this JSON object actually look like? Well, listed below is an examp
 }
 {% endhighlight %}
 
-## Accessing JSON data about OSRS items
+## Accessing the JSON API
 
 The JSON file for each OSRS item can be directly accessed using unique URLs provide through the `osrsbox.com` website. Technically, this provides some of the functionality of a RESTful API, but only supports GET requests. That is, you can fetch JSON files using a unique URL but cannot modify any JSON content. Below is a list of URL examples for items in the osrsbox-db:
 
@@ -191,7 +198,7 @@ In addition to the single JSON files for each item, there is also a collection o
 
 So how can you get and use these JSON files about OSRS items? It is pretty easy, but really depends on what you are trying to accomplish and what programming language you are using. 
 
-### Accessing JSON Using wget
+### Accessing the JSON API using wget
 
 Take a simple example of downloading a single JSON file. In a Linux system, we could use the `wget` command to download a single JSON file, as illustrated in the example code below:
 
@@ -199,7 +206,7 @@ Take a simple example of downloading a single JSON file. In a Linux system, we c
 wget https://www.osrsbox.com/osrsbox-db/items-json/12453.json
 {% endhighlight %}
 
-### Accessing JSON Using Python
+### Accessing the JSON API using Python
 
 Maybe you are interested in downloading a single (or potentially multiple) JSON files about OSRS items and processing the information in a Python program. The short script below downloads the `12453.json` file using Python's urllib library, loads the data as a JSON object and prints the contents to the console. The code is a little messy, primarily due to supporting both Python 2 and 3 (as you can see from the "try" and "except" importing method implemented).
 
@@ -218,7 +225,7 @@ json_obj = json.loads(data)
 print(data)
 {% endhighlight %}
 
-### Accessing JSON Using JavaScript
+### Accessing the JSON API using JavaScript
 
 Finally, let's have a look at JavaScript (specifically jQuery) example to fetch a JSON file from the osrsbox-db and build an HTML element to display in a web page. The example below is a very simple method to download the JSON file using the jQuery getJSON function. Once we get the JSON file, we loop through the JSON entries and print each key and value (e.g., name and Black wizard hat (g)) on it's own line in a div element. If you want to experiment with the code, the code is available in a W3Schools TryIt Editor at [this link](https://www.w3schools.com/code/tryit.asp?filename=FY2CQ7W1J346).
 
@@ -266,6 +273,7 @@ As displayed by the links above, each item ID is stored in the `osrsbox-db` repo
 
 ## Projects Using osrsbox-db
 
+- [OSRS Best In Slot](https://www.osrsbestinslot.com/)
 - [OSRSBox Tooltips (osrsbox-tooltips)]({{ site.url}}/projects/osrsbox-tooltips/)
 - [Item Search for Old School RuneScape]({{ site.url}}/tools/item-search/)
 
@@ -288,7 +296,7 @@ This project would thoroughly benefit from contribution from additional develope
 
 The osrsbox-db project is released under the GNU General Public License version 3 as published by the Free Software Foundation. You can read the [LICENSE](LICENSE) file for the full license, check the [GNU GPL](https://www.gnu.org/licenses/gpl-3.0.en.html) page for additional information, or check the [tl;drLegal](https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3) documentation for the license explained in simple english. The GPL license is specified for all source code contained in this project. Other content is specified under GPL if not listed in the **Exceptions to GPL** below.
 
-#### Exceptions to GPL
+##### Exceptions to GPL
 
 Old School RuneScape (OSRS) content and materials are trademarks and copyrights of JaGeX or its licensors. All rights reserved. OSRSBox, and the osrsbox-db project, is not associated or affiliated with JaGeX or its licensors. 
 

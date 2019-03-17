@@ -1,3 +1,11 @@
+- name: "osrsbox-db:  An OSRS Item Database Available via a JSON API or Python API"
+  muted: "Get OSRS Items in JSON Format"
+  date: "2018"
+  description: |
+    A database of Old School Runescape (OSRS) items in JSON format available via a JSON API or used in a Python package. This project provides access to metadata about every OSRS item in the game! Receive data about items including name, alch values, examine text, and combat bonuses.
+  url: "/projects/osrsbox-db"
+  image: "/300/osrsbox-db.png"
+  
 - name: "Treasure Trails Tracker"
   muted: "Keep track of your unique clue scroll rewards"
   date: "2018"
@@ -13,14 +21,6 @@
     Ever wanted to know where Jad will spawn? Having problems with getting that fire cape? Don't know the spawns and what to pray? This tool will help! The Fight Caves spawn predictor will map the entire fight caves mob rotation - when and where each and every mob spawn.
   url: "/tools/fight-caves"
   image: "/300/jad.png"
-
-- name: "An OSRS Item Database Available via a RESTful API"
-  muted: "Get OSRS Items in JSON Format"
-  date: "2018"
-  description: |
-    A database of Old School Runescape (OSRS) items in JSON format with accompanying icon images in PNG format. This project provides public access to metadata about every OSRS item in the game! Query a specific item ID number and receive back data about items including name, alch values, examine text, and combat bonuses.
-  url: "/projects/osrsbox-db"
-  image: "/300/osrsbox-db.png"
 
 - name: "Item ID Search"
   muted: "Search an exhaustive and up-to-date list of OSRS Item ID numbers"
