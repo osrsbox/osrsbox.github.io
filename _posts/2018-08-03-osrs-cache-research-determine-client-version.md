@@ -12,7 +12,7 @@ redirect_from:
   - /osrs-cache/
 ---
 
-## Post Update (2018/09/04)
+### Post Update (2018/09/04)
 
 **This post is no longer relevant as the original RuneLite Deobfuscator has been removed from my GitHub osrsbox-cache repo. This is to align with Jagex policies with the previously available RuneLite Deobfuscator. Sorry for any inconvenience - the post was written a long time ago (and later published) when the deobfuscator was still publically available.**
 

@@ -1,8 +1,8 @@
 ---
 layout: project
-title: OSRSBOX | An OSRS Item Database Available via a RESTful API
+title: OSRSBOX | A database of Old School Runescape (OSRS) items in JSON format available via a JSON API or Python package
 project_name: OSRSBox Database
-project_desc: A database of Old School Runescape (OSRS) items in JSON format available via a JSON API or used in a Python package.
+project_desc: A database of Old School Runescape (OSRS) items in JSON format available via a JSON API or Python package.
 include_tooltips: true
 redirect_from:
   - osrs-database/
@@ -32,10 +32,10 @@ This section provides some brief summary information about the status of the OSR
 
 Since OSRS is a dynamic constantly updated MMO game, the items are continually changing due to game updates (a good thing!). This section briefly summarizes the last update to the primary data sources:
 
-- [`items-complete.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-complete.json): Updated as of 2019/03/16
-- [`items-summary.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-summary.json): Updated as of 2019/03/16
-- [`items-json`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-json): Updated as of 2019/03/16
-- [`items-icons`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-icons): Updated as of 2019/03/16
+- [`items-complete.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-complete.json): Updated as of 2019/04/18
+- [`items-summary.json`](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-summary.json): Updated as of 2019/04/18
+- [`items-json`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-json): Updated as of 2019/04/18
+- [`items-icons`](https://github.com/osrsbox/osrsbox-db/tree/master/docs/items-icons): Updated as of 2019/04/18
 
 ### Useful Links
 
