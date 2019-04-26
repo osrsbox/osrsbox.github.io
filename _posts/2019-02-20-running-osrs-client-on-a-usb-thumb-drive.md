@@ -115,6 +115,8 @@ E:\client-runelite\RuneLite.jar
 
 ### Running the RuneLite JAR File
 
+**UPDATE**: Please note that you can perform the following section of the tutorial in Windows PowerShell, or Windows Command Prompt (CMD). I would recommend using the Windows Command Prompt - as it is easier. PowerShell has a quirk where you must wrap Java properties with double quotes. For example, `-Duser.home=client-home` or `-Xmx512m` must be wrapped in quotes to produce `"-Duser.home=client-home"` or `"-Xmx512m"`. This tutorial includes the wrapped Java properties, but they are a pain to add!
+
 We now have the RuneLite launcher downloaded, validated using the hash value, and copied to the folder we created on our USB flash drive. The only thing left to do is determine a suitable method to run the RuneLite client. Since it is not installed, we cannot simply click a Start Menu entry, or Desktop icon to start the client. We need to run a command to execute the client. Usually, this is very easy, as illustrated by the following command that would usually be sufficient:
 
 {% highlight plaintext %}
@@ -142,8 +144,10 @@ Basically, RuneLite is asking Java for the home directory of the user that is ru
 The `-D` is a system property option - we are changing the `user.home` property to be `any/path/we/want`! So, based on our portable `java.exe` path, and the location of the `RuneLite.java` file... the full command we should use to run RuneLite is:
 
 {% highlight plaintext %}
-CommonFiles\Java\bin\java.exe -Duser.home=client-home -jar client-runelite/RuneLite.jar
+CommonFiles\Java\bin\java.exe "-Duser.home=client-home" -jar client-runelite/RuneLite.jar
 {% endhighlight %}
+
+Remember, if you are using PowerShell (and not the Windows Command Prompt - cmd) to run RuneLite, then you must wrap the specified Java properties in double quotes. This is the `-Duser.home=client-home` part of the command. I would recommend using quotes to wrap this argument, as it will work in PowerShell and CMD. Thanks to user comments that pointed out this issue.
 
 In the above example, take note that this command has been run in the root directory of the `E:` drive (the USB flash drive). We use a relative path to launch the Java executable (`CommonFiles\Java\bin\java.exe`), set a new home folder location (`-Duser.home=client-home`) to be the folder named `client-home` on our USB drive, then run the RuneLite launcher (`-jar RuneLite.jar`). Excellent! Well... no, not really. This works and achieves two of the requirements - numbers 1 and 2, but not 3. This method will still create/load the OSRS cache files from the normal users' directory (e.g., `C:\Users\PH01L\jagexcache`). The `user.home` property works for the RuneLite configuration folder (the `.runelite` folder), but does not work for the OSRS cache folder (the `jagexcache` folder). So how can we solve this?
 
@@ -157,9 +161,10 @@ This last entry is an array of strings that are the command used to run the clie
 
 {% highlight plaintext %}
 CommonFiles\Java\bin\java.exe -cp "client-runelite\RuneLite.jar;client-home\.runelite\repository2\*" ^
--Duser.home=client-home -Xmx512m -Xss2m -XX:CompileThreshold=1500 -Xincgc -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC ^
--Djna.nosys=true -Dsun.java2d.noddraw=false -Dsun.java2d.opengl=false -Djava.net.preferIPv4Stack=true ^
--Djava.net.preferIPv4Addresses=true -Drunelite.launcher.version=1.6.1 net.runelite.client.RuneLite
+"-Duser.home=client-home" "-Xmx512m" "-Xss2m" "-XX:CompileThreshold=1500" "-Xincgc" "-XX:+UseConcMarkSweepGC" ^
+"-XX:+UseParNewGC" "-Djna.nosys=true" "-Dsun.java2d.noddraw=false" "-Dsun.java2d.opengl=false" ^
+"-Djava.net.preferIPv4Stack=true" "-Djava.net.preferIPv4Addresses=true" ^
+"-Drunelite.launcher.version=1.6.1" net.runelite.client.RuneLite
 {% endhighlight %}
 
 Holy crap, right?! One key point before we discuss anything: This command requires you have run the RuneLite launcher at least once to download all the required JAR files to the RuneLite home folder (`client-home\.runelite\repositories2\`). This is because we need those files to actually launch the client. In future releases when the client is updated, you will have to run the launcher again to download the updated JAR dependency files. Another important note, the command above is using the caret symbol (`^`) to add line breaks to the command so that it is readable. You could remove these and put the command on one line if you wanted. So... a little summary of what is happening in the command above:
@@ -180,27 +185,27 @@ cd /D E:
 - Start the RuneLite launcher to update any dependencies
 
 {% highlight plaintext %}
-CommonFiles\Java\bin\java.exe -Duser.home=client-home -jar client-runelite/RuneLite.jar
+CommonFiles\Java\bin\java.exe "-Duser.home=client-home" -jar client-runelite/RuneLite.jar
 {% endhighlight %}
 
 - Run the RuneLite client
 
 {% highlight plaintext %}
-CommonFiles\Java\bin\java.exe -cp "client-runelite\RuneLite.jar;client-home\.runelite\repository2\*" -Duser.home=client-home -Xmx512m -Xss2m -XX:CompileThreshold=1500 -Xincgc -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC -Djna.nosys=true -Dsun.java2d.noddraw=false -Dsun.java2d.opengl=false -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true -Drunelite.launcher.version=1.6.1 net.runelite.client.RuneLite
+CommonFiles\Java\bin\java.exe -cp "client-runelite\RuneLite.jar;client-home\.runelite\repository2\*" "-Duser.home=client-home" "-Xmx512m" "-Xss2m" "-XX:CompileThreshold=1500" "-Xincgc" "-XX:+UseConcMarkSweepGC"  "-XX:+UseParNewGC" "-Djna.nosys=true" "-Dsun.java2d.noddraw=false" "-Dsun.java2d.opengl=false" "-Djava.net.preferIPv4Stack=true" "-Djava.net.preferIPv4Addresses=true" "-Drunelite.launcher.version=1.6.1" net.runelite.client.RuneLite
 {% endhighlight %}
 
 The third command (to run the RuneLite client) should be used for running RuneLite to play OSRS. The second command should be used to update RuneLite dependencies when the RuneLite client is updated (usually Thursdays). Also, if you are a little paranoid about making changes to the host computer, only perform the update on a computer you are willing to install the OSRS cache too. If you update the client and do not stop it quickly enough, it will continue to run the client and download the OSRS cache files.
 
 ### RuneLite Dependency Cleanup
 
-It is essential that this final step is followed when running the RuneLite client from the USB drive. When the game updates each week, this will usually create a number of new files in the `client-runelite\.runelite\repository2\` folder. It is essential that you remove any previous versions of any of the dependencies. This will usually include the `client`, `client-patch`, `runelite-api` and `runescape-api` files. If you are unsure what to delete, just delete all the files and run the launcher again to update the files.
+It is essential that this final step is followed when running the RuneLite client from the USB drive. When the game updates each week, this will usually create a number of new files in the `client-runelite\.runelite\repository2\` folder. It is essential that you remove any previous versions of any of the dependencies. This will usually include the following five (5) files: `client`, `client-patch`, `http-api`, `runelite-api` and `runescape-api` files. If you are unsure what to delete, just delete all the files and run the launcher again to update the files.
 
 ### Creating a Batch File to Update RuneLite
 
 Those commands are a little intense, so I created a Windows Batch file to automate the process. The first batch script is to update the RuneLite client. In the root folder of your USB flash drive, create a new text file. This is easily achieved by right-clicking in Windows Explorer and selecting _New_, then _Text Document_. Rename the file to `RuneLite_update.bat` (make sure you have the _Hide extensions for known file types_ turned off in the _Folder Options_ for Windows - Google it!). Open the file in your favorite text editor and insert the following command.
 
 {% highlight plaintext %}
-CommonFiles\Java\bin\java.exe -Duser.home=client-home -jar client-runelite/RuneLite.jar
+CommonFiles\Java\bin\java.exe "-Duser.home=client-home" -jar client-runelite/RuneLite.jar
 {% endhighlight %}
 
 You can simply run the batch file (double click) to force RuneLite to update. I usually do this after every weekly RuneLite update.
@@ -210,7 +215,7 @@ You can simply run the batch file (double click) to force RuneLite to update. I 
 The second batch file will be used to run RuneLite. Perform the same steps to create a new file, but this time name it `RuneLite_run.bat`. Enter the following command.
 
 {% highlight plaintext %}
-CommonFiles\Java\bin\java.exe -cp "client-runelite\RuneLite.jar;client-home\.runelite\repository2\*" -Duser.home=client-home -Xmx512m -Xss2m -XX:CompileThreshold=1500 -Xincgc -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC -Djna.nosys=true -Dsun.java2d.noddraw=false -Dsun.java2d.opengl=false -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true -Drunelite.launcher.version=1.6.1 net.runelite.client.RuneLite
+CommonFiles\Java\bin\java.exe -cp "client-runelite\RuneLite.jar;client-home\.runelite\repository2\*" "-Duser.home=client-home" "-Xmx512m" "-Xss2m" "-XX:CompileThreshold=1500" "-Xincgc" "-XX:+UseConcMarkSweepGC"  "-XX:+UseParNewGC" "-Djna.nosys=true" "-Dsun.java2d.noddraw=false" "-Dsun.java2d.opengl=false" "-Djava.net.preferIPv4Stack=true" "-Djava.net.preferIPv4Addresses=true" "-Drunelite.launcher.version=1.6.1" net.runelite.client.RuneLite
 {% endhighlight %}
 
 Again, you can double click this batch file to run it using the Windows Command Prompt. One quick note, if you download a new version of the launcher in the future, you may need to change the `-Drunelite.launcher.version=1.6.1` entry to the new version number. Additionally, you may need to update the command to launch RuneLite if the developers include or exclude any of the command line options/arguments I have witnessed in version 1.6.1 of the launcher. Below is an example of when I run the `RuneLite_run.bat` batch script from my USB drive (wallpaper art courtesy of [RS-LegendArts](https://www.deviantart.com/rs-legendarts)).
