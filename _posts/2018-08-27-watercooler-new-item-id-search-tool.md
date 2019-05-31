@@ -218,7 +218,7 @@ Saving the image was the final part of the RuneLite plugin design. The full sour
 
 ## Writing an Item Search Web Application
 
-After getting an up-to-date list of item ID numbers and names, it was possible for me to make an item ID and item name search tool using the [summary.json](https://www.osrsbox.com/osrsbox-db/summary.json) file. Aside from an up-to-date item list, it was important that the item ID and item search was fast and responsive. I am never a fan of re-inventing the wheel, so the first objective was to find a decent library for building a table solution to handle the following requirements:
+After getting an up-to-date list of item ID numbers and names, it was possible for me to make an item ID and item name search tool using the [summary.json](https://www.osrsbox.com/osrsbox-db/items-summary.json) file. Aside from an up-to-date item list, it was important that the item ID and item search was fast and responsive. I am never a fan of re-inventing the wheel, so the first objective was to find a decent library for building a table solution to handle the following requirements:
 
 - Handle loading 20,000+ rows in a table
 - Fetching item icons from the [OSRSBox Database project]({{ site.url }}/projects/osrsbox-db/)

@@ -30,7 +30,7 @@ This post is a part two of a two-part series:
 
 ## Running your Vanilla WOW Server 
 
-At the end of the last post, we finished with a freshly installed and partially configured WoW vanilla private server using the [Continued MaNGOS](https://cmangos.net/) project (cMaNGOS for short). In that post, we did not discuss anything about running the actual server. To accomplish this, there are the following three options:
+At the end of the last post, we finished with a freshly installed and partially configured WoW vanilla private server using the [Continued MaNGOS](https://github.com/cmangos/) project (cMaNGOS for short). In that post, we did not discuss anything about running the actual server. To accomplish this, there are the following three options:
 
 1. Commands
 1. Scripts

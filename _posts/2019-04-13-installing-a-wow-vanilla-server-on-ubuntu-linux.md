@@ -17,7 +17,7 @@ I embarked on creating my own WoW Vanilla server because I wanted some in-game p
 
 {% include figure_lightbox.html path="blog/wow-server/wow-client-hello-world.png" alt="WoW client hello world!" %}
 
-There are many projects available for implementing a Vanilla WoW server. I decided to use [Continued MaNGOS](https://cmangos.net/) (cMaNGOS for short) as my solution to build a server. After a little research, I decided this was the most suitable option for me - as it is well documented and stable. The [cMaNGOS GitHub](https://github.com/cmangos) has great installation instructions and excellent general documentation. This tutorial follows the [cMaNGOS Installation Intructions](https://github.com/cmangos/issues/wiki/Installation-Instructions) but tailors it to Ubuntu Linux, and adds additional discussion and bits of information I learned along the way.
+There are many projects available for implementing a Vanilla WoW server. I decided to use [Continued MaNGOS](https://github.com/cmangos/) (cMaNGOS for short) as my solution to build a server. After a little research, I decided this was the most suitable option for me - as it is well documented and stable. The [cMaNGOS GitHub](https://github.com/cmangos) has great installation instructions and excellent general documentation. This tutorial follows the [cMaNGOS Installation Intructions](https://github.com/cmangos/issues/wiki/Installation-Instructions) but tailors it to Ubuntu Linux, and adds additional discussion and bits of information I learned along the way.
 
 This post is a part one of a two-part series:
 

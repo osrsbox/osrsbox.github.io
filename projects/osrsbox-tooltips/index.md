@@ -33,7 +33,7 @@ Include a span element in your the web page body. The example below will create 
 <span class="osrstooltip" id='11806' title='Please wait ...'>[Saradomin godsword]</span>
 {% endhighlight %}
 
-The only modification you need to make is 1) The item text name; and 2) The OSRS item ID number. Both must be manually entered. To help, you can use my [OSRS Item ID and Item Name Search Tool]({{ site.url }}/tools/item-search). You can also manually look at the [summary.json](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-summary.json) file provided on the osrsbox-db project site. If you want to automate your own search, the `summary.json` file is also publically available using the osrsbox-db API using a GET request on the [summary.json](https://www.osrsbox.com/osrsbox-db/summary.json) file.
+The only modification you need to make is 1) The item text name; and 2) The OSRS item ID number. Both must be manually entered. To help, you can use my [OSRS Item ID and Item Name Search Tool]({{ site.url }}/tools/item-search). You can also manually look at the [summary.json](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-summary.json) file provided on the osrsbox-db project site. If you want to automate your own search, the `summary.json` file is also publically available using the osrsbox-db API using a GET request on the [summary.json](https://github.com/osrsbox/osrsbox-db/blob/master/docs/items-summary.json) file.
 
 ## Detailed Usage Guide with Examples
 
