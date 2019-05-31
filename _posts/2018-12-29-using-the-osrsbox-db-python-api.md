@@ -12,8 +12,6 @@ add_to_popular_list: false
 thumbnail: api.png
 ---
 
-**This post is no longer up-to-date as the osrsbox-db project is currently under active development and the Python API is undergoing dramatic changes. I will update the post when the API is bought up-to-date.**
-
 This post presents a quick introduction to the Python API that I have authored for my [OSRSBox Item Database]({{ site.url }}/projects/osrsbox-db/). The database contains every item in Old School RuneScape (OSRS) with lots of properties for each item, including alchemy values, examine text, quest status and item bonuses and equipment properties. 
 
 The API is a simple implementation that makes processing the item database easier. You can load the database, and interact with each item as an object. This makes it simple and fast to author basic Python scripts to extract or manipulate item information from the database. You can also do funky things such as import the item "database" into an actual database such as MySQL or MongoDB. I prefer to write Python scripts, but both of these options could be very useful. 
@@ -28,88 +26,59 @@ The API is a simple implementation that makes processing the item database easie
 
 To use the OSRSBox Item API you only need the following requirements:
 
-1. Python
-1. Git
+1. Python version 3.6 or higher
 
-### Python
-
-Only the standard Python installation is required, and the API (by default) uses no other third-party libraries. The API has been written and tested in Python version 3.5. It has not been tested with Python version 2.7.
-
-### Git
-
-Git can be used to download the [OSRSBox database repository](https://github.com/osrsbox/osrsbox-db). However, this is not mandatory as you can download the GitHub repository using the _Clone or Download_ button, and then select _Download ZIP_. This tutorial assumes you are using git. You can clone (download) the repository using the following `git` command:
-
-{% highlight plaintext %}
-git clone https://github.com/osrsbox/osrsbox-db.git
-{% endhighlight %}
+Only the standard Python installation is required, and the API (by default) only uses the `dataclasses` library when using Python 3.6 (but not 3.7 as it is standard). The API has been written and tested in Python version 3.6 and Python version 3.7.
 
 ## Project Structure and API
 
-The OSRSBox database (osrsbox-db) repository hosts a variety of code. The programs to scrape the OSRS Wiki are included, as well as the programs used to build, manage and update the database. This means the repository has a bunch of subfolders. The Python API tools are available inside the `item_api_tools` folder. 
+The OSRSBox database (osrsbox-db) repository hosts a variety of code. The programs to scrape the OSRS Wiki are included, as well as the programs used to build, manage and update the database. This means the repository has a bunch of subfolders. The Python API is available inside the `osrsbox` folder, in the [osrsbox-db repository](https://github.com/osrsbox/osrsbox-db). However, you do not need to clone the repository to use the API... You can simply use `pip` to install the `osrsbox` package. The [`osrsbox` package is hosted on PyPi](https://pypi.org/project/osrsbox/) and can be installed using: 
 
 {% highlight plaintext %}
-cd osrsbox-db/item_api_tools
+pip install osrsbox
 {% endhighlight %}
-
-Inside this folder, you will find a variety of Python classes which form the API, as well as a collection of example Python scripts which use the API. 
 
 ### API Classes 
 
-The Python API is comprised as a collection of Python classes. This code provides the ability to load and manage the database of items. When an item is loaded, various checks are performed to make sure all the properties have correct data types. In addition, there is a class to handle every object in the database, to make processing simpler. The four Python classes are described below:
+Each item is represented by Python objects, specifically using Python dataclasses. There are three types of objects that can be used to represent part of an in-game OSRS item:
 
-1. `AllItems.py`: Handles (loads and stores) all items in the database
-1. `ItemDefinition.py`: Handles an instance of a single item from the database
-1. `ItemBonuses.py`: Handles an instance of the item bonuses of a single item from the database (this is for equipable items only)
-1. `ItemEquipment.py`: Handles an instance of the item equipment properties of a single item from the database (this is for equipable items only)
+- `ItemDefinition`: An item that is not equipable, and not a weapon. This object type includes basic item metadata such as `id`, `name`, `examine` text, store `cost`, `high_alch` and `low_alch` values and `quest` association. Every item object in the database has these properties.
 
-### API Tools
+- `ItemEquipment`: Many items in OSRS are equipable, this includes armour and other _wearable_ items. Any equipable item (that is not a weapon) is stored as an `ItemEquipment` object including attributes such as `attack_slash`, `defence_crush` and `melee_strength` values. Additional information about equipable items include skill `requirements` to wear armour or wield weapons, and item `slot` properties. Finally, every equipable item also has all the properties available in the `ItemDefinition` class.
+  
+- `ItemWeapon`: A selection of OSRS items are both equipable, and also weapons. The `ItemWeapon` class has additional weapon-specific attributes including `attack_speed` and `weapon_types`. Additionally, each weapon has an array of combat stances associated with it to determine the `combat_style`, `attack_type`, `attack_style` and any `bonuses` or combat `experience` association. Finally, every weapon item also has the properties available in the `ItemDefinition` and `ItemEquipment` classes. 
 
-Any tool in the `items_api_tools` folder that is a tool is identifiable as it starts with a lowercase letter `c_`. This stands for _caller_ and should help identify the actual tools available and tell them apart from the API classes. [Have a look at some of these scripts](https://github.com/osrsbox/osrsbox-db/tree/master/item_api_tools) if you want to see some more working examples of using the API.
+### API Examples
+
+Any tool in the `osrsbox/items_api_examples` folder that is an example program. [Have a look at some of these scripts](https://github.com/osrsbox/osrsbox-db/tree/master/osrsbox/items_api_examples) if you want to see some more working examples of using the API.
 
 ## A Simple OSRSBox Database API Example
 
-This section presents a short and simple example of how to use the Python API to import the API classes, load the item database, and then loop through every item. I would recommend creating your script in the `items_api_tools` folder so that there are no import issues. 
+This section presents a short and simple example of how to use the Python API to import the API classes, load the item database, and then loop through every item. 
 
 ### Import API Classes
 
-To use the Python API, you must import the `AllItems.py` class. If this class is imported, the remaining API classes are automatically imported into the `AllItems` class. Remember, this tutorial expects that you have created your script in the `items_api_tools` folder. The following code will import the required Python classes, followed by the required API classes.
+To use the Python API, you must import the `items_api` class. If this class is imported, the remaining API classes are automatically imported. The following code will import the required Python classes to load and process item metadata.
 
 {% highlight python %}
-import os
-import sys
-
-# Import osrsbox-db API classes
-sys.path.append(os.getcwd())
-import AllItems
+from osrsbox import items_api
 {% endhighlight %}
 
 ### Load the Item Database
 
-Once you have imported the API class you are ready to load in the items. The API will handle this for you, and attempts to hide all the processing from the end-user. To load the item database, you must specify the location of the database. Remember, this is in the `docs` folder in the repository. If you are authoring your script in the `items_api_tools` folder, the database location can be either:
-
-- `../docs/items-json/` if you want to load the individual JSON files
-- `../docs/items_complete.json` if you want to load the single JSON file
-
-There is no difference between the two inputs, they have the same content... just one is a directory of individual JSON files and the other is a single JSON file with all items. The API can handle both input types transparently. Loading the single `items_complete.json` file is probably faster.
-
-The example below sets the `db_path` variable to `../docs/items-json/`, then loads the item database using the `AllItems` class. When initializing the `AllItems` object, the only required argument is the path to the JSON file/s that make up the database.
+Once you have imported the API class you are ready to load in the items. The API will handle this for you, and attempts to hide all the processing from the end-user. The example below loads the item database using the `items_api` class. 
 
 {% highlight python %}
-# Set the database location
-db_path = "../docs/items-json/"
-# Read in the database
-all_items = AllItems.AllItems(db_path)
+all_db_items = items_api.load()
 {% endhighlight %}
-
-Please note that the initial processing takes quite a while (depending on your system specifications), as every item must be read and loaded and there are over 20,000 items in the database. However, the second load should be much quicker as the processing performed has most likely been cached by Python on your system.
 
 ### Loop Items in the Database
 
-Once you have the item database loaded you can process the items. In the previous example, we loaded the item database into an object called `all_items`. The API has built-in capability to iterate the items in this object to make processing easy. As a simple example, the code below loops over every item in the loaded database, and prints the item ID number and item name (if it has a name - as some item IDs do not).
+Once you have the item database loaded you can process the items. In the previous example, we loaded the item database into an object called `all_db_items`. The API has built-in capability to iterate the items in this object to make processing easy. As a simple example, the code below loops over every item in the loaded database, and prints the item ID number and item name (if it has a name - as some item IDs do not).
 
 {% highlight python %}
 # Loop the item database, and print names of items
-for item in all_items:
+for item in all_db_items:
     if item.name is not None:
         print(item.id, item.name)
 {% endhighlight %}
@@ -142,20 +111,19 @@ The above list only prints the information in each property to the terminal. But
 
 {% highlight python %}
 # Loop the item database and find equipable items
-for item in all_items:
-    if item.equipable:
-        print(item.bonuses)
+for item in all_db_items:
+    if item.equipable_by_player:
         print(item.equipment)
 {% endhighlight %}
 
-In the above code, the `if item.equipable:` statement checks to see if an item is equipable. If it is, then you can access the `item.bonuses` object and the `item.equipment` object. Instead of listing all the properties available in each object in this post, I recommend checking the [OSRSBox Database project page]({{ site.url }}/projects/osrsbox-db/) which has a table of all the properties available. However, as a simple example, you can fetch the melee strength bonus of an equipable item using the code below:
+In the above code, the `if item.equipable_by_player:` statement checks to see if an item is equipable. If it is, then you can access the `item.equipment` object. Instead of listing all the properties available in each object in this post, I recommend checking the [OSRSBox Database project page on PyPi](https://pypi.org/project/osrsbox/) which has a table of all the properties available. However, as a simple example, you can fetch the melee strength bonus of an equipable item using the code below:
 
 {% highlight python %}
 # Loop the item database and find equipable items melee strength
-for item in all_items:
-    if item.equipable:
-        if item.bonuses.melee_strength is not 0:
-            print(item.name, item.bonuses.melee_strength, item.equipment.slot)
+for item in all_db_items:
+    if item.equipable_by_player:
+        if item.equipment.melee_strength is not 0:
+            print(item.name, item.equipment.melee_strength, item.equipment.slot)
 {% endhighlight %}
 
 ## Collection of API Examples
@@ -168,7 +136,7 @@ The example below loops over all of the items and determines if an item has a bu
 
 {% highlight python %}
 # Loop the item database, and print names of items
-for item in all_items:
+for item in all_db_items:
     if item.buy_limit is not None:
         print(item.name, item.buy_limit)
 {% endhighlight %}
@@ -182,9 +150,9 @@ from collections import defaultdict
 top_attack_slash = defaultdict(list)
 
 # Loop the item database, and print names of items
-for item in all_items:
-    if item.equipable:
-        top_attack_slash[item.bonuses.attack_slash].append(item.name)
+for item in all_db_items:
+    if item.equipable_by_player:
+        top_attack_slash[item.equipment.attack_slash].append(item.name)
 
 for k, v in sorted(top_attack_slash.items(), reverse=True):
   print(k, ', '.join(v))

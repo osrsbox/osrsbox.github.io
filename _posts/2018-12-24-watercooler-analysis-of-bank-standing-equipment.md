@@ -180,7 +180,7 @@ The only thing left to do was extract the actual equipment a player was wearing.
 PlayerComposition playerComposition = p.getPlayerComposition();
 {% endhighlight %}
 
-From here, you can use the `playerComposition` object to query specific equipment slots. According to the [RuneLite API documentation for PlayerComposition](https://static.runelite.net/api/runelite-api/net/runelite/api/PlayerComposition.html), there are a variety of options available. You can fetch a list of item IDs using the `getEquipmentIds` function. You can also query based on a specific equipment slot using the `getEquipmentId` function with a `KitType` argument. During development of this plugin, I discovered a bug in the `KitType` enumerator. [This commit](https://github.com/osrsbox/runelite/commit/e619618a174943dca3a6dd7740220a19ba8e5dd4) provides a summary of the changes, where there is a misplaced item index for the head equipment slot.
+From here, you can use the `playerComposition` object to query specific equipment slots. According to the [RuneLite API documentation for PlayerComposition](https://static.runelite.net/api/runelite-api/net/runelite/api/PlayerComposition.html), there are a variety of options available. You can fetch a list of item IDs using the `getEquipmentIds` function. You can also query based on a specific equipment slot using the `getEquipmentId` function with a `KitType` argument. 
 
 {% highlight java %}
 int itemId = playerComposition.getEquipmentId(kitType);

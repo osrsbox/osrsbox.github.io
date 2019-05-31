@@ -327,6 +327,6 @@ config.colorConfig()
 
 ## Conclusion
 
-As I mentioned previously, have a look at my [configexample](https://github.com/osrsbox/runelite/tree/osrsbox-plugins/runelite-client/src/main/java/net/runelite/client/plugins/configexample) plugin to see the complete source used in this post. However, this is a very bare-bones plugin. I would recommend reading the code from other plugins to see how other developers utilize the menu configuration in their plugins.
+As I mentioned previously, I would recommend reading the code from other plugins to see how other developers utilize the menu configuration in their plugins.
 
 I hope this post helped you understand the RuneLite plugin configuration system and helped you start developing RuneLite plugins. As always, please leave a comment below if you notice any errors, or have any feedback. I really enjoy writing these posts and really hope that you have found it useful and informative! Thanks!
