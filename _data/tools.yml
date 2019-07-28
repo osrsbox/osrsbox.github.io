@@ -22,6 +22,22 @@
   url: "/tools/item-search"
   image: "/300/osrsbox-db.png"
 
+- name: "NPC ID Search"
+  muted: "Search an exhaustive and up-to-date list of OSRS NPC ID numbers and NPC names"
+  date: "2019"
+  description: |
+    Do you want to know the ID number of a specific NPC? Would you like to keyword search a complete and up-to-date database of OSRS NPCS? This tool provides access to an online database of OSRS items to identify the name or ID number of specific NPCs.
+  url: "/tools/npc-search"
+  image: "/300/osrsbox-db.png"
+
+- name: "Object ID Search"
+  muted: "Search an exhaustive and up-to-date list of OSRS Object ID numbers and Object names"
+  date: "2019"
+  description: |
+    Do you want to know the ID number of a specific Object? Would you like to keyword search a complete and up-to-date database of OSRS Objects? This tool provides access to an online database of OSRS items to identify the name or ID number of specific Objects.
+  url: "/tools/object-search"
+  image: "/300/osrsbox-db.png"
+
 - name: "Model ID Search"
   muted: "Search an exhaustive and up-to-date list of OSRS Model ID numbers, model names and model types"
   date: "2018"
