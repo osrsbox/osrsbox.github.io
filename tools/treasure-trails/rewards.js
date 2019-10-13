@@ -1,3 +1,20 @@
+var beginner = new Map();
+beginner.set(23309, false); // Amulet of defense (t)
+beginner.set(23291, false); // Bear feet
+beginner.set(23294, false); // Demon feet
+beginner.set(23288, false); // Frog slippers
+beginner.set(23297, false); // Jester cape
+beginner.set(23285, false); // Mole slippers
+beginner.set(23306, false); // Monk's robe (t)
+beginner.set(23303, false); // Monk's robe top (t)
+beginner.set(23321, false); // Rune scimitar ornament kit (guthix)
+beginner.set(23324, false); // Rune scimitar ornament kit (saradomin)
+beginner.set(23327, false); // Rune scimitar ornament kit (zamorak)
+beginner.set(23318, false); // Sandwich lady bottom
+beginner.set(23312, false); // Sandwich lady hat
+beginner.set(23315, false); // Sandwich lady top
+beginner.set(23300, false); // Shoulder parrot
+
 var easy = new Map();
 easy.set(12221, false); // Bronze full helm (t)
 easy.set(12215, false); // Bronze platebody (t)
@@ -109,14 +126,26 @@ easy.set(10396, false); // Pantaloons
 easy.set(10398, false); // Sleeping cap
 easy.set(12249, false); // Imp mask
 easy.set(12251, false); // Goblin mask
-easy.set(12375, false); // Black cane
 easy.set(10366, false); // Amulet of magic (t)
+easy.set(23354, false); // Amulet of power (t)
+easy.set(12375, false); // Black cane
 easy.set(12297, false); // Black pickaxe
 easy.set(20166, false); // Wooden shield (g)
 easy.set(20205, false); // Golden chef's hat
 easy.set(20208, false); // Golden apron
 easy.set(20199, false); // Monk's robe top (g)
 easy.set(20202, false); // Monk's robe (g)
+easy.set(23351, false); // Cape of skulls
+easy.set(23357, false); // Rain bow
+easy.set(23360, false); // Ham joint
+easy.set(23363, false); // Staff of Bob the Cat
+easy.set(23381, false); // Leather body (g)
+easy.set(23384, false); // Leather chaps (g)
+easy.set(23366, false); // Black platebody (h1)
+easy.set(23369, false); // Black platebody (h2)
+easy.set(23372, false); // Black platebody (h3)
+easy.set(23375, false); // Black platebody (h4)
+easy.set(23378, false); // Black platebody (h5)
 easy.set(20164, false); // Large spade
 
 var medium = new Map();
@@ -210,7 +239,6 @@ medium.set(12598, false); // Holy sandals
 medium.set(10364, false); // Strength amulet (t)
 medium.set(12377, false); // Adamant cane
 medium.set(20275, false); // Gnomish firelighter
-medium.set(20249, false); // Clueless scroll
 medium.set(12319, false); // Crier hat
 medium.set(20243, false); // Crier bell
 medium.set(20240, false); // Crier coat
@@ -225,6 +253,16 @@ medium.set(20254, false); // Hosidius banner
 medium.set(20257, false); // Lovakengj banner
 medium.set(20260, false); // Piscarilius banner
 medium.set(20263, false); // Shayzien banner
+medium.set(23389, false); // Spiked manacles
+medium.set(23410, false); // Wolf cloak
+medium.set(23407, false); // Wolf mask
+medium.set(23413, false); // Climbing boots (g)
+medium.set(23392, false); // Adamant platebody (h1)
+medium.set(23395, false); // Adamant platebody (h2)
+medium.set(23398, false); // Adamant platebody (h3)
+medium.set(23401, false); // Adamant platebody (h4)
+medium.set(23404, false); // Adamant platebody (h5)
+medium.set(20249, false); // Clueless scroll
 
 var hard = new Map();
 hard.set(2627, false); // Rune full helm (t)
@@ -366,6 +404,23 @@ hard.set(10362, false); // Amulet of glory (t)
 hard.set(19918, false); // Nunchaku
 hard.set(12379, false); // Rune cane
 hard.set(12514, false); // Explorer backpack
+hard.set(23206, false); // Dual sai
+hard.set(23224, false); // Thieving bag
+hard.set(23227, false); // Rune defender ornament kit
+hard.set(23232, false); // Tzhaar-ket-om ornament kit
+hard.set(23237, false); // Berserker necklace ornament kit
+hard.set(23242, false); // 3rd age plateskirt
+hard.set(23197, false); // Ancient d'hide shield
+hard.set(23200, false); // Armadyl d'hide shield
+hard.set(23203, false); // Bandos d'hide shield
+hard.set(23188, false); // Guthix d'hide shield
+hard.set(23191, false); // Saradomin d'hide shield
+hard.set(23194, false); // Zamorak d'hide shield
+hard.set(23209, false); // Rune platebody (h1)
+hard.set(23212, false); // Rune platebody (h2)
+hard.set(23215, false); // Rune platebody (h3)
+hard.set(23218, false); // Rune platebody (h4)
+hard.set(23221, false); // Rune platebody (h5)
 
 var elite = new Map();
 elite.set(12538, false); // Dragon full helm ornament kit
@@ -428,6 +483,17 @@ elite.set(12424, false); // 3rd age bow
 elite.set(12437, false); // 3rd age cloak
 elite.set(12426, false); // 3rd age longsword
 elite.set(12422, false); // 3rd age wand
+elite.set(23270, false); // Adamant dragon mask
+elite.set(23273, false); // Rune dragon mask
+elite.set(23249, false); // Rangers' tights
+elite.set(23258, false); // Gilded coif
+elite.set(23264, false); // Gilded d'hide body
+elite.set(23267, false); // Gilded d'hide chaps
+elite.set(23261, false); // Gilded d'hide vambs
+elite.set(23279, false); // Gilded axe
+elite.set(23276, false); // Gilded pickaxe
+elite.set(23282, false); // Gilded spade
+elite.set(23255, false); // Uri's hat
 
 var master = new Map();
 master.set(20143, false); // Dragon defender ornament kit
@@ -478,12 +544,53 @@ master.set(20056, false); // Ale of the gods
 master.set(20059, false); // Bucket helm (g)
 master.set(20110, false); // Bowl wig
 master.set(19730, false); // Bloodhound
+master.set(23348, false); // Tormented ornament kit
+master.set(23336, false); // 3rd age druidic robe top
+master.set(23339, false); // 3rd age druidic robe bottoms
+master.set(23345, false); // 3rd age druidic cloak
+master.set(23342, false); // 3rd age druidic staff
+
+var shared = new Map();
+shared.set(21387, false); // Master scroll book (empty)
+shared.set(12621, false); // Ancient page 1
+shared.set(12622, false); // Ancient page 2
+shared.set(12623, false); // Ancient page 3
+shared.set(12624, false); // Ancient page 4
+shared.set(12617, false); // Armadyl page 1
+shared.set(12618, false); // Armadyl page 2
+shared.set(12619, false); // Armadyl page 3
+shared.set(12620, false); // Armadyl page 4
+shared.set(12613, false); // Bandos page 1
+shared.set(12614, false); // Bandos page 2
+shared.set(12615, false); // Bandos page 3
+shared.set(12616, false); // Bandos page 4
+shared.set(3835, false); // Guthix page 1
+shared.set(3836, false); // Guthix page 2
+shared.set(3837, false); // Guthix page 3
+shared.set(3838, false); // Guthix page 4
+shared.set(3827, false); // Saradomin page 1
+shared.set(3828, false); // Saradomin page 2
+shared.set(3829, false); // Saradomin page 3
+shared.set(3830, false); // Saradomin page 4
+shared.set(3831, false); // Zamorak page 1
+shared.set(3832, false); // Zamorak page 2
+shared.set(3833, false); // Zamorak page 3
+shared.set(3834, false); // Zamorak page 4
+shared.set(20235, false); // Ancient blessing
+shared.set(20220, false); // Holy blessing
+shared.set(20229, false); // Honorable blessing
+shared.set(20226, false); // Peaceful blessing
+shared.set(20223, false); // Unholy blessing
+shared.set(20232, false); // War blessing
+shared.set(23185, false); // Ring of 3rd age
 
 // Add clue level maps to an object array
 rewards = {
+    "beginner" : beginner,
     "easy": easy,
     "medium": medium,
     "hard": hard,
     "elite": elite,
-    "master": master
+    "master": master,
+    "shared" : shared
 };
