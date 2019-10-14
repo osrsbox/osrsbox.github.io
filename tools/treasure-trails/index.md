@@ -357,7 +357,6 @@ include_custom_script:
                 <div class="col py-1"><span class="osrstooltip" data-type="short" id="23413" title="Please wait ..."><img id="23413-img" class="tt-notselected" src="https://www.osrsbox.com/osrsbox-db/items-icons/23413.png" alt="alt text" onclick="javascript:update_rewards('23413','medium')"></span></div>
                 <div class="col py-1"><span class="osrstooltip" data-type="short" id="23410" title="Please wait ..."><img id="23410-img" class="tt-notselected" src="https://www.osrsbox.com/osrsbox-db/items-icons/23410.png" alt="alt text" onclick="javascript:update_rewards('23410','medium')"></span></div>
                 <div class="col py-1"><span class="osrstooltip" data-type="short" id="23407" title="Please wait ..."><img id="23407-img" class="tt-notselected" src="https://www.osrsbox.com/osrsbox-db/items-icons/23407.png" alt="alt text" onclick="javascript:update_rewards('23407','medium')"></span></div>
-                <div class="col py-1"><span class="osrstooltip" data-type="short" id="20249" title="Please wait ..."><img id="20249-img" class="tt-notselected" src="https://www.osrsbox.com/osrsbox-db/items-icons/20249.png" alt="alt text" onclick="javascript:update_rewards('20249','medium')"></span></div>
             </div>
         </div>
     </div>
