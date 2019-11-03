@@ -15,9 +15,9 @@ include_custom_script:
 <table id="search-results" class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">Model ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Type</th>
+      <th scope="col">Model IDs</th>
+      <th scope="col">Model Name</th>
+      <th scope="col">Model Type</th>
       <th scope="col">Type ID</th>
     </tr>
   </thead>

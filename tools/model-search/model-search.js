@@ -5,11 +5,18 @@ $.getJSON("https://www.osrsbox.com/osrsbox-db/models-summary.json", function(dat
         data:  sanitizeData(data),
         "order": [[ 0, "asc" ]],
         "iDisplayLength": 50,
+        "bAutoWidth": false,
         columns: [
-            { data: 'model_id' },
-            { data: 'name' },
-            { data: 'type' },
-            { data: 'type_id' }
+            { data: 'model_ids'},
+            { data: 'model_name' },
+            { data: 'model_type' },
+            { data: 'model_type_id' }
+        ],
+        columnDefs: [
+          { "width": "30%", "targets": 0, class:"wrap" },
+          { "width": "27.5%", "targets": 1 },
+          { "width": "25%", "targets": 2 },
+          { "width": "17.5%", "targets": 3 }
         ]
         })  
 });
