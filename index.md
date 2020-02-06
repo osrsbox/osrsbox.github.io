@@ -14,6 +14,7 @@ title: OSRSBox | An Old School RuneScape Project
             <a href="mailto:phoil@osrsbox.com"><i class="header-icon fas fa-envelope-square fa-4x pr-2"></i></a>
             <a href="https://github.com/osrsbox"><i class="header-icon fab fa-github-square fa-4x pr-2"></i></a>
             <a href="https://www.reddit.com/user/PH01L/"><i class="header-icon fab fa-reddit-square fa-4x pr-2"></i></a>
+            <a href="https://discord.gg/HFynKyr"><i class="header-icon fab fa-discord fa-4x pr-2"></i></a>
         </div>
     </div>
     </div>

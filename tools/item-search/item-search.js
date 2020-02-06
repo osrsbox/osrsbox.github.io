@@ -1,6 +1,6 @@
-// Fetch items_summary.json on page load
+// Fetch item-search.json on page load
 // Then generate osrs-items table
-$.getJSON("https://www.osrsbox.com/osrsbox-db/items-summary.json", function(data) {
+$.getJSON("https://www.osrsbox.com/osrsbox-db/items-search.json", function(data) {
     var table = $('#search-results').DataTable({
         data:  sanitizeData(data),
         "fnRowCallback": customFnRowCallback,
@@ -14,7 +14,9 @@ $.getJSON("https://www.osrsbox.com/osrsbox-db/items-summary.json", function(data
                 }                
             },
             { data: 'name' },
-            { data: 'id' }
+            { data: 'id' },
+            { data: 'type' },
+            { data: 'duplicate' }
         ]
         })  
 });

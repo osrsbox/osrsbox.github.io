@@ -4,9 +4,9 @@ title: OSRSBOX | Item Search for Old School RuneScape
 tool_name: Item Search for Old School RuneScape
 tool_desc: Search an exhaustive and up-to-date list of OSRS Item ID numbers and Item names
 include_custom_css: 
-- //cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css
+- //cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css
 include_custom_script: 
-- //cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js
+- //cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js
 - item-search.js
 ---
 
@@ -18,6 +18,8 @@ include_custom_script:
       <th scope="col">Icon</th>
       <th scope="col">Name</th>
       <th scope="col">ID</th>
+      <th scope="col">Type</th>
+      <th scope="col">Duplicate</th>
     </tr>
   </thead>
 </table>
