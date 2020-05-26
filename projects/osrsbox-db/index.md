@@ -14,622 +14,51 @@ redirect_from:
 
 [![Discord Chat](https://img.shields.io/discord/598412106118987787.svg)](https://discord.gg/HFynKyr)
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9J44ADGJQ5BC6&source=url)
+
 ## A complete and up-to-date database of Old School Runescape (OSRS) items, monsters and prayers
 
-This project hosts a complete and up-to-date database of every item, every monster and every prayer in OSRS. **Complete** means it holds every single item, monster and prayer in OSRS. **Up-to-date** means this database is updated after every weekly game update to ensure accurate information. 
+This project hosts a complete and up-to-date database items, monsters and prayers in OSRS. **Complete** means it holds every single item, monster and prayer in OSRS. **Up-to-date** means this database is updated after every weekly game update to ensure accurate information.
 
-The item database has extensive properties for each item: a total of 27 properties for every item, an additional 16 properties for equipable items, and an additional 3 properties for equipable weapons. These properties include the item ID and name, whether an item is tradeable, stackable, or equipable or if the item is members only or associated with a quest. For any equipable item, there are additional properties about combat stats the item has; for example, what slash attack bonus, magic defence bonus or prayer bonus that an item provides. For weapons, additional properties are added which include attack speed and combat stance/weapon type information.
+The item database has extensive properties for each item: a total of 27 properties for every item, an additional 16 properties for equipable items, and an additional 3 properties for equipable weapons. These properties include the item ID and name, whether an item is tradeable, stackable, or equipable or if the item is members only. For any equipable item, there are additional properties about combat stats; for example, what slash attack bonus, magic defence bonus or prayer bonus that an item provides. For weapons, additional properties are added which include attack speed, combat stance and weapon type information.
 
-The monster database also has extensive properties: a total of 44 unique properties for each monster, as well as an array of item drops for each monster that has 6 additional properties per item drop. The base properties include the monster ID, name, member status, and all monster combat stats. Additional properties include slayer-related properties, attack type, hit points and max hit. Each monster also has an associated array of drops which document the item ID, name, rarity, quantity, and any requirements to get the drop.
+The monster database also has extensive properties: a total of 44 unique properties for each monster, as well as an array of item drops for each monster that has 6 additional properties per item drop. The base properties include the monster ID, name, member status, slayer properties, attack type, max hit, attack types and all monster combat stats. Each monster also has an associated array of drops which document the item ID, name, rarity, quantity, and any requirements to get the drop.
 
 The prayer database documentes each prayer that available in-game and has detailed properties: a total of 8 properties for every prayer. The base properties include the prayer name, members status, description, requirements, and bonuses that it provides.
 
 ## Table of Contents
 
 - [Project Summary](#project-summary)
+- [The `osrsbox` Python PyPi Package](#the-osrsbox-python-pypi-package)
+- [The osrsbox RESTful API](#the-osrsbox-restful-api)
+- [The osrsbox Static JSON API](#the-osrsbox-static-json-api)
+- [The `osrsbox-db` GitHub Repository](#the-osrsbox-db-github-repository)
 - [The Item Database](#the-item-database)
 - [The Monster Database](#the-monster-database)
 - [The Prayer Database](#the-prayer-database)
-- [The `osrsbox` Python PyPi Package](#the-osrsbox-python-pypi-package)
-- [The `osrsbox-db` Static JSON API](#the-osrsbox-db-static-json-api)
-- [The `osrsbox-db` GitHub Repository](#the-osrsbox-db-github-repository)
 - [Additional Project Information](#additional-project-information)
-    - [Project Feedback](#project-feedback)
-    - [Project Contribution](#project-contribution)
-    - [Project License](#project-license)
-    - [Project Attribution](#project-attribution)
 
 ## Project Summary
 
-The osrsbox-db project provides three primary data sources:
+The osrsbox-db project provides data for three different categories:
 
 1. **Items**
 1. **Monsters**
 1. **Prayers**
 
-The osrsbox-db project and data is accessible using three primary methods:
+The osrsbox-db project and data is accessible using four methods:
 
 1. [**The Python PyPi package**](https://pypi.org/project/osrsbox/)
-1. [**The static JSON API**](https://github.com/osrsbox/osrsbox-db/tree/master/docs) - Note: this will be removed soon, replaced by the new RESTful API
 1. [**The RESTful API**](https://github.com/osrsbox/osrsbox-api/)
+1. [**The Static JSON API**](https://github.com/osrsbox/osrsbox-db/tree/master/docs)
 1. [**The GitHub development repository**](https://github.com/osrsbox/osrsbox-db/)
 
-## The Item Database
+With four different methods to access data... most people will have the following question: _Which one should I use?_ The following list is a short-sharp summary of the options:
 
-Each item is represented by Python objects when using the PyPi `osrsbox` package, specifically using Python dataclass objects. Additionally, the data is accessible directly by parsing the raw JSON files. There are three types of objects, or classifications of data, that can be used to represent part of an in-game OSRS item, each outlined in the following subsections.
-
-### Item Properties
-
-An `ItemProperties` object type includes basic item metadata such as `id`, `name`, `examine` text, store `cost`, `highalch` and `lowalch` values and `quest_item` association. Every item object in the item database has all of these properties. If you are parsing the raw JSON files all of these properties are in the root of the JSON document - so they are not nested. All of the properties available are listed in the table below including the property name, the data types used, a description of the property, if the property is required to be populated, and if the property is nullable (able to be set to `null` or `None`).
-
-{: .table .table-striped .table-sm}
-| Property | Data type | Description | Required | Nullable |
-| -------- | --------- | ----------- | -------- |----------|
-| id | integer | Unique OSRS item ID number. | True | False |
-| name | string | The name of the item. | True | False |
-| incomplete | boolean | If the item has incomplete wiki data. | True | False |
-| members | boolean | If the item is a members-only. | True | False |
-| tradeable | boolean | If the item is tradeable (between players and on the GE). | True | False |
-| tradeable_on_ge | boolean | If the item is tradeable (only on GE). | True | False |
-| stackable | boolean | If the item is stackable (in inventory). | True | False |
-| noted | boolean | If the item is noted. | True | False |
-| noteable | boolean | If the item is noteable. | True | False |
-| linked_id_item | integer | The linked ID of the actual item (if noted/placeholder). | True | True |
-| linked_id_noted | integer | The linked ID of an item in noted form. | True | True |
-| linked_id_placeholder | integer | The linked ID of an item in placeholder form. | True | True |
-| placeholder | boolean | If the item is a placeholder. | True | False |
-| equipable | boolean | If the item is equipable (based on right-click menu entry). | True | False |
-| equipable_by_player | boolean | If the item is equipable in-game by a player. | True | False |
-| equipable_weapon | boolean | If the item is an equipable weapon. | True | False |
-| cost | integer | The store price of an item. | True | False |
-| lowalch | integer | The low alchemy value of the item (cost * 0.4). | True | False |
-| highalch | integer | The high alchemy value of the item (cost * 0.6). | True | False |
-| weight | float | The weight (in kilograms) of the item. | True | True |
-| buy_limit | integer | The Grand Exchange buy limit of the item. | True | True |
-| quest_item | boolean | If the item is associated with a quest. | True | False |
-| release_date | string | Date the item was released (in ISO8601 format). | True | True |
-| duplicate | boolean | If the item is a duplicate. | True | False |
-| examine | string | The examine text for the item. | True | True |
-| wiki_name | string | The OSRS Wiki name for the item. | True | True |
-| wiki_url | string | The OSRS Wiki URL (possibly including anchor link). | True | True |
-| equipment | dict | The equipment bonuses of equipable armour/weapons. | True | True |
-| weapon | dict | The weapon bonuses including attack speed, type and stance. | True | True |
-
-
-### Item Equipment
-
-Many items in OSRS are equipable, this includes armor, weapons, and other _wearable_ items. Any equipable item has additional properties stored as an `ItemEquipment` object type - including attributes such as `attack_slash`, `defence_crush` and `melee_strength` values. The `ItemEquipment` object is nested within an `ItemProperties`. If you are parsing the raw JSON files, this data is nested under the `equipment` key. It is very important to note that not all items in OSRS are equipable. Only items with the `equipable_by_player` property set to `true` are equipable. The `equipable` property is similar, but this is the raw data extracted from the game cache - and can sometimes be incorrect (not equipable by a player). All of the properties available for equipable items are listed in the table below including the property name, the data types used, a description of the property, if the property is required to be populated, and if the property is nullable (able to be set to `null` or `None`).
-
-{: .table .table-striped .table-sm}
-| Property | Data type | Description | Required | Nullable |
-| -------- | --------- | ----------- | -------- |----------|
-| attack_stab | integer | The attack stab bonus of the item. | True | False |
-| attack_slash | integer | The attack slash bonus of the item. | True | False |
-| attack_crush | integer | The attack crush bonus of the item. | True | False |
-| attack_magic | integer | The attack magic bonus of the item. | True | False |
-| attack_ranged | integer | The attack ranged bonus of the item. | True | False |
-| defence_stab | integer | The defence stab bonus of the item. | True | False |
-| defence_slash | integer | The defence slash bonus of the item. | True | False |
-| defence_crush | integer | The defence crush bonus of the item. | True | False |
-| defence_magic | integer | The defence magic bonus of the item. | True | False |
-| defence_ranged | integer | The defence ranged bonus of the item. | True | False |
-| melee_strength | integer | The melee strength bonus of the item. | True | False |
-| ranged_strength | integer | The ranged strength bonus of the item. | True | False |
-| magic_damage | integer | The magic damage bonus of the item. | True | False |
-| prayer | integer | The prayer bonus of the item. | True | False |
-| slot | string | The equipment slot associated with the item (e.g., head). | True | False |
-| requirements | dict | An object of requirements {skill: level}. | True | True |
-
-### Item Weapon
-
-A select number of items in OSRS are equipable weapons. Any equipable item that is a weapon has additional properties stored as an `ItemWeapon` type object including attributes such as `attack_speed` and `weapon_types` values. Additionally, each weapon has an array of combat stances associated with it to determine the `combat_style`, `attack_type`, `attack_style` and any `bonuses` or combat `experience` association. The `ItemWeapon` object is nested within an `ItemProperties` object when using the Python API. If you are parsing the raw JSON files, this data is nested under the `weapon` key.  It is very important to note that not all items in OSRS are equipable weapons. Only items with the `equipable_weapon` property set to `true` are equipable. All of the properties available for equipable weapons are listed in the table below including the property name, the data types used, a description of the property, if the property is required to be populated, and if the property is nullable (able to be set to `null` or `None`).
-
-{: .table .table-striped .table-sm}
-| Property | Data type | Description | Required | Nullable |
-| -------- | --------- | ----------- | -------- |----------|
-| attack_speed | integer | The attack speed of a weapon (in game ticks). | True | False |
-| weapon_type | string | The weapon classification (e.g., axe) | True | False |
-| stances | list | An array of weapon stance information. | True | False |
-
-### Item: Python Object Example
-
-A description of the properties that each item in the database can have is useful, but sometimes it is simpler to provide an example. Below is a full example of an item as loaded in a Python object, specifically the _Abyssal whip_ item. Since this item is a type of equipment, there is an `EquipmentProperties` object nested with combat bonuses. Additionally, this item is also a weapon, so there is a `WeaponProperties` object with extra information. If the item was not equipable, the `EquipmentProperties` property would be `None` and the `equipable_by_player` would be `False`. If the item was not a weapon, the `WeaponProperties` key would be `None` and the `equipable_weapon` would be `False`.
-
-```
-ItemProperties(
-    id=4151,
-    name='Abyssal whip',
-    incomplete=True,
-    members=True,
-    tradeable=True,
-    tradeable_on_ge=True,
-    stackable=False,
-    noted=False,
-    noteable=True,
-    linked_id_item=None,
-    linked_id_noted=4152,
-    linked_id_placeholder=14032,
-    placeholder=False,
-    equipable=True,
-    equipable_by_player=True,
-    equipable_weapon=True,
-    cost=120001,
-    lowalch=48000,
-    highalch=72000,
-    weight=0.453,
-    buy_limit=70,
-    quest_item=False,
-    release_date='2005-01-26',
-    duplicate=False,
-    examine='A weapon from the abyss.',
-    wiki_name='Abyssal whip',
-    wiki_url='https://oldschool.runescape.wiki/w/Abyssal_whip',
-    equipment=ItemEquipment(
-        attack_stab=0,
-        attack_slash=82,
-        attack_crush=0,
-        attack_magic=0,
-        attack_ranged=0,
-        defence_stab=0,
-        defence_slash=0,
-        defence_crush=0,
-        defence_magic=0,
-        defence_ranged=0,
-        melee_strength=82,
-        ranged_strength=0,
-        magic_damage=0,
-        prayer=0,
-        slot='weapon',
-        requirements={'attack': 70}
-    ),
-    weapon=ItemWeapon(
-        attack_speed=4,
-        weapon_type='whips',
-        stances=[
-            {'combat_style': 'flick',
-            'attack_type': 'slash',
-            'attack_style': 'accurate',
-            'experience': 'attack',
-            'boosts': None},
-            {'combat_style': 'lash',
-            'attack_type': 'slash',
-            'attack_style': 'controlled',
-            'experience': 'shared',
-            'boosts': None},
-            {'combat_style': 'deflect',
-            'attack_type': 'slash',
-            'attack_style': 'defensive',
-            'experience': 'defence',
-            'boosts': None}
-        ]
-    )
-)
-```
-
-### Item: JSON Example
-
-A description of the properties that each item in the database can have is useful, but sometimes it is simpler to provide an example. Below is a full example of an item, specifically the _Abyssal whip_ item. Since this item is a type of equipment, there is an `equipment` key with combat bonuses. Additionally, this item is also a weapon, so there is a `weapon` key with extra information. If the item was not equipable, the `equipment` key would be `null` and the `equipable_by_player` would be `false`. If the item was not a weapon, the `weapon` key would be `null` and the `equipable_weapon` would be `false`.
-
-```
-{
-    "id": 4151,
-    "name": "Abyssal whip",
-    "incomplete": true,
-    "members": true,
-    "tradeable": true,
-    "tradeable_on_ge": true,
-    "stackable": false,
-    "noted": false,
-    "noteable": true,
-    "linked_id_item": null,
-    "linked_id_noted": 4152,
-    "linked_id_placeholder": 14032,
-    "placeholder": false,
-    "equipable": true,
-    "equipable_by_player": true,
-    "equipable_weapon": true,
-    "cost": 120001,
-    "lowalch": 48000,
-    "highalch": 72000,
-    "weight": 0.453,
-    "buy_limit": 70,
-    "quest_item": false,
-    "release_date": "2005-01-26",
-    "duplicate": false,
-    "examine": "A weapon from the abyss.",
-    "wiki_name": "Abyssal whip",
-    "wiki_url": "https://oldschool.runescape.wiki/w/Abyssal_whip",
-    "equipment": {
-        "attack_stab": 0,
-        "attack_slash": 82,
-        "attack_crush": 0,
-        "attack_magic": 0,
-        "attack_ranged": 0,
-        "defence_stab": 0,
-        "defence_slash": 0,
-        "defence_crush": 0,
-        "defence_magic": 0,
-        "defence_ranged": 0,
-        "melee_strength": 82,
-        "ranged_strength": 0,
-        "magic_damage": 0,
-        "prayer": 0,
-        "slot": "weapon",
-        "requirements": {
-            "attack": 70
-        }
-    },
-    "weapon": {
-        "attack_speed": 4,
-        "weapon_type": "whips",
-        "stances": [
-            {
-                "combat_style": "flick",
-                "attack_type": "slash",
-                "attack_style": "accurate",
-                "experience": "attack",
-                "boosts": null
-            },
-            {
-                "combat_style": "lash",
-                "attack_type": "slash",
-                "attack_style": "controlled",
-                "experience": "shared",
-                "boosts": null
-            },
-            {
-                "combat_style": "deflect",
-                "attack_type": "slash",
-                "attack_style": "defensive",
-                "experience": "defence",
-                "boosts": null
-            }
-        ]
-    }
-}
-```
-
-## The Monster Database
-
-Each monster is represented by Python objects when using the PyPi `osrsbox` package, specifically using Python dataclass objects. Additionally, the data is accessible directly by parsing the raw JSON files. There are two types of objects, or classifications of data, that can be used to represent part of an in-game OSRS monster, each outlined in the following subsections. 
-
-### Monster Properties
-
-A `MonsterProperties` object type includes basic monster metadata such as `id`, `name`, `examine` text, `combat_level`, `attack_speed` and `hitpoints` values and slayer association such as `slayer_masters` who give this monster as a task. Every monster object in the monster database has all of these properties. If you are parsing the raw JSON files all of these properties are in the root of the JSON document - so they are not nested. All of the properties available are listed in the table below including the property name, the data types used, a description of the property, if the property is required to be populated, and if the property is nullable (able to be set to `null` or `None`).
-
-{: .table .table-striped .table-sm}
-| Property | Data type | Description | Required | Nullable |
-| -------- | --------- | ----------- | -------- |----------|
-| id | integer | Unique OSRS item ID number. | True | False |
-| name | string | The name of the monster. | True | False |
-| incomplete | boolean | If the monster has incomplete wiki data. | True | False |
-| members | boolean | If the monster is members only, or not. | True | False |
-| release_date | string | The release date of the monster (in ISO8601 format). | True | True |
-| combat_level | integer | The combat level of the monster. | True | False |
-| size | integer | The size, in tiles, of the monster. | True | False |
-| hitpoints | integer | The number of hitpoints a monster has. | True | False |
-| max_hit | integer | The maximum hit of the monster. | True | False |
-| attack_type | list | The attack style (melee, magic, range) of the monster. | True | False |
-| attack_speed | integer | The attack speed (in game ticks) of the monster. | True | True |
-| aggressive | boolean | If the monster is aggressive, or not. | True | False |
-| poisonous | boolean | If the monster poisons, or not | True | False |
-| immune_poison | boolean | If the monster is immune to poison, or not | True | False |
-| immune_venom | boolean | If the monster is immune to venom, or not | True | False |
-| weakness | list | An array of monster weaknesses. | True | False |
-| category | list | An array of monster category. | True | False |
-| slayer_monster | boolean | If the monster is a potential slayer task. | True | False |
-| slayer_level | integer | The slayer level required to kill the monster. | True | True |
-| slayer_xp | float | The slayer XP rewarded for a monster kill. | True | True |
-| slayer_masters | list | The slayer XP rewarded for a monster kill. | True | True |
-| duplicate | boolean | If the monster is a duplicate. | True | False |
-| examine | string | The examine text of the monster. | True | False |
-| wiki_name | string | The OSRS Wiki name for the monster. | True | False |
-| wiki_url | string | The OSRS Wiki URL (possibly including anchor link). | True | False |
-| attack_level | integer | The attack level of the monster. | True | False |
-| strength_level | integer | The strength level of the monster. | True | False |
-| defence_level | integer | The defence level of the monster. | True | False |
-| magic_level | integer | The magic level of the monster. | True | False |
-| ranged_level | integer | The ranged level of the monster. | True | False |
-| attack_stab | integer | The attack stab bonus of the monster. | True | False |
-| attack_slash | integer | The attack slash bonus of the monster. | True | False |
-| attack_crush | integer | The attack crush bonus of the monster. | True | False |
-| attack_magic | integer | The attack magic bonus of the monster. | True | False |
-| attack_ranged | integer | The attack ranged bonus of the monster. | True | False |
-| defence_stab | integer | The defence stab bonus of the monster. | True | False |
-| defence_slash | integer | The defence slash bonus of the monster. | True | False |
-| defence_crush | integer | The defence crush bonus of the monster. | True | False |
-| defence_magic | integer | The defence magic bonus of the monster. | True | False |
-| defence_ranged | integer | The defence ranged bonus of the monster. | True | False |
-| attack_accuracy | integer | The attack accuracy bonus of the monster. | True | False |
-| melee_strength | integer | The melee strength bonus of the monster. | True | False |
-| ranged_strength | integer | The ranged strength bonus of the monster. | True | False |
-| magic_damage | integer | The magic damage bonus of the monster. | True | False |
-| drops | list | An array of monster drop objects. | True | True |
-
-### Monster Drops
-
-Most monsters in OSRS drop items when they have been defeated (killed). All monster drops are stored in the `drops` property in an array containing properties about the item drop. When using the PyPi `osrsbox` package, these drops are represented by a list of `MonsterDrops` object type. When parsing the raw JSON files, the drops are stored in an array, that are nested under the `drops` key. The data included with the monster drops are the item `id`, item `name`, the drop `rarity`, whether the drop is `noted` and any `drop_requirements`. All of the properties available for item drops are listed in the table below including the property name, the data types used, a description of the property, if the property is required to be populated, and if the property is nullable (able to be set to `null` or `None`).
-
-{: .table .table-striped .table-sm}
-| Property | Data type | Description | Required | Nullable |
-| -------- | --------- | ----------- | -------- |----------|
-| id | integer | The ID number of the item drop. | True | False |
-| name | string | The name of the item drop. | True | False |
-| members | boolean | If the drop is a members-only item. | True | False |
-| quantity | string | The quantity of the item drop (integer, comma-separated or range). | True | True |
-| noted | boolean | If the item drop is noted, or not. | True | False |
-| rarity | float | The rarity of the item drop (as a float out of 1.0). | True | True |
-| drop_requirements | string | If there are any requirements to getting the specific drop. | True | True |
-
-### Monster: Python Object Example 
-
-A description of the properties that each monster in the database can have is useful, but sometimes it is simpler to provide an example. Below is a full example of a monster, specifically the _Abyssal demon_ monster. Please note that the number of item `drops` key data has been reduced to make the data more readable.
-
-```
-MonsterProperties(
-    id=415,
-    name='Abyssal demon',
-    incomplete=False,
-    members=True,
-    release_date='2005-01-26',
-    combat_level=124,
-    size=1,
-    hitpoints=150,
-    max_hit=8,
-    attack_type=['stab'],
-    attack_speed=4,
-    aggressive=False,
-    poisonous=False,
-    immune_poison=False,
-    immune_venom=False,
-    weakness=['magic', 'demonbane'],
-    category=['abyssal demon'],
-    slayer_monster=True,
-    slayer_level=85,
-    slayer_xp=150.0,
-    slayer_masters=['vannaka', 'chaeldar', 'konar', 'nieve', 'duradel'], 
-    duplicate=False,
-    examine='A denizen of the Abyss!',
-    wiki_name='Abyssal demon (Standard)',
-    wiki_url='https://oldschool.runescape.wiki/w/Abyssal_demon#Standard',
-    attack_level=97,
-    strength_level=67,
-    defence_level=135,
-    magic_level=1,
-    ranged_level=1,
-    attack_stab=0,
-    attack_slash=0,
-    attack_crush=0,
-    attack_magic=0,
-    attack_ranged=0,
-    defence_stab=20,
-    defence_slash=20,
-    defence_crush=20,
-    defence_magic=0,
-    defence_ranged=20,
-    attack_accuracy=0,
-    melee_strength=0,
-    ranged_strength=0,
-    magic_damage=0,
-    drops=[
-        MonsterDrop(
-            id=592,
-            name='Ashes',
-            members=True,
-            quantity='1',
-            noted=False,
-            rarity=1.0,
-            drop_requirements=None
-        ),
-        MonsterDrop(
-            id=4151,
-            name='Abyssal whip',
-            members=True,
-            quantity='1',
-            noted=False,
-            rarity=0.001953125,
-            drop_requirements=None
-        ),
-        MonsterDrop(
-            id=565,
-            name='Blood rune',
-            members=True,
-            quantity='7',
-            noted=False,
-            rarity=0.03125,
-            drop_requirements=None
-        ),
-        MonsterDrop(
-            id=19683,
-            name='Dark totem top',
-            members=True,
-            quantity='1',
-            noted=False,
-            rarity=0.002857142857142857,
-            drop_requirements='catacombs'
-        ),
-        MonsterDrop(
-            id=12073,
-            name='Clue scroll (elite)',
-            members=True,
-            quantity='1',
-            noted=False,
-            rarity=0.0008333333333333334,
-            drop_requirements=None
-        )
-    ]
-)
-```
-
-### Monster: JSON Example
-
-A description of the properties that each monster in the database can have is useful, but sometimes it is simpler to provide an example. Below is a full example of a monster, specifically the _Abyssal demon_ monster. Please note that the number of item `drops` key data has been reduced to make the data more readable.
-
-```
-{
-    "id": 415,
-    "name": "Abyssal demon",
-    "incomplete": false,
-    "members": true,
-    "release_date": "2005-01-26",
-    "combat_level": 124,
-    "size": 1,
-    "hitpoints": 150,
-    "max_hit": 8,
-    "attack_type": [
-        "stab"
-    ],
-    "attack_speed": 4,
-    "aggressive": false,
-    "poisonous": false,
-    "immune_poison": false,
-    "immune_venom": false,
-    "weakness": [
-        "magic",
-        "demonbane"
-    ],
-    "slayer_monster": true,
-    "slayer_level": 85,
-    "slayer_xp": 150.0,
-    "slayer_masters": [
-        "vannaka",
-        "chaeldar",
-        "konar",
-        "nieve",
-        "duradel"
-    ],
-    "duplicate": false,
-    "examine": "A denizen of the Abyss!",
-    "wiki_name": "Abyssal demon (Standard)",
-    "wiki_url": "https://oldschool.runescape.wiki/w/Abyssal_demon#Standard",
-    "attack_level": 97,
-    "strength_level": 67,
-    "defence_level": 135,
-    "magic_level": 1,
-    "ranged_level": 1,
-    "attack_stab": 0,
-    "attack_slash": 0,
-    "attack_crush": 0,
-    "attack_magic": 0,
-    "attack_ranged": 0,
-    "defence_stab": 20,
-    "defence_slash": 20,
-    "defence_crush": 20,
-    "defence_magic": 0,
-    "defence_ranged": 20,
-    "attack_accuracy": 0,
-    "melee_strength": 0,
-    "ranged_strength": 0,
-    "magic_damage": 0,
-    "drops": [
-        {
-            "id": 592,
-            "name": "Ashes",
-            "members": True,
-            "quantity": "1",
-            "noted": false,
-            "rarity": "1.0",
-            "drop_requirements": null
-        },
-        {
-            "id": 4151,
-            "name": "Abyssal whip",
-            "members": true,
-            "quantity": "1",
-            "noted": false,
-            "rarity": 0.001953125,
-            "drop_requirements": null
-        },
-        {
-            "id": 565,
-            "name": "Blood rune",
-            "members": true,
-            "quantity": "7",
-            "noted": false,
-            "rarity": 0.03125,
-            "drop_requirements": null
-        },
-        {
-            "id": 19683,
-            "name": "Dark totem top",
-            "members": true,
-            "quantity": "1",
-            "noted": false,
-            "rarity": 0.002857142857142857,
-            "drop_requirements": "catacombs"
-        },
-        {
-            "id": 12073,
-            "name": "Clue scroll (elite)",
-            "members": true,
-            "quantity": "1",
-            "noted": false,
-            "rarity": 0.0008333333333333334,
-            "drop_requirements": null
-        }
-    ]
-}
-```
-
-## The Prayer Database
-
-Each prayer is represented by Python objects when using the PyPi `osrsbox` package, specifically using Python dataclass objects Additionally, the data is accessible directly by parsing the raw JSON files. All prayer data is stored in a single object to represent the properties of an in-game OSRS prayer, which is outlined in the following subsection. 
-
-### Prayer Properties
-
-A `PrayerProperties` object type includes basic prayer metadata such as `id`, `name`, `description` text, `drain_per_minute`, `requirements` and `bonuses` values. Every prayer object in the prayer database has all of these properties. If you are parsing the raw JSON files all of these properties are in the root of the JSON document - so they are not nested. All of the properties available are listed in the table below including the property name, the data types used, a description of the property, if the property is required to be populated, and if the property is nullable (able to be set to `null` or `None`).
-
-{: .table .table-striped .table-sm}
-| Property | Data type | Description | Required | Nullable |
-| -------- | --------- | ----------- | -------- |----------|
-| id | integer | Unique prayer ID number. | True | False |
-| name | string | The name of the prayer. | True | False |
-| members | boolean | If the prayer is members-only. | True | False |
-| description | string | The prayer description (as show in-game). | True | False |
-| drain_per_minute | float | The prayer point drain rate per minute. | True | False |
-| wiki_url | string | The OSRS Wiki URL. | True | False |
-| requirements | dict | The stat requirements to use the prayer. | True | False |
-| bonuses | dict | The bonuses a prayer provides. | True | False |
-
-### Prayer: Python Object Example 
-
-A description of the properties that each prayer in the database can have is useful, but sometimes it is simpler to provide an example. Below is a full example of a prayer, specifically the _Rigour_ prayer, as loaded in the `osrsbox` PyPi Python package.
-
-```
-PrayerProperties(
-    id=28,
-    name='Rigour',
-    members=True,
-    description='Increases your Ranged attack by 20% and damage by 23%,and your defence by 25%.',
-    drain_per_minute=40.0,
-    wiki_url='https://oldschool.runescape.wiki/w/Rigour',
-    requirements={'prayer': 74, 'defence': 70}, 
-    bonuses={'ranged': 20, 'ranged_strength': 25, 'defence': 23})
-```
-
-### Prayer: JSON Example
-
-A description of the properties that each prayer in the database can have is useful, but sometimes it is simpler to provide an example. Below is a full example of a prayer, specifically the _Rigour_ prayer, as a JSON object.
-
-```
-{
-    "id": 28,
-    "name": "Rigour",
-    "members": true,
-    "description": "Increases your Ranged attack by 20% and damage by 23%, and your defence by 25%.",
-    "drain_per_minute": 40.0,
-    "wiki_url": "https://oldschool.runescape.wiki/w/Rigour",
-    "requirements": {
-        "prayer": 74,
-        "defence": 70
-    },
-    "bonuses": {
-        "ranged": 20,
-        "ranged_strength": 25,
-        "defence": 23
-    }
-}
-```
+1. [**The Python PyPi package**](https://pypi.org/project/osrsbox/): Use this if you are programming anything in Python - as it is the simplest option. Install using `pip`, and you are ready to do anything from experimenting and prototyping, to building a modern web app using something like Flask.
+1. [**The RESTful API**](https://github.com/osrsbox/osrsbox-api/): Use this if you are not programming in Python, and want an Internet-accessible API with rich-quering including filtering, sorting and projection functionality.
+1. [**The Static JSON API**](https://github.com/osrsbox/osrsbox-db/tree/master/docs): Use this if you want Internet-accessible raw data (JSON files and PNG images) and don't need queries to filter data. This is a good option if you want to _dump_ the enitire database contents, and saves the RESTful API from un-needed traffic.
+1. [**The GitHub development repository**](https://github.com/osrsbox/osrsbox-db/): The development repository provides the code and data to build the database. I would not recommend using the development repository unless you are (really) interested in the project or you want to contribute to the project.
 
 ## The `osrsbox` Python PyPi Package
 
@@ -641,16 +70,16 @@ If you want to access the item and monster database programmatically using Pytho
 - Install package using: `pip install osrsbox`
 - Item database quick start:
     - Import items API using: `from osrsbox import items_api`
-    - Load all items using: `all_db_items = items_api.load()`
-    - Loop items using: `for item in all_db_items: print(item.name)`
+    - Load all items using: `items = items_api.load()`
+    - Loop items using: `for item in items: print(item.name)`
 - Monster database quick start:
     - Import monsters API using: `from osrsbox import monsters_api`
-    - Load all monsters using: `all_db_monsters = monsters_api.load()`
-    - Loop monsters using: `for monster in all_db_monsters: print(monster.name)`
+    - Load all monsters using: `monsters = monsters_api.load()`
+    - Loop monsters using: `for monster in monsters: print(monster.name)`
 - Prayer database quick start:
     - Import prayers API using: `from osrsbox import prayers_api`
-    - Load all prayers using: `all_db_prayers = prayers_api.load()`
-    - Loop prayers using: `for prayer in all_db_prayers: print(prayer.name)`
+    - Load all prayers using: `prayers = prayers_api.load()`
+    - Loop prayers using: `for prayer in prayers: print(prayer.name)`
 
 ### Package Requirements
 
@@ -688,8 +117,8 @@ Python 3.6.8 (default, Jan 14 2019, 11:02:34)
 [GCC 8.0.1 20180414 (experimental) [trunk revision 259383]] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> from osrsbox import items_api
->>> all_db_items = items_api.load()
->>> for item in all_db_items:
+>>> items = items_api.load()
+>>> for item in items:
 ...     print(item.id, item.name)
 ```
 
@@ -700,20 +129,28 @@ Instead of using the Python interpreter, you can also write a simple script and 
 
 from osrsbox import monsters_api
 
-all_db_monsters = monsters_api.load()
-for monster in all_db_monsters:
+monsters = monsters_api.load()
+for monster in monsters:
     print(monster.id, monster.name)
 ```
 
 If you would like to review additional examples of using the `osrsbox` Python API, have a look at the [`items_api_examples` folder](https://github.com/osrsbox/osrsbox-db/tree/master/osrsbox/items_api_examples) and [`monsters_api_examples` folder](https://github.com/osrsbox/osrsbox-db/tree/master/osrsbox/monsters_api_examples). There are a number of scripts available that provide examples of loading and processing data using the Python API. 
 
-## The `osrsbox-db` Static JSON API
+## The osrsbox RESTful API
+
+The [official osrsbox-api GitHub repository](https://github.com/osrsbox/osrsbox-api) hosts the source code used for the RESTful API. The official `osrsbox-api` project is available from:
+
+- [https://api.osrsbox.com](https://api.osrsbox.com)
+
+The link provided above has an API landing page with detailed information on the project including a project summary, API enpoints, and links to useful documentation. Also, have a look at the [official `osrsbox-api` project README](https://github.com/osrsbox/osrsbox-api/blob/master/README.md) for more information. The README has a tutorial on how to build the API docker environment locally for testing purposes which might be useful.
+
+## The `osrsbox` Static JSON API
 
 This project also includes an Internet-accessible, static JSON API for all items/monsters in the database. The JSON API was originally written for the [`osrsbox-tooltips` project](https://github.com/osrsbox/osrsbox-tooltips) but has since been used for a variety of other projects. The JSON API is useful when you do not want to write a program in Python (as using the PyPi package is probably easier), but would like to fetch the database information programmatically over the Internet, and receive the data back in nicely structured JSON syntax. A key example is a web application. 
 
 ### Static JSON API Files
 
-The JSON API is available in the [`docs` folder](https://github.com/osrsbox/osrsbox-db/tree/master/docs/) in the osrsbox-db project repository. This folder contains the publicly available database and somewhat-RESTful API of osrsbox-db (read: not RESTful at all, as it only supports HTTP GET requests). Every file inside this specific folder can be fetched using HTTP GET requests. The base URL for this folder is `https://www.osrsbox.com/osrsbox-db/`. Simply append any name of any file from the `docs` folder to the base URL, and you can fetch this data. You can also clone the entire osrsbox-db project repository and access the files provided in this folder, or download a single file for offline processing. A summary of the folders/files provided in the JSON API are listed below with descriptions:
+The JSON API is available in the [`docs` folder](https://github.com/osrsbox/osrsbox-db/tree/master/docs/) in the osrsbox-db project repository. This folder contains the publicly available database. Every file inside this specific folder can be fetched using HTTP GET requests. The base URL for this folder is `https://www.osrsbox.com/osrsbox-db/`. Simply append any name of any file from the `docs` folder to the base URL, and you can fetch this data. A summary of the folders/files provided in the JSON API are listed below with descriptions:
 
 - `items-complete.json`: A single JSON file that combines all single JSON files from `items-json` folder. This file contains the entire osrsbox-db items database in one file. This is useful if you want to get the data for every single item.
 - `items-icons`: Collection of PNG files (20K+) for every item inventory icon in OSRS. Each inventory icon is named using the unique item ID number.
@@ -825,7 +262,6 @@ If using this repository (the development version), you will need to fulfil some
 
 - Python 3.6 or above
 - Pip - the standard package manager for Python
-- Virtualenv - a tool to create isolated virtual environments
 - A selection of additional Python packages
 
 As a short example, I configured my Ubuntu 18.04 system to run the development repository code using the following steps:
@@ -833,20 +269,19 @@ As a short example, I configured my Ubuntu 18.04 system to run the development r
 ```
 sudo apt update
 sudo apt install python3-pip
-pip3 install virtualenv
 ```
 
-These three commands will install the `pip3` command, allowing the installation of Python package. Then you can use `pip3` to install the `virtualenv` tool, allowing the creation of a virtualized and isolated Python development environment. Then we can install more Python packages that are used in this project. The PyPi `osrsbox` package requires a variety of Python packages in addition to the mandatory `dataclasses` package. These package requirements are documented in the [`requirements.txt`](https://github.com/osrsbox/osrsbox-db/tree/master/requirements.txt) file. It is recommended to use `virtualenv` tool to set up your environment, then install the specified requirements. As an example, the following workflow is provided for Linux-based environments (make sure `virtualenv`, and `python3` are available first):
+These two commands will install the `pip3` command, allowing the installation of Python packages. Then you can use `pip3` to install additional packages. The development repository requires a variety of Python packages in addition to the mandatory `dataclasses` package. These package requirements are documented in the [`requirements.txt`](https://github.com/osrsbox/osrsbox-db/tree/master/requirements.txt) file. It is recommended to use the `venv` module to set up your environment, then install the specified requirements. As an example, the following workflow is provided for Linux-based environments (make sure `python3` is available first):
 
 ```
-git clone https://github.com/osrsbox/osrsbox-db.git
+git clone --recursive https://github.com/osrsbox/osrsbox-db.git
 cd osrsbox-db
-virtualenv venv
+python -m venv venv
 source venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
-When you have finished with working in the `osrsbox-db` repository, make sure to deactivate the current `virtualenv` environment using:
+When you have finished with working in the `osrsbox-db` repository, make sure to deactivate the current `venv` environment using:
 
 ```
 deactivate
@@ -873,7 +308,6 @@ deactivate
 - `scripts`: A collection of scripts (using Python and BASH) to help automate common tasks including dumping the OSRS cache, scraping the OSRS wiki, generating schemas, updating the databases, and inserting data into a MongoDB database.
     - `cache`: A collection of scripts to extract useful data from the OSRS cache item, npc and object definition files.
     - `items`: A collection of scripts to help process data for the item builder.
-    - `mongodb`: A collection of scripts for creating and inserting data into the MongoDB database.
     - `schemas`: A collection of scripts for generating and parsing the JSON schemas used in this project.
     - `update`: A collection of scripts for automating the data collection and database regeneration.
     - `wiki`: A collection of scripts for automating data extraction from the OSRS Wiki using the MediaWiki API.
@@ -894,6 +328,597 @@ The Cerberus schemas are provided in a dedicated repository called [`osrsbox/sch
 1. [`schema-prayers.json`](https://github.com/osrsbox/schemas/blob/master/schema-prayers.json): This file defines the prayer schema, the defined properties, the property types, and some additional specifications including regex validation, and/or property type specification.
 
 All Cerberus schema files are authored using Cerberus version 1.3.2. This project uses the [`Cerberus` PyPi package](https://pypi.org/project/Cerberus/).
+
+## The Item Database
+
+Each item is represented by Python objects when using the PyPi `osrsbox` package, specifically using Python dataclass objects. Additionally, the data is accessible directly by parsing the raw JSON files. There are three types of objects, or classifications of data, that can be used to represent part of an in-game OSRS item, each outlined in the following subsections.
+
+### Item Properties
+
+An `ItemProperties` object type includes basic item metadata such as `id`, `name`, `examine` text, store `cost`, `highalch` and `lowalch` values and `quest_item` association. Every item object in the item database has all of these properties. If you are parsing the raw JSON files all of these properties are in the root of the JSON document - so they are not nested. All of the properties available are listed in the table below including the property name, the data types used, a description of the property, if the property is required to be populated, and if the property is nullable (able to be set to `null` or `None`).
+
+{: .table .table-striped .table-sm}
+| Property | Data type | Description | Required | Nullable |
+| -------- | --------- | ----------- | -------- |----------|
+| id | integer | Unique OSRS item ID number. | True | False |
+| name | string | The name of the item. | True | False |
+| incomplete | boolean | If the item has incomplete wiki data. | True | False |
+| members | boolean | If the item is a members-only. | True | False |
+| tradeable | boolean | If the item is tradeable (between players and on the GE). | True | False |
+| tradeable_on_ge | boolean | If the item is tradeable (only on GE). | True | False |
+| stackable | boolean | If the item is stackable (in inventory). | True | False |
+| stacked | integer | If the item is stacked, indicated by the stack count. | True | True |
+| noted | boolean | If the item is noted. | True | False |
+| noteable | boolean | If the item is noteable. | True | False |
+| linked_id_item | integer | The linked ID of the actual item (if noted/placeholder). | True | True |
+| linked_id_noted | integer | The linked ID of an item in noted form. | True | True |
+| linked_id_placeholder | integer | The linked ID of an item in placeholder form. | True | True |
+| placeholder | boolean | If the item is a placeholder. | True | False |
+| equipable | boolean | If the item is equipable (based on right-click menu entry). | True | False |
+| equipable_by_player | boolean | If the item is equipable in-game by a player. | True | False |
+| equipable_weapon | boolean | If the item is an equipable weapon. | True | False |
+| cost | integer | The store price of an item. | True | False |
+| lowalch | integer | The low alchemy value of the item (cost * 0.4). | True | True |
+| highalch | integer | The high alchemy value of the item (cost * 0.6). | True | True |
+| weight | float | The weight (in kilograms) of the item. | True | True |
+| buy_limit | integer | The Grand Exchange buy limit of the item. | True | True |
+| quest_item | boolean | If the item is associated with a quest. | True | False |
+| release_date | string | Date the item was released (in ISO8601 format). | True | True |
+| duplicate | boolean | If the item is a duplicate. | True | False |
+| examine | string | The examine text for the item. | True | True |
+| icon | string | The item icon (in base64 encoding). | True | False |
+| wiki_name | string | The OSRS Wiki name for the item. | True | True |
+| wiki_url | string | The OSRS Wiki URL (possibly including anchor link). | True | True |
+| wiki_exchnage | string | The OSRS Wiki Exchange URL. | True | True |
+| equipment | dict | The equipment bonuses of equipable armour/weapons. | True | True |
+| weapon | dict | The weapon bonuses including attack speed, type and stance. | True | True |
+
+### Item Equipment
+
+Many items in OSRS are equipable, this includes armor, weapons, and other _wearable_ items. Any equipable item has additional properties stored as an `ItemEquipment` object type - including attributes such as `attack_slash`, `defence_crush` and `melee_strength` values. The `ItemEquipment` object is nested within an `ItemProperties`. If you are parsing the raw JSON files, this data is nested under the `equipment` key. It is very important to note that not all items in OSRS are equipable. Only items with the `equipable_by_player` property set to `true` are equipable. The `equipable` property is similar, but this is the raw data extracted from the game cache - and can sometimes be incorrect (not equipable by a player). All of the properties available for equipable items are listed in the table below including the property name, the data types used, a description of the property, if the property is required to be populated, and if the property is nullable (able to be set to `null` or `None`).
+
+{: .table .table-striped .table-sm}
+| Property | Data type | Description | Required | Nullable |
+| -------- | --------- | ----------- | -------- |----------|
+| attack_stab | integer | The attack stab bonus of the item. | True | False |
+| attack_slash | integer | The attack slash bonus of the item. | True | False |
+| attack_crush | integer | The attack crush bonus of the item. | True | False |
+| attack_magic | integer | The attack magic bonus of the item. | True | False |
+| attack_ranged | integer | The attack ranged bonus of the item. | True | False |
+| defence_stab | integer | The defence stab bonus of the item. | True | False |
+| defence_slash | integer | The defence slash bonus of the item. | True | False |
+| defence_crush | integer | The defence crush bonus of the item. | True | False |
+| defence_magic | integer | The defence magic bonus of the item. | True | False |
+| defence_ranged | integer | The defence ranged bonus of the item. | True | False |
+| melee_strength | integer | The melee strength bonus of the item. | True | False |
+| ranged_strength | integer | The ranged strength bonus of the item. | True | False |
+| magic_damage | integer | The magic damage bonus of the item. | True | False |
+| prayer | integer | The prayer bonus of the item. | True | False |
+| slot | string | The equipment slot associated with the item (e.g., head). | True | False |
+| requirements | dict | An object of requirements {skill: level}. | True | True |
+
+### Item Weapon
+
+A select number of items in OSRS are equipable weapons. Any equipable item that is a weapon has additional properties stored as an `ItemWeapon` type object including attributes such as `attack_speed` and `weapon_types` values. Additionally, each weapon has an array of combat stances associated with it to determine the `combat_style`, `attack_type`, `attack_style` and any `bonuses` or combat `experience` association. The `ItemWeapon` object is nested within an `ItemProperties` object when using the Python API. If you are parsing the raw JSON files, this data is nested under the `weapon` key.  It is very important to note that not all items in OSRS are equipable weapons. Only items with the `equipable_weapon` property set to `true` are equipable. All of the properties available for equipable weapons are listed in the table below including the property name, the data types used, a description of the property, if the property is required to be populated, and if the property is nullable (able to be set to `null` or `None`).
+
+{: .table .table-striped .table-sm}
+| Property | Data type | Description | Required | Nullable |
+| -------- | --------- | ----------- | -------- |----------|
+| attack_speed | integer | The attack speed of a weapon (in game ticks). | True | False |
+| weapon_type | string | The weapon classification (e.g., axes) | True | False |
+| stances | list | An array of weapon stance information. | True | False |
+
+### Item: Python Object Example
+
+A description of the properties that each item in the database can have is useful, but sometimes it is simpler to provide an example. Below is a full example of an item as loaded in a Python object, specifically the _Abyssal whip_ item. Since this item is a type of equipment, there is an `EquipmentProperties` object nested with combat bonuses. Additionally, this item is also a weapon, so there is a `WeaponProperties` object with extra information. If the item was not equipable, the `EquipmentProperties` property would be `None` and the `equipable_by_player` would be `False`. If the item was not a weapon, the `WeaponProperties` key would be `None` and the `equipable_weapon` would be `False`.
+
+```
+ItemProperties(
+    id=4151,
+    name='Abyssal whip',
+    incomplete=Flase,
+    members=True,
+    tradeable=True,
+    tradeable_on_ge=True,
+    stackable=False,
+    stacked=None,
+    noted=False,
+    noteable=True,
+    linked_id_item=None,
+    linked_id_noted=4152,
+    linked_id_placeholder=14032,
+    placeholder=False,
+    equipable=True,
+    equipable_by_player=True,
+    equipable_weapon=True,
+    cost=120001,
+    lowalch=48000,
+    highalch=72000,
+    weight=0.453,
+    buy_limit=70,
+    quest_item=False,
+    release_date='2005-01-26',
+    duplicate=False,
+    examine='A weapon from the abyss.',
+    icon: 'iVBORw0KGgoAAAANSUhEUgAAACQAAAAgCAYAAAB6kdqOAAABvUlEQVR4Xu2Xv26DMBDG4QEyZECKIkVCKIoyVR26dOrQpUOHDn3/V3F7nL7689kGAo6z9JNuiH1wP+6PIU3zr2Jq3bRVkQ/Y7feBvfcn93o8upfDwT11XQKwOGQMwfYx9O7rcnaf52GEezuFgNdfn4JQ7RjAQojZLAAMcPJbAOH73PcloBTIQiEAG8MB7Pt6MQ+wSW1QAs6Kh1A/NgtnHyKMcZMUCP3AIBw0XcqmgU9qb4W0JwTIwuRAYHETF4FSIMkORjn1xCnjayy8lN/vLVY7TglfvBRGTJpZrpXM+my1f6DhPRdJs8M3nAPibGDseY9hVgHxzbh3chC22dkPQ8EnufddpBgI69Lk3B8hnPrwOsPEw7FYqUzoOsqBUtps8XUASh0bYbxZxUCcJZzCNnjOBGgDDBRD8d4tQAVgRAqEs2jusLOGEhaCgTQTgApLp/s5A0RBGMg3shx2YZb0fZUz9issD4VpsR4PkJ+uYbczJQr94rW7KT3yDJcegLtqeuRlAFa+0bdoeuTxPV2538Ixt1D86Vutr8IR16CSndzfoSpQLIDh09dmscL5lJICMUClw3JKD8tGXiVgfgACr1tEhnw7UAAAAABJRU5ErkJggg==',
+    wiki_name='Abyssal whip',
+    wiki_url='https://oldschool.runescape.wiki/w/Abyssal_whip',
+    equipment=ItemEquipment(
+        attack_stab=0,
+        attack_slash=82,
+        attack_crush=0,
+        attack_magic=0,
+        attack_ranged=0,
+        defence_stab=0,
+        defence_slash=0,
+        defence_crush=0,
+        defence_magic=0,
+        defence_ranged=0,
+        melee_strength=82,
+        ranged_strength=0,
+        magic_damage=0,
+        prayer=0,
+        slot='weapon',
+        requirements={'attack': 70}
+    ),
+    weapon=ItemWeapon(
+        attack_speed=4,
+        weapon_type='whips',
+        stances=[
+            {'combat_style': 'flick',
+            'attack_type': 'slash',
+            'attack_style': 'accurate',
+            'experience': 'attack',
+            'boosts': None},
+            {'combat_style': 'lash',
+            'attack_type': 'slash',
+            'attack_style': 'controlled',
+            'experience': 'shared',
+            'boosts': None},
+            {'combat_style': 'deflect',
+            'attack_type': 'slash',
+            'attack_style': 'defensive',
+            'experience': 'defence',
+            'boosts': None}
+        ]
+    )
+)
+```
+
+### Item: JSON Example
+
+A description of the properties that each item in the database can have is useful, but sometimes it is simpler to provide an example. Below is a full example of an item, specifically the _Abyssal whip_ item. Since this item is a type of equipment, there is an `equipment` key with combat bonuses. Additionally, this item is also a weapon, so there is a `weapon` key with extra information. If the item was not equipable, the `equipment` key would be `null` and the `equipable_by_player` would be `false`. If the item was not a weapon, the `weapon` key would be `null` and the `equipable_weapon` would be `false`.
+
+```
+{
+    "id": 4151,
+    "name": "Abyssal whip",
+    "incomplete": false,
+    "members": true,
+    "tradeable": true,
+    "tradeable_on_ge": true,
+    "stackable": false,
+    "stacked": null,
+    "noted": false,
+    "noteable": true,
+    "linked_id_item": null,
+    "linked_id_noted": 4152,
+    "linked_id_placeholder": 14032,
+    "placeholder": false,
+    "equipable": true,
+    "equipable_by_player": true,
+    "equipable_weapon": true,
+    "cost": 120001,
+    "lowalch": 48000,
+    "highalch": 72000,
+    "weight": 0.453,
+    "buy_limit": 70,
+    "quest_item": false,
+    "release_date": "2005-01-26",
+    "duplicate": false,
+    "examine": "A weapon from the abyss.",
+    "icon": "iVBORw0KGgoAAAANSUhEUgAAACQAAAAgCAYAAAB6kdqOAAABvUlEQVR4Xu2Xv26DMBDG4QEyZECKIkVCKIoyVR26dOrQpUOHDn3/V3F7nL7689kGAo6z9JNuiH1wP+6PIU3zr2Jq3bRVkQ/Y7feBvfcn93o8upfDwT11XQKwOGQMwfYx9O7rcnaf52GEezuFgNdfn4JQ7RjAQojZLAAMcPJbAOH73PcloBTIQiEAG8MB7Pt6MQ+wSW1QAs6Kh1A/NgtnHyKMcZMUCP3AIBw0XcqmgU9qb4W0JwTIwuRAYHETF4FSIMkORjn1xCnjayy8lN/vLVY7TglfvBRGTJpZrpXM+my1f6DhPRdJs8M3nAPibGDseY9hVgHxzbh3chC22dkPQ8EnufddpBgI69Lk3B8hnPrwOsPEw7FYqUzoOsqBUtps8XUASh0bYbxZxUCcJZzCNnjOBGgDDBRD8d4tQAVgRAqEs2jusLOGEhaCgTQTgApLp/s5A0RBGMg3shx2YZb0fZUz9issD4VpsR4PkJ+uYbczJQr94rW7KT3yDJcegLtqeuRlAFa+0bdoeuTxPV2538Ixt1D86Vutr8IR16CSndzfoSpQLIDh09dmscL5lJICMUClw3JKD8tGXiVgfgACr1tEhnw7UAAAAABJRU5ErkJggg==",
+    "wiki_name": "Abyssal whip",
+    "wiki_url": "https://oldschool.runescape.wiki/w/Abyssal_whip",
+    "equipment": {
+        "attack_stab": 0,
+        "attack_slash": 82,
+        "attack_crush": 0,
+        "attack_magic": 0,
+        "attack_ranged": 0,
+        "defence_stab": 0,
+        "defence_slash": 0,
+        "defence_crush": 0,
+        "defence_magic": 0,
+        "defence_ranged": 0,
+        "melee_strength": 82,
+        "ranged_strength": 0,
+        "magic_damage": 0,
+        "prayer": 0,
+        "slot": "weapon",
+        "requirements": {
+            "attack": 70
+        }
+    },
+    "weapon": {
+        "attack_speed": 4,
+        "weapon_type": "whips",
+        "stances": [
+            {
+                "combat_style": "flick",
+                "attack_type": "slash",
+                "attack_style": "accurate",
+                "experience": "attack",
+                "boosts": null
+            },
+            {
+                "combat_style": "lash",
+                "attack_type": "slash",
+                "attack_style": "controlled",
+                "experience": "shared",
+                "boosts": null
+            },
+            {
+                "combat_style": "deflect",
+                "attack_type": "slash",
+                "attack_style": "defensive",
+                "experience": "defence",
+                "boosts": null
+            }
+        ]
+    }
+}
+```
+
+## The Monster Database
+
+Each monster is represented by Python objects when using the PyPi `osrsbox` package, specifically using Python dataclass objects. Additionally, the data is accessible directly by parsing the raw JSON files. There are two types of objects, or classifications of data, that can be used to represent part of an in-game OSRS monster, each outlined in the following subsections. 
+
+### Monster Properties
+
+A `MonsterProperties` object type includes basic monster metadata such as `id`, `name`, `examine` text, `combat_level`, `attack_speed` and `hitpoints` values and slayer association such as `slayer_masters` who give this monster as a task. Every monster object in the monster database has all of these properties. If you are parsing the raw JSON files all of these properties are in the root of the JSON document - so they are not nested. All of the properties available are listed in the table below including the property name, the data types used, a description of the property, if the property is required to be populated, and if the property is nullable (able to be set to `null` or `None`).
+
+{: .table .table-striped .table-sm}
+| Property | Data type | Description | Required | Nullable |
+| -------- | --------- | ----------- | -------- |----------|
+| id | integer | Unique OSRS item ID number. | True | False |
+| name | string | The name of the monster. | True | False |
+| incomplete | boolean | If the monster has incomplete wiki data. | True | False |
+| members | boolean | If the monster is members only, or not. | True | False |
+| release_date | string | The release date of the monster (in ISO8601 format). | True | True |
+| combat_level | integer | The combat level of the monster. | True | False |
+| size | integer | The size, in tiles, of the monster. | True | False |
+| hitpoints | integer | The number of hitpoints a monster has. | True | False |
+| max_hit | integer | The maximum hit of the monster. | True | False |
+| attack_type | list | The attack style (melee, magic, range) of the monster. | True | False |
+| attack_speed | integer | The attack speed (in game ticks) of the monster. | True | True |
+| aggressive | boolean | If the monster is aggressive, or not. | True | False |
+| poisonous | boolean | If the monster poisons, or not | True | False |
+| immune_poison | boolean | If the monster is immune to poison, or not | True | False |
+| immune_venom | boolean | If the monster is immune to venom, or not | True | False |
+| attributes | list | An array of monster attributes. | True | False |
+| category | list | An array of monster category. | True | False |
+| slayer_monster | boolean | If the monster is a potential slayer task. | True | False |
+| slayer_level | integer | The slayer level required to kill the monster. | True | True |
+| slayer_xp | float | The slayer XP rewarded for a monster kill. | True | True |
+| slayer_masters | list | The slayer masters who can assign the monster. | True | False |
+| duplicate | boolean | If the monster is a duplicate. | True | False |
+| examine | string | The examine text of the monster. | True | False |
+| icon | string | The monster icon  (in base64 encoding). | True | True |
+| wiki_name | string | The OSRS Wiki name for the monster. | True | False |
+| wiki_url | string | The OSRS Wiki URL (possibly including anchor link). | True | False |
+| attack_level | integer | The attack level of the monster. | True | False |
+| strength_level | integer | The strength level of the monster. | True | False |
+| defence_level | integer | The defence level of the monster. | True | False |
+| magic_level | integer | The magic level of the monster. | True | False |
+| ranged_level | integer | The ranged level of the monster. | True | False |
+| attack_stab | integer | The attack stab bonus of the monster. | True | False |
+| attack_slash | integer | The attack slash bonus of the monster. | True | False |
+| attack_crush | integer | The attack crush bonus of the monster. | True | False |
+| attack_magic | integer | The attack magic bonus of the monster. | True | False |
+| attack_ranged | integer | The attack ranged bonus of the monster. | True | False |
+| defence_stab | integer | The defence stab bonus of the monster. | True | False |
+| defence_slash | integer | The defence slash bonus of the monster. | True | False |
+| defence_crush | integer | The defence crush bonus of the monster. | True | False |
+| defence_magic | integer | The defence magic bonus of the monster. | True | False |
+| defence_ranged | integer | The defence ranged bonus of the monster. | True | False |
+| attack_accuracy | integer | The attack accuracy bonus of the monster. | True | False |
+| melee_strength | integer | The melee strength bonus of the monster. | True | False |
+| ranged_strength | integer | The ranged strength bonus of the monster. | True | False |
+| magic_damage | integer | The magic damage bonus of the monster. | True | False |
+| drops | list | An array of monster drop objects. | True | False |
+
+### Monster Drops
+
+Most monsters in OSRS drop items when they have been defeated (killed). All monster drops are stored in the `drops` property in an array containing properties about the item drop. When using the PyPi `osrsbox` package, these drops are represented by a list of `MonsterDrops` object type. When parsing the raw JSON files, the drops are stored in an array, that are nested under the `drops` key. The data included with the monster drops are the item `id`, item `name`, the drop `rarity`, whether the drop is `noted` and any `drop_requirements`. All of the properties available for item drops are listed in the table below including the property name, the data types used, a description of the property, if the property is required to be populated, and if the property is nullable (able to be set to `null` or `None`).
+
+{: .table .table-striped .table-sm}
+| Property | Data type | Description | Required | Nullable |
+| -------- | --------- | ----------- | -------- |----------|
+| id | integer | The ID number of the item drop. | True | False |
+| name | string | The name of the item drop. | True | False |
+| members | boolean | If the drop is a members-only item. | True | False |
+| quantity | string | The quantity of the item drop (integer, comma-separated or range). | True | True |
+| noted | boolean | If the item drop is noted, or not. | True | False |
+| rarity | float | The rarity of the item drop (as a float out of 1.0). | True | True |
+| drop_requirements | string | If there are any requirements to getting the specific drop. | True | True |
+
+### Monster: Python Object Example 
+
+A description of the properties that each monster in the database can have is useful, but sometimes it is simpler to provide an example. Below is a full example of a monster, specifically the _Abyssal demon_ monster. Please note that the number of item `drops` key data has been reduced to make the data more readable.
+
+```
+MonsterProperties(
+    id=415,
+    name='Abyssal demon',
+    incomplete=True,
+    members=True,
+    release_date='2005-01-26',
+    combat_level=124,
+    size=1,
+    hitpoints=150,
+    max_hit=8,
+    attack_type=['stab'],
+    attack_speed=4,
+    aggressive=False,
+    poisonous=False,
+    immune_poison=False,
+    immune_venom=False,
+    attributes=['demon'],
+    category=['abyssal demon'],
+    slayer_monster=True,
+    slayer_level=85,
+    slayer_xp=150.0,
+    slayer_masters=['vannaka', 'chaeldar', 'konar', 'nieve', 'duradel'], 
+    duplicate=False,
+    examine='A denizen of the Abyss!',
+    icon=None,
+    wiki_name='Abyssal demon (Standard)',
+    wiki_url='https://oldschool.runescape.wiki/w/Abyssal_demon#Standard',
+    attack_level=97,
+    strength_level=67,
+    defence_level=135,
+    magic_level=1,
+    ranged_level=1,
+    attack_stab=0,
+    attack_slash=0,
+    attack_crush=0,
+    attack_magic=0,
+    attack_ranged=0,
+    defence_stab=20,
+    defence_slash=20,
+    defence_crush=20,
+    defence_magic=0,
+    defence_ranged=20,
+    attack_accuracy=0,
+    melee_strength=0,
+    ranged_strength=0,
+    magic_damage=0,
+    drops=[
+        MonsterDrop(
+            id=592,
+            name='Ashes',
+            members=True,
+            quantity='1',
+            noted=False,
+            rarity=1.0,
+            drop_requirements=None
+        ),
+        MonsterDrop(
+            id=4151,
+            name='Abyssal whip',
+            members=True,
+            quantity='1',
+            noted=False,
+            rarity=0.001953125,
+            drop_requirements=None
+        ),
+        MonsterDrop(
+            id=565,
+            name='Blood rune',
+            members=True,
+            quantity='7',
+            noted=False,
+            rarity=0.03125,
+            drop_requirements=None
+        ),
+        MonsterDrop(
+            id=19683,
+            name='Dark totem top',
+            members=True,
+            quantity='1',
+            noted=False,
+            rarity=0.002857142857142857,
+            drop_requirements='catacombs'
+        ),
+        MonsterDrop(
+            id=12073,
+            name='Clue scroll (elite)',
+            members=True,
+            quantity='1',
+            noted=False,
+            rarity=0.0008333333333333334,
+            drop_requirements=None
+        )
+    ]
+)
+```
+
+### Monster: JSON Example
+
+A description of the properties that each monster in the database can have is useful, but sometimes it is simpler to provide an example. Below is a full example of a monster, specifically the _Abyssal demon_ monster. Please note that the number of item `drops` key data has been reduced to make the data more readable.
+
+```
+{
+    "id": 415,
+    "name": "Abyssal demon",
+    "incomplete": true,
+    "members": true,
+    "release_date": "2005-01-26",
+    "combat_level": 124,
+    "size": 1,
+    "hitpoints": 150,
+    "max_hit": 8,
+    "attack_type": [
+        "stab"
+    ],
+    "attack_speed": 4,
+    "aggressive": false,
+    "poisonous": false,
+    "immune_poison": false,
+    "immune_venom": false,
+    "attributes": [
+        "demon"
+    ],
+    "category": [
+        "abyssal demon"
+    ],
+    "slayer_monster": true,
+    "slayer_level": 85,
+    "slayer_xp": 150.0,
+    "slayer_masters": [
+        "vannaka",
+        "chaeldar",
+        "konar",
+        "nieve",
+        "duradel"
+    ],
+    "duplicate": false,
+    "examine": "A denizen of the Abyss!",
+    "icon": null,
+    "wiki_name": "Abyssal demon (Standard)",
+    "wiki_url": "https://oldschool.runescape.wiki/w/Abyssal_demon#Standard",
+    "attack_level": 97,
+    "strength_level": 67,
+    "defence_level": 135,
+    "magic_level": 1,
+    "ranged_level": 1,
+    "attack_stab": 0,
+    "attack_slash": 0,
+    "attack_crush": 0,
+    "attack_magic": 0,
+    "attack_ranged": 0,
+    "defence_stab": 20,
+    "defence_slash": 20,
+    "defence_crush": 20,
+    "defence_magic": 0,
+    "defence_ranged": 20,
+    "attack_accuracy": 0,
+    "melee_strength": 0,
+    "ranged_strength": 0,
+    "magic_damage": 0,
+    "drops": [
+        {
+            "id": 592,
+            "name": "Ashes",
+            "members": True,
+            "quantity": "1",
+            "noted": false,
+            "rarity": "1.0",
+            "drop_requirements": null
+        },
+        {
+            "id": 4151,
+            "name": "Abyssal whip",
+            "members": true,
+            "quantity": "1",
+            "noted": false,
+            "rarity": 0.001953125,
+            "drop_requirements": null
+        },
+        {
+            "id": 565,
+            "name": "Blood rune",
+            "members": true,
+            "quantity": "7",
+            "noted": false,
+            "rarity": 0.03125,
+            "drop_requirements": null
+        },
+        {
+            "id": 19683,
+            "name": "Dark totem top",
+            "members": true,
+            "quantity": "1",
+            "noted": false,
+            "rarity": 0.002857142857142857,
+            "drop_requirements": "catacombs"
+        },
+        {
+            "id": 12073,
+            "name": "Clue scroll (elite)",
+            "members": true,
+            "quantity": "1",
+            "noted": false,
+            "rarity": 0.0008333333333333334,
+            "drop_requirements": null
+        }
+    ]
+}
+```
+
+## The Prayer Database
+
+Each prayer is represented by Python objects when using the PyPi `osrsbox` package, specifically using Python dataclass objects Additionally, the data is accessible directly by parsing the raw JSON files. All prayer data is stored in a single object to represent the properties of an in-game OSRS prayer, which is outlined in the following subsection. 
+
+### Prayer Properties
+
+A `PrayerProperties` object type includes basic prayer metadata such as `id`, `name`, `description` text, `drain_per_minute`, `requirements` and `bonuses` values. Every prayer object in the prayer database has all of these properties. If you are parsing the raw JSON files all of these properties are in the root of the JSON document - so they are not nested. All of the properties available are listed in the table below including the property name, the data types used, a description of the property, if the property is required to be populated, and if the property is nullable (able to be set to `null` or `None`).
+
+{: .table .table-striped .table-sm}
+| Property | Data type | Description | Required | Nullable |
+| -------- | --------- | ----------- | -------- |----------|
+| id | integer | Unique prayer ID number. | True | False |
+| name | string | The name of the prayer. | True | False |
+| members | boolean | If the prayer is members-only. | True | False |
+| description | string | The prayer description (as show in-game). | True | False |
+| drain_per_minute | float | The prayer point drain rate per minute. | True | False |
+| wiki_url | string | The OSRS Wiki URL. | True | False |
+| requirements | dict | The stat requirements to use the prayer. | True | False |
+| bonuses | dict | The bonuses a prayer provides. | True | False |
+| icon | string | The prayer icon. | True | False |
+
+### Prayer: Python Object Example 
+
+A description of the properties that each prayer in the database can have is useful, but sometimes it is simpler to provide an example. Below is a full example of a prayer, specifically the _Rigour_ prayer, as loaded in the `osrsbox` PyPi Python package.
+
+```
+PrayerProperties(
+    id=28,
+    name='Rigour',
+    members=True,
+    description='Increases your Ranged attack by 20% and damage by 23%, and your defence by 25%.',
+    drain_per_minute=40.0,
+    wiki_url='https://oldschool.runescape.wiki/w/Rigour',
+    requirements={'prayer': 74, 'defence': 70},
+    bonuses={'ranged': 20, 'ranged_strength': 25, 'defence': 23}, 
+    icon='iVBORw0KGgoAAAANSUhEUgAAABwAAAAYCAYAAADpnJ2CAAABMklEQVR42rWW3Q0CIRCEjwJ8tgBrMPHZFmzAIny0gOvA+izAGjCYcMwNswucSrLJHT/7McvyM02bSojTfwo7Tv8h3h/PqKFfTSTEYqUuwTRQ9R8Erp0XdV79ANBWw7Y/7Mw2W7mhqDSGxTkC0vf5eqqg2I99CKAOVXZ0mY+Lw/SdgFjHk7DD3xE+hLZsINR2+BQMlXG7Gu8Cc2jyt4KketWWw22HWYTUWqcMsYzVcmIBMFQZqBSxmvl1+xj2Z7XdQByQHbKSDET1qNCB1uuHs1ZhY2NgQ2W9fpbCEaAT0jpLeZAKaQvmJI3OUs5QhHoZqoDuWcr7jDe4lURqL3bcIOsTxwJbxmvdcV0FeQPgPmydpZ3KJvcg904bVNi+GwegCPYgG2D1g6nXfvCu4cdRy9rlDXGzl98mKbMMAAAAAElFTkSuQmCC'
+)
+```
+
+### Prayer: JSON Example
+
+A description of the properties that each prayer in the database can have is useful, but sometimes it is simpler to provide an example. Below is a full example of a prayer, specifically the _Rigour_ prayer, as a JSON object.
+
+```
+    "id": 28,
+    "name": "Rigour",
+    "members": true,
+    "description": "Increases your Ranged attack by 20% and damage by 23%, and your defence by 25%.",
+    "drain_per_minute": 40.0,
+    "wiki_url": "https://oldschool.runescape.wiki/w/Rigour",
+    "requirements": {
+        "prayer": 74,
+        "defence": 70
+    },
+    "bonuses": {
+        "ranged": 20,
+        "ranged_strength": 25,
+        "defence": 23
+    },
+    "icon": "iVBORw0KGgoAAAANSUhEUgAAABwAAAAYCAYAAADpnJ2CAAABMklEQVR42rWW3Q0CIRCEjwJ8tgBrMPHZFmzAIny0gOvA+izAGjCYcMwNswucSrLJHT/7McvyM02bSojTfwo7Tv8h3h/PqKFfTSTEYqUuwTRQ9R8Erp0XdV79ANBWw7Y/7Mw2W7mhqDSGxTkC0vf5eqqg2I99CKAOVXZ0mY+Lw/SdgFjHk7DD3xE+hLZsINR2+BQMlXG7Gu8Cc2jyt4KketWWw22HWYTUWqcMsYzVcmIBMFQZqBSxmvl1+xj2Z7XdQByQHbKSDET1qNCB1uuHs1ZhY2NgQ2W9fpbCEaAT0jpLeZAKaQvmJI3OUs5QhHoZqoDuWcr7jDe4lURqL3bcIOsTxwJbxmvdcV0FeQPgPmydpZ3KJvcg904bVNi+GwegCPYgG2D1g6nXfvCu4cdRy9rlDXGzl98mKbMMAAAAAElFTkSuQmCC"
+}
+```
 
 ## Additional Project Information
 
