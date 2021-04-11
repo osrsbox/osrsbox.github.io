@@ -4,9 +4,9 @@ title: OSRSBOX | Model ID Search for Old School RuneScape
 tool_name: Model ID Search for Old School RuneScape
 tool_desc: Search an exhaustive and up-to-date list of OSRS Model ID numbers, model names and model types
 include_custom_css: 
-- //cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css
+- //cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css
 include_custom_script: 
-- //cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js
+- //cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js
 - model-search.js
 ---
 

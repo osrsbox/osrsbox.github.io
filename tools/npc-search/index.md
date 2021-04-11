@@ -4,9 +4,9 @@ title: OSRSBOX | NPC Search for Old School RuneScape
 tool_name: NPC Search for Old School RuneScape
 tool_desc: Search an exhaustive and up-to-date list of OSRS NPC ID numbers and NPC names
 include_custom_css: 
-- //cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css
+- //cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css
 include_custom_script: 
-- //cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js
+- //cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js
 - npc-search.js
 ---
 

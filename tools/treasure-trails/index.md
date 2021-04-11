@@ -7,7 +7,6 @@ include_tooltips: true
 include_custom_script:
 - rewards.js
 - tt.js
-- html2canvas.min.js
 ---
 
 <style>

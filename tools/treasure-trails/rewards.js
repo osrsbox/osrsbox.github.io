@@ -586,11 +586,11 @@ shared.set(23185, false); // Ring of 3rd age
 
 // Add clue level maps to an object array
 rewards = {
-    "beginner" : beginner,
-    "easy": easy,
-    "medium": medium,
-    "hard": hard,
-    "elite": elite,
-    "master": master,
-    "shared" : shared
+  beginner: beginner,
+  easy: easy,
+  medium: medium,
+  hard: hard,
+  elite: elite,
+  master: master,
+  shared: shared,
 };
