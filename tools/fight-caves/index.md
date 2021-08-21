@@ -158,7 +158,7 @@ redirect_from:
 	top: 430px;
 	left: 200px;
 }
-.spawn-sw-offset {
+.spawn-se-offset {
 	position: absolute;
 	top: 365px;
 	left: 320px;
