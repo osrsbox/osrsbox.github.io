@@ -12,6 +12,12 @@ redirect_from:
   - /blog/2018/08/10/writing-runelite-plugins-part-1/
 ---
 
+## NOTICE!!! PLEASE READ!!!
+
+### It has been over 3 years since I originally wrote this guide. It is out-of-date.
+
+### Check [the RuneLite Wiki](https://github.com/runelite/runelite/wiki/Building-with-IntelliJ-IDEA) for more up-to-date instructions for setting up a development environment for RuneLite on Windows
+
 This post is the first in a series that documents my journey of writing plugins for the popular open-source RuneLite client for Old School RuneScape. This first post covers how I set up the built environment for RuneLite.
 
 This tutorial is very similar to the official [Building with IntelliJ IDEA](https://github.com/runelite/runelite/wiki/Building-with-IntelliJ-IDEA) documentation provided on the [RuneLite GitHub Wiki](https://github.com/runelite/runelite/wiki). However, this post includes additional discussion on setting up the development environment for those who are new to the project. Rather than a quick start style tutorial (like on the RuneLite Wiki), this post covers topics more deeply and document some things I learned along the way. The post is targeted to those who have programming experience, but might not be Java experts and those who have not had previous experience with the RuneLite project.
